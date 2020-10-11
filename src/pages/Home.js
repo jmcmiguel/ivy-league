@@ -158,13 +158,6 @@ const Home = () => {
               color="textPrimary"
               href="#"
               className={classes.link}>
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}>
               For Teachers
             </Link>
             <Link
@@ -188,6 +181,7 @@ const Home = () => {
           </Button>
         </Toolbar>
       </AppBar>
+
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography
