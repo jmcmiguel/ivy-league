@@ -12,22 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link as RouterLink } from "react-router-dom";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit">
-        <RouterLink to="/" style={{ color: "inherit" }}>
-          BPSU Online Examination System
-        </RouterLink>
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../components/Copyright";
+import { Link as BrowserLink } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -104,8 +90,10 @@ const SignIn = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link variant="body2">
+                <BrowserLink to="/signup" style={{ color: "inherit" }}>
+                  Don't have an account? Sign Up
+                </BrowserLink>
               </Link>
             </Grid>
           </Grid>
