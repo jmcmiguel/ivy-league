@@ -8,7 +8,9 @@ const Copyright = () => {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit">
-        <RouterLink to="/" style={{ color: "inherit" }}>
+        <RouterLink
+          to="/"
+          style={{ color: "inherit", textDecoration: "inherit" }}>
           BPSU Online Examination System
         </RouterLink>
       </Link>{" "}

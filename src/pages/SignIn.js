@@ -86,12 +86,18 @@ const SignIn = () => {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                <BrowserLink
+                  to="forgotpassword"
+                  style={{ color: "inherit", textDecoration: "inherit" }}>
+                  Forgot password?
+                </BrowserLink>
               </Link>
             </Grid>
             <Grid item>
               <Link variant="body2">
-                <BrowserLink to="/signup" style={{ color: "inherit" }}>
+                <BrowserLink
+                  to="/signup"
+                  style={{ color: "inherit", textDecoration: "inherit" }}>
                   Don't have an account? Sign Up
                 </BrowserLink>
               </Link>

@@ -163,7 +163,9 @@ const SignUp = () => {
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="#" variant="body2">
-                <RouterLink to="/signin">
+                <RouterLink
+                  to="/signin"
+                  style={{ color: "inherit", textDecoration: "inherit" }}>
                   Already have an account? Sign in
                 </RouterLink>
               </Link>
