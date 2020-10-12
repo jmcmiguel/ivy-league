@@ -1,28 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import {
-  CssBaseline,
-  Drawer,
-  Box,
-  AppBar,
-  Toolbar,
-  List,
-  Typography,
-  Divider,
-  IconButton,
-  Badge,
-  Container,
-  Grid,
-  Paper,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import {
-  mainListItems,
-  secondaryListItems,
-  tertiaryListItems,
-} from "../components/listItems";
+import { CssBaseline, Box, Container, Grid, Paper } from "@material-ui/core";
 import AverageScoreChart from "../components/AverageScoreChart.js";
 import TopScorer from "../components/TopScorer";
 import RankingBoard from "../components/RankingBoard";
