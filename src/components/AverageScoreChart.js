@@ -10,29 +10,18 @@ import {
 } from "recharts";
 import Title from "./Title";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00", undefined),
-];
-
-const Chart = () => {
+const AverageScoreChart = ({ title, chartData }) => {
   const theme = useTheme();
+
+  const data = chartData.map(data => {
+    const examname = data.examname;
+    const avgscore = data.avgscore;
+    return { examname, avgscore };
+  });
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{title}</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -42,7 +31,7 @@ const Chart = () => {
             bottom: 0,
             left: 24,
           }}>
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="examname" stroke={theme.palette.text.secondary} />
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
@@ -51,14 +40,14 @@ const Chart = () => {
                 textAnchor: "middle",
                 fill: theme.palette.text.primary,
               }}>
-              Sales ($)
+              Scores
             </Label>
           </YAxis>
           <Line
             type="monotone"
-            dataKey="amount"
+            dataKey="avgscore"
             stroke={theme.palette.primary.main}
-            dot={false}
+            dot={true}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -66,4 +55,4 @@ const Chart = () => {
   );
 };
 
-export default Chart;
+export default AverageScoreChart;

@@ -14,24 +14,27 @@ const useStyles = makeStyles({
   },
 });
 
-const Deposits = () => {
+const TopScorer = ({ name, section, totalScore, highestScore }) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Top Scorer</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        {`${name} (${section})`}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        Total Score: {totalScore}
+      </Typography>
+      <Typography color="textSecondary" className={classes.depositContext}>
+        Highest Score: {highestScore}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          View Student Record
         </Link>
       </div>
     </React.Fragment>
   );
 };
 
-export default Deposits;
+export default TopScorer;
