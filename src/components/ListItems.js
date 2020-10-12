@@ -38,18 +38,23 @@ const ListItems = ({ match }) => {
               <ListItemText primary="Subjects" />
             </ListItem>
           </Link>
-          <ListItem button>
-            <ListItemIcon>
-              <CreateIcon />
-            </ListItemIcon>
-            <ListItemText primary="Exams" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Students" />
-          </ListItem>
+          <Link to={`${match.url}/exams`} style={{ all: "inherit" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <CreateIcon />
+              </ListItemIcon>
+              <ListItemText primary="Exams" />
+            </ListItem>
+          </Link>
+
+          <Link to={`${match.url}/students`} style={{ all: "inherit" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Students" />
+            </ListItem>
+          </Link>
         </div>
       </List>
 
@@ -85,12 +90,14 @@ const ListItems = ({ match }) => {
         <div>
           <div>
             <ListSubheader inset>Account Settings</ListSubheader>
-            <ListItem button>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Account" />
-            </ListItem>
+            <Link to={`${match.url}/account`} style={{ all: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary="My Account" />
+              </ListItem>
+            </Link>
             <ListItem button>
               <ListItemIcon>
                 <ExitToAppIcon />
