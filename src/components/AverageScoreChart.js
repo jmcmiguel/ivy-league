@@ -7,6 +7,8 @@ import {
   YAxis,
   Label,
   ResponsiveContainer,
+  Tooltip,
+  Legend,
 } from "recharts";
 import Title from "./Title";
 
@@ -43,6 +45,8 @@ const AverageScoreChart = ({ title, chartData }) => {
               Scores
             </Label>
           </YAxis>
+          <Tooltip />
+          <Legend />
           <Line
             type="monotone"
             dataKey="avgscore"

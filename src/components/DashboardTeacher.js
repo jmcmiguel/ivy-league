@@ -171,7 +171,7 @@ const DashboardTeacher = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Box pt={4}>
+      <Box pt={8}>
         <Copyright />
       </Box>
     </div>
