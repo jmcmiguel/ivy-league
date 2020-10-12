@@ -21,14 +21,15 @@ const useStyles = makeStyles(theme => ({
 const RankingBoard = ({ title, tableData }) => {
   const classes = useStyles();
 
-  const rows = tableData.map(data => {
+  const rows = tableData.map((data, i) => {
+    const id = i;
     const rank = data.rank;
     const idNumber = data.idNumber;
     const name = data.name;
     const section = data.section;
     const avgScore = data.avgScore;
     const ttlScore = data.ttlScore;
-    return { rank, idNumber, name, section, avgScore, ttlScore };
+    return { id, rank, idNumber, name, section, avgScore, ttlScore };
   });
 
   return (
