@@ -5,20 +5,20 @@ import AverageScoreChart from "../components/AverageScoreChart.js";
 import TopScorer from "../components/TopScorer";
 import RankingBoard from "../components/RankingBoard";
 import Copyright from "../components/Copyright";
-import useStylesHome from "../components/useStylesHome";
+import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
 
 const TeacherHome = () => {
-  const classes = useStylesHome();
+  const classes = useStylesTeacherHome();
   const [open, setOpen] = React.useState(true);
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>

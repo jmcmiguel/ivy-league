@@ -9,10 +9,10 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import useStylesHome from "../components/useStylesHome";
+import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 
 const HomeAppBar = ({ open, handleDrawerOpen }) => {
-  const classes = useStylesHome();
+  const classes = useStylesTeacherHome();
 
   return (
     <AppBar

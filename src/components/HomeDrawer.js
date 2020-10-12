@@ -7,10 +7,10 @@ import {
   secondaryListItems,
   tertiaryListItems,
 } from "../components/listItems";
-import useStylesHome from "../components/useStylesHome";
+import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 
 const HomeDrawer = ({ open, handleDrawerClose }) => {
-  const classes = useStylesHome();
+  const classes = useStylesTeacherHome();
   return (
     <Drawer
       variant="permanent"
