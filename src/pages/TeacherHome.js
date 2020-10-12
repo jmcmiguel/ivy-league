@@ -3,10 +3,11 @@ import { CssBaseline, Container } from "@material-ui/core";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
-import SubjectsTeacher from "../components/SubjectsTeacher.js";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import DashboardTeacher from "../components/DashboardTeacher.js";
 import ExamTeacher from "../components/ExamTeacher";
+import StudentsTeacher from "../components/StudentsTeacher";
+import AccountTeacher from "../components/AccountTeacher";
 
 const TeacherHome = () => {
   let match = useRouteMatch();
@@ -33,14 +34,20 @@ const TeacherHome = () => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          {/* React Router */}
           <Switch>
             <Route path={`${match.path}`} exact component={DashboardTeacher} />
-            <Route
-              path={`${match.path}/subjects`}
-              exact
-              component={SubjectsTeacher}
-            />
             <Route path={`${match.path}/exams`} exact component={ExamTeacher} />
+            <Route
+              path={`${match.path}/students`}
+              exact
+              component={StudentsTeacher}
+            />
+            <Route
+              path={`${match.path}/account`}
+              exact
+              component={AccountTeacher}
+            />
           </Switch>
         </Container>
       </main>

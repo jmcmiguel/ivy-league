@@ -1,7 +1,6 @@
 import React from "react";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import CreateIcon from "@material-ui/icons/Create";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -28,14 +27,6 @@ const ListItems = ({ match }) => {
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
-            </ListItem>
-          </Link>
-          <Link to={`${match.url}/subjects`} style={{ all: "inherit" }}>
-            <ListItem button>
-              <ListItemIcon>
-                <LibraryBooksIcon />
-              </ListItemIcon>
-              <ListItemText primary="Subjects" />
             </ListItem>
           </Link>
           <Link to={`${match.url}/exams`} style={{ all: "inherit" }}>
@@ -98,12 +89,14 @@ const ListItems = ({ match }) => {
                 <ListItemText primary="My Account" />
               </ListItem>
             </Link>
-            <ListItem button>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Log Out" />
-            </ListItem>
+            <Link to="/" style={{ all: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Log Out" />
+              </ListItem>
+            </Link>
           </div>
         </div>
       </List>
