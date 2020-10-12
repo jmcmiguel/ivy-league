@@ -1,15 +1,11 @@
 import React from "react";
 import clsx from "clsx";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { Drawer, Divider, List, IconButton } from "@material-ui/core";
-import {
-  mainListItems,
-  secondaryListItems,
-  tertiaryListItems,
-} from "../components/listItems";
 import useStylesTeacherHome from "./styles/useStylesTeacherHome";
+import { Drawer, IconButton } from "@material-ui/core";
+import ListItems from "../components/ListItems";
 
-const HomeDrawer = ({ open, handleDrawerClose }) => {
+const HomeDrawer = ({ open, handleDrawerClose, match }) => {
   const classes = useStylesTeacherHome();
   return (
     <Drawer
@@ -23,12 +19,7 @@ const HomeDrawer = ({ open, handleDrawerClose }) => {
           <ChevronLeftIcon />
         </IconButton>
       </div>
-      <Divider />
-      <List>{mainListItems}</List>
-      <Divider />
-      <List>{secondaryListItems}</List>
-      <Divider />
-      <List>{tertiaryListItems}</List>
+      <ListItems match={match} />
     </Drawer>
   );
 };
