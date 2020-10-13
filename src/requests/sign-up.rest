@@ -1,14 +1,14 @@
-POST http://localhost:8080/signup
+POST http://localhost:8080/api/signup
 Content-Type: application/json
 
 {
-    "firstName":"Tanjiro",
+    "firstName":"John",
     "middleName":"D",
-    "lastName":"Kamado",
-    "idNumber":"18-03599",
-    "contactNumber":"09399537777",
-    "email":"kamasldfk@email.com",
-    "password":"password123",
-    "isTeacher":true
+    "lastName":"Doe",
+    "idNumber":"20-02366",
+    "contactNumber":"09393805099",
+    "email":"poison@gmail.com",
+    "password":"password",
+    "isTeacher":false
 
 }

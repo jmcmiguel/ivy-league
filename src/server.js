@@ -5,11 +5,14 @@ const mongoose = require("mongoose");
 var bodyparser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const User = require("./models/User");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
 const passport = require("passport");
-const jsonwt = require("jsonwebtoken");
+
+// Start of Routes Import
+const profile = require("./routes/Profile");
+const signin = require("./routes/Signin");
+const signup = require("./routes/Signup");
+const home = require("./routes/Home");
+// End of Routes Import
 
 // Start of Middlewares
 
@@ -49,113 +52,12 @@ mongoose
   });
 // End of Connect to MongoDB
 
-// Start of Home Path
-app.get("/", (req, res) => {
-  res.status(200).send(`Hi Welcome to the Login and Signup API`);
-});
-// End of Home Path
-
-// Start of Sign Up Path
-app.post("/signup", async (req, res) => {
-  var newUser = User({
-    firstName: req.body.firstName,
-    middleName: req.body.middleName,
-    lastName: req.body.lastName,
-    idNumber: req.body.idNumber,
-    contactNumber: req.body.contactNumber,
-    email: req.body.email,
-    password: req.body.password,
-    isTeacher: req.body.isTeacher,
-  });
-
-  await User.findOne({ email: newUser.email })
-    .then(async profile => {
-      if (!profile) {
-        bcrypt.hash(newUser.password, saltRounds, async (err, hash) => {
-          if (err) {
-            console.log("Error is", err.message);
-          } else {
-            newUser.password = hash;
-            await newUser
-              .save()
-              .then(() => {
-                res.status(200).send(newUser);
-              })
-              .catch(err => {
-                console.log("Error is ", err.message);
-              });
-          }
-        });
-      } else {
-        res.send("Email is alreaydy in use");
-      }
-    })
-    .catch(err => {
-      console.log("Error is", err.message);
-    });
-});
-// End of Sign Up Path
-
-// Start of Signin Path
-app.post("/signin", async (req, res) => {
-  var newUser = {};
-  newUser.email = req.body.email;
-  newUser.password = req.body.password;
-
-  await User.findOne({ email: newUser.email })
-    .then(profile => {
-      if (!profile) {
-        res.send("User does not exist");
-      } else {
-        bcrypt.compare(
-          newUser.password,
-          profile.password,
-          async (err, result) => {
-            if (err) {
-              console.log("Error is", err.message);
-            } else if (result === true) {
-              //   res.send("User authenticated");
-              const payload = {
-                id: profile.id,
-                email: profile.email,
-              };
-              jsonwt.sign(
-                payload,
-                process.env.secretKey,
-                { expiresIn: 3600 },
-                (err, token) => {
-                  res.json({
-                    success: true,
-                    token: "Bearer " + token,
-                  });
-                }
-              );
-            } else {
-              res.send("User Unauthorized Access");
-            }
-          }
-        );
-      }
-    })
-    .catch(err => {
-      console.log("Error is ", err.message);
-    });
-});
-// End of Login Path
-
-// Start of Profile Path
-app.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    console.log(req);
-    res.json({
-      id: req.user.id,
-      email: req.user.email,
-    });
-  }
-);
-// End of Profile Path
+// Start of Routes
+app.use("/", home);
+app.use("/api", profile);
+app.use("/api", signin);
+app.use("/api", signup);
+// End of Routes
 
 const unknownEndpoint = (req, res) => {
   res.status(404).send({ error: "Unknown Endpoint" });
