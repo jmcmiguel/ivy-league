@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherHome";
 import SectionsCard from "../components/SectionsCard";
@@ -13,27 +13,26 @@ import {
   Box,
 } from "@material-ui/core";
 
-const sections = [
+let section = [
   {
     subject: "ITNW-1413",
     section: "NW3D",
     students: 36,
-    description: "Some notes here",
+    description: "Software Engineering 1",
     image: "https://source.unsplash.com/random",
   },
   {
     subject: "ICTC-1314",
     section: "NW4B",
     students: 15,
-    description:
-      "This is a larger note. This is a larger note. This is a larger note. This is a larger note.",
+    description: "Designs 1",
     image: "https://source.unsplash.com/random",
   },
   {
     subject: "FOLA-1234",
     section: "NW1C",
     students: 54,
-    description: "You can put some notes here",
+    description: "Diferrential Calculus",
     image: "https://source.unsplash.com/random",
   },
 ];
@@ -42,6 +41,22 @@ const sections = [
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
+  const [sections, setSections] = useState(section);
+
+  const handleAdd = (subject, sect, students, description) => {
+    setSections([
+      ...sections,
+      {
+        subject: subject,
+        section: sect,
+        students: students,
+        description: description,
+        image: "https://source.unsplash.com/random",
+      },
+    ]);
+  };
+
+  useEffect(() => {}, [sections]);
 
   return (
     <div>
@@ -63,7 +78,11 @@ const StudentsTeacher = () => {
         <AddIcon />
       </Fab>
 
-      <AddSectionDialog open={openAddSection} setOpen={setOpenAddSection} />
+      <AddSectionDialog
+        open={openAddSection}
+        setOpen={setOpenAddSection}
+        handleAdd={handleAdd}
+      />
 
       {/* Start Hero Unit */}
       <Container maxWidth="sm">

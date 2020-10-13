@@ -33,13 +33,13 @@ const SectionsCard = ({ post }) => {
                 {post.subject}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.section}
+                {post.description}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {`${post.students} students enrolled`}
+                {post.section}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {post.description}
+                {`${post.students} students enrolled`}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Click to view all students
