@@ -19,6 +19,7 @@ const home = require("./routes/Home");
 // Config for JWT Strategy
 require("./strategies/jsonwtStrategies")(passport);
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
@@ -50,13 +51,14 @@ mongoose
   .catch(error => {
     console.log("error connecting to MongoDB:", error.message);
   });
+
 // End of Connect to MongoDB
 
 // Start of Routes
 app.use("/", home);
-app.use("/api", profile);
 app.use("/api", signin);
 app.use("/api", signup);
+app.use("/api", profile);
 // End of Routes
 
 const UnknownEndpoint = (req, res) => {
@@ -64,6 +66,7 @@ const UnknownEndpoint = (req, res) => {
 };
 
 app.use(UnknownEndpoint);
+
 const errorHandler = (error, request, response) => {
   console.error(error.message);
 

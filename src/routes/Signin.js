@@ -28,8 +28,8 @@ router.post("/signin", async (req, res) => {
               };
               jsonwt.sign(
                 payload,
-                process.env.secretKey,
-                { expiresIn: 3600 },
+                process.env.secretTokenKey,
+                { algorithm: "HS256", expiresIn: process.env.secretTokenLife },
                 (err, token) => {
                   res.json({
                     success: true,

@@ -7,7 +7,7 @@ Content-Type: application/json
     "lastName":"Doe",
     "idNumber":"20-02366",
     "contactNumber":"09393805099",
-    "email":"poison@gmail.com",
+    "email":"lkji@gmail.com",
     "password":"password",
     "isTeacher":false
 
