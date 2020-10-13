@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherHome";
 import SectionsCard from "../components/SectionsCard";
+import AddSectionDialog from "../components/AddSectionDialog";
 import {
   Container,
   Typography,
@@ -40,6 +41,8 @@ const sections = [
 // const sections = [];
 
 const StudentsTeacher = () => {
+  const [openAddSection, setOpenAddSection] = useState(false);
+
   return (
     <div>
       <Fab
@@ -53,9 +56,14 @@ const StudentsTeacher = () => {
           bottom: 40,
           left: "auto",
           position: "fixed",
+        }}
+        onClick={() => {
+          setOpenAddSection(true);
         }}>
         <AddIcon />
       </Fab>
+
+      <AddSectionDialog open={openAddSection} setOpen={setOpenAddSection} />
 
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
@@ -67,10 +75,22 @@ const StudentsTeacher = () => {
           gutterBottom>
           Students
         </Typography>
-        <div className={classes.heroButtons}>
+        <Typography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p">
+          Manage students here by creating sections
+        </Typography>
+        <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
             <Grid item>
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setOpenAddSection(true);
+                }}>
                 Create New Section
               </Button>
             </Grid>
@@ -84,7 +104,7 @@ const StudentsTeacher = () => {
       </Container>
       {/* End hero unit */}
 
-      <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
+      <Divider style={{ marginTop: "3rem", marginBottom: "4rem" }} />
 
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
@@ -107,7 +127,7 @@ const StudentsTeacher = () => {
                 align="center"
                 color="textSecondary"
                 component="p">
-                Create an exam using the add button
+                Create a section using the add button
               </Typography>
             </Box>
           )}
