@@ -99,10 +99,10 @@ app.post("/signup", async (req, res) => {
 // Start of Signin Path
 app.post("/signin", async (req, res) => {
   var newUser = {};
-  newUser.name = req.body.name;
+  newUser.email = req.body.email;
   newUser.password = req.body.password;
 
-  await User.findOne({ name: newUser.name })
+  await User.findOne({ email: newUser.email })
     .then(profile => {
       if (!profile) {
         res.send("User does not exist");
