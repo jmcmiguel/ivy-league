@@ -19,7 +19,6 @@ const home = require("./routes/Home");
 // Config for JWT Strategy
 require("./strategies/jsonwtStrategies")(passport);
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
