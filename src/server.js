@@ -59,12 +59,11 @@ app.use("/api", signin);
 app.use("/api", signup);
 // End of Routes
 
-const unknownEndpoint = (req, res) => {
+const UnknownEndpoint = (req, res) => {
   res.status(404).send({ error: "Unknown Endpoint" });
 };
 
-app.use(unknownEndpoint);
-
+app.use(UnknownEndpoint);
 const errorHandler = (error, request, response) => {
   console.error(error.message);
 
