@@ -1,46 +1,20 @@
 import React from "react";
-import { Button, Box } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Copyright from "../components/Copyright";
-
-const useStyles = makeStyles(theme => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardMedia: {
-    paddingTop: "56.25%", // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));
+import AddIcon from "@material-ui/icons/Add";
+import classes from "../components/styles/useStylesTeacherExam";
+import {
+  Button,
+  Box,
+  Fab,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  Container,
+  Divider,
+} from "@material-ui/core";
 
 const cards = [
   {
@@ -48,44 +22,64 @@ const cards = [
     altText: "Alternative Text 1",
     title: "Exam 1",
     desc: "ICTC-1213 (NW3D)",
+    status: "Everyone has taken this exam",
   },
   {
     image: "https://source.unsplash.com/random",
     altText: "Alternative Text 2",
     title: "Exam 1",
     desc: "ICTC-1413 (NW3D)",
+    status: "3 more people has not taken this exam",
   },
   {
     image: "https://source.unsplash.com/random",
     altText: "Alternative Text 3",
     title: "Exam 3",
     desc: "ICTC-1213 (NW3D)",
+    status: "Exam not yet published",
   },
   {
     image: "https://source.unsplash.com/random",
     altText: "Alternative Text 1",
     title: "Exam 1",
     desc: "ICTC-1213 (NW3D)",
+    status: "No one has taken this exam yet",
   },
   {
     image: "https://source.unsplash.com/random",
     altText: "Alternative Text 1",
     title: "Exam 1",
     desc: "ICTC-1213 (NW3D)",
+    status: "Everyone has taken this exam",
   },
   {
     image: "https://source.unsplash.com/random",
     altText: "Alternative Text 1",
     title: "Exam 1",
     desc: "ICTC-1213 (NW3D)",
+    status: "Everyone has taken this exam",
   },
 ];
 
 const ExamTeacher = () => {
-  const classes = useStyles();
-
   return (
     <div>
+      <Fab
+        color="primary"
+        aria-label="add"
+        size="large"
+        style={{
+          margin: 0,
+          top: "auto",
+          right: 50,
+          bottom: 40,
+          left: "auto",
+          position: "fixed",
+        }}>
+        <AddIcon />
+      </Fab>
+
+      {/* Start Hero Unit */}
       <Container maxWidth="sm">
         <Typography
           component="h1"
@@ -110,12 +104,12 @@ const ExamTeacher = () => {
           </Grid>
         </div>
       </Container>
-      <Container className={classes.cardGrid} maxWidth="md">
-        {/* End hero unit */}
+      {/* End hero unit */}
 
+      <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
+          {cards.map((card, i) => (
+            <Grid item key={i} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -123,10 +117,22 @@ const ExamTeacher = () => {
                   title={card.altText}
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    align="center">
                     {card.title}
                   </Typography>
-                  <Typography>{card.desc}</Typography>
+                  <Typography gutterBottom align="center">
+                    {card.desc}
+                  </Typography>
+                  <div style={{ marginTop: "2rem" }}>
+                    <Divider variant="middle" />
+                    <Typography gutterBottom color="secondary" align="center">
+                      {card.status}
+                    </Typography>
+                  </div>
                 </CardContent>
                 <CardActions>
                   <Button size="small" color="primary">
