@@ -1,5 +1,10 @@
 var mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
+  firstName: { type: String, require: true },
+  lastName: { type: String, require: true },
+  middleName: { type: String, require: false },
+  idNumber: { type: String, require: true },
+  contactNumber: { type: String, require: true },
   email: {
     type: String,
     require: true,
@@ -8,9 +13,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  teacher: {
+  isTeacher: {
     type: Boolean,
-    require: false,
+    require: true,
   },
 });
 module.exports = mongoose.model("User", UserSchema);

@@ -5,10 +5,19 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 const User = require("./models/User");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const passport = require("passport");
+const jsonwt = require("jsonwebtoken");
 
+// Start of Middlewares
+
+app.use(passport.initialize());
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
+
+require("./strategies/jsonwtStrategies")(passport);
 
 morgan.token("body", req => {
   return req.method === "POST" || req.method === "PUT"
@@ -19,6 +28,8 @@ morgan.token("body", req => {
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
+
+// End of Middlewares
 
 // Connect to MongoDB
 console.log("connecting to mongoDB");
@@ -35,9 +46,113 @@ mongoose
   });
 // End of Connect to MongoDB
 
+// Start of Home Path
 app.get("/", (req, res) => {
   res.status(200).send(`Hi Welcome to the Login and Signup API`);
 });
+// End of Home Path
+
+// Start of Sign Up Path
+app.post("/signup", async (req, res) => {
+  var newUser = User({
+    firstName: req.body.firstName,
+    middleName: req.body.middleName,
+    lastName: req.body.lastName,
+    idNumber: req.body.idNumber,
+    contactNumber: req.body.contactNumber,
+    email: req.body.email,
+    password: req.body.password,
+    isTeacher: req.body.isTeacher,
+  });
+
+  await User.findOne({ email: newUser.email })
+    .then(async profile => {
+      if (!profile) {
+        bcrypt.hash(newUser.password, saltRounds, async (err, hash) => {
+          if (err) {
+            console.log("Error is", err.message);
+          } else {
+            newUser.password = hash;
+            await newUser
+              .save()
+              .then(() => {
+                res.status(200).send(newUser);
+              })
+              .catch(err => {
+                console.log("Error is ", err.message);
+              });
+          }
+        });
+      } else {
+        res.send("Email is alreaydy in use");
+      }
+    })
+    .catch(err => {
+      console.log("Error is", err.message);
+    });
+});
+// End of Sign Up Path
+
+// Start of Signin Path
+app.post("/signin", async (req, res) => {
+  var newUser = {};
+  newUser.name = req.body.name;
+  newUser.password = req.body.password;
+
+  await User.findOne({ name: newUser.name })
+    .then(profile => {
+      if (!profile) {
+        res.send("User does not exist");
+      } else {
+        bcrypt.compare(
+          newUser.password,
+          profile.password,
+          async (err, result) => {
+            if (err) {
+              console.log("Error is", err.message);
+            } else if (result === true) {
+              //   res.send("User authenticated");
+              const payload = {
+                id: profile.id,
+                email: profile.email,
+              };
+              jsonwt.sign(
+                payload,
+                process.env.secretKey,
+                { expiresIn: 3600 },
+                (err, token) => {
+                  res.json({
+                    success: true,
+                    token: "Bearer " + token,
+                  });
+                }
+              );
+            } else {
+              res.send("User Unauthorized Access");
+            }
+          }
+        );
+      }
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+});
+// End of Login Path
+
+// Start of Profile Path
+app.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log(req);
+    res.json({
+      id: req.user.id,
+      email: req.user.email,
+    });
+  }
+);
+// End of Profile Path
 
 const unknownEndpoint = (req, res) => {
   res.status(404).send({ error: "Unknown Endpoint" });

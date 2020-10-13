@@ -1,0 +1,14 @@
+POST http://localhost:8080/signup
+Content-Type: application/json
+
+{
+    "firstName":"Tanjiro",
+    "middleName":"D",
+    "lastName":"Kamado",
+    "idNumber":"18-03599",
+    "contactNumber":"09399537777",
+    "email":"kamasldfk@email.com",
+    "password":"password123",
+    "isTeacher":true
+
+}
