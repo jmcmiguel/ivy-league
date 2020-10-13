@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+var bodyparser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const User = require("./models/User");
@@ -12,12 +13,14 @@ const jsonwt = require("jsonwebtoken");
 
 // Start of Middlewares
 
+// Config for JWT Strategy
+require("./strategies/jsonwtStrategies")(passport);
 app.use(passport.initialize());
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
-
-require("./strategies/jsonwtStrategies")(passport);
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 morgan.token("body", req => {
   return req.method === "POST" || req.method === "PUT"
