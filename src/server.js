@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-var bodyparser = require("body-parser");
+const bodyparser = require("body-parser");
+const cookieparser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const passport = require("passport");
@@ -24,6 +25,7 @@ app.use(express.static("build"));
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
+app.use(cookieparser());
 
 morgan.token("body", req => {
   return req.method === "POST" || req.method === "PUT"
