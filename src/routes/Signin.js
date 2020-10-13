@@ -26,6 +26,8 @@ router.post("/signin", async (req, res) => {
                 id: profile.id,
                 email: profile.email,
               };
+
+              // Create token
               jsonwt.sign(
                 payload,
                 process.env.secretTokenKey,
