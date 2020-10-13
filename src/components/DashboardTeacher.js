@@ -1,10 +1,9 @@
 import React from "react";
 import clsx from "clsx";
-import { Box, Grid, Paper } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import AverageScoreChart from "../components/AverageScoreChart.js";
 import TopScorer from "../components/TopScorer";
 import RankingBoard from "../components/RankingBoard";
-import Copyright from "../components/Copyright";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 
 const DashboardTeacher = () => {
@@ -171,9 +170,6 @@ const DashboardTeacher = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Box pt={8}>
-        <Copyright />
-      </Box>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline, Container } from "@material-ui/core";
+import { CssBaseline, Container, Box } from "@material-ui/core";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
@@ -8,6 +8,7 @@ import DashboardTeacher from "../components/DashboardTeacher.js";
 import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
 import AccountTeacher from "../components/AccountTeacher";
+import Copyright from "../components/Copyright";
 
 const TeacherHome = () => {
   let match = useRouteMatch();
@@ -49,6 +50,10 @@ const TeacherHome = () => {
               component={AccountTeacher}
             />
           </Switch>
+
+          <Box pt={8}>
+            <Copyright />
+          </Box>
         </Container>
       </main>
     </div>

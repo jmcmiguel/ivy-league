@@ -1,5 +1,4 @@
 import React from "react";
-import Copyright from "../components/Copyright";
 import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherExam";
 import {
@@ -61,6 +60,8 @@ const cards = [
   },
 ];
 
+// const cards = [];
+
 const ExamTeacher = () => {
   return (
     <div>
@@ -106,53 +107,74 @@ const ExamTeacher = () => {
       </Container>
       {/* End hero unit */}
 
+      <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
+
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {cards.map((card, i) => (
-            <Grid item key={i} xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image={card.image}
-                  title={card.altText}
-                />
-                <CardContent className={classes.cardContent}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="h2"
-                    align="center">
-                    {card.title}
-                  </Typography>
-                  <Typography gutterBottom align="center">
-                    {card.desc}
-                  </Typography>
-                  <div style={{ marginTop: "2rem" }}>
-                    <Divider variant="middle" />
-                    <Typography gutterBottom color="secondary" align="center">
-                      {card.status}
+          {cards.length ? (
+            cards.map((card, i) => (
+              <Grid item key={i} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    variant={"outlined"}
+                    image={card.image}
+                    title={card.altText}
+                    style={{ height: "8rem" }}
+                  />
+                  {console.log("object :>> ", card)}
+                  <CardContent className={classes.cardContent}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                      align="center">
+                      {card.title}
                     </Typography>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
-                  <Button size="small" color="primary">
-                    Edit
-                  </Button>
-                  <Button size="small" color="primary">
-                    Delete
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+                    <Typography gutterBottom align="center">
+                      {card.desc}
+                    </Typography>
+                    <div style={{ marginTop: "2rem" }}>
+                      <Divider variant="middle" />
+                      <Typography gutterBottom color="secondary" align="center">
+                        {card.status}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+                    <Button size="small" color="primary">
+                      Delete
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Box pt={8} style={{ marginBottom: "3rem" }}>
+              <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="textPrimary"
+                gutterBottom>
+                {`Yikes! you haven't created an exam yet :/`}
+              </Typography>
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                component="p">
+                Create an exam using the add button
+              </Typography>
+            </Box>
+          )}
         </Grid>
-
-        <Box pt={8}>
-          <Copyright />
-        </Box>
       </Container>
     </div>
   );
