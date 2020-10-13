@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const Person = require("./src/models/person");
+const Person = require("./models/person");
 
 app.use(express.json());
 app.use(express.static("build"));
