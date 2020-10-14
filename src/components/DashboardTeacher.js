@@ -175,13 +175,12 @@ const DashboardTeacher = () => {
   ];
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       {sampledata.length ? (
         sampledata.map((data, i) => {
           return (
-            <div>
+            <div key={i}>
               <DashboardCharts
-                key={i}
                 section={data.section}
                 subject={data.subject}
                 desc={data.desc}

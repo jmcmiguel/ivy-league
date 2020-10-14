@@ -1,9 +1,9 @@
 import React from "react";
 import { CssBaseline, Container, Box } from "@material-ui/core";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
 import DashboardTeacher from "../components/DashboardTeacher.js";
 import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
@@ -50,11 +50,10 @@ const TeacherHome = () => {
               component={AccountTeacher}
             />
           </Switch>
-
-          <Box pt={8}>
-            <Copyright />
-          </Box>
         </Container>
+        <Box pt={8}>
+          <Copyright />
+        </Box>
       </main>
     </div>
   );

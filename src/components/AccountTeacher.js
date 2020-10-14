@@ -3,7 +3,7 @@ import { Container, Typography } from "@material-ui/core";
 
 const AccountTeacher = () => {
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
         <Typography

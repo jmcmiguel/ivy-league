@@ -7,12 +7,19 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
+const shortid = require("shortid");
 
 const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
   const { handleSubmit, control } = useForm();
 
   const onSubmit = form => {
-    handleAdd(form.subject, form.section, form.studentCount, form.desc);
+    handleAdd(
+      form.subject,
+      form.section,
+      form.studentCount,
+      form.desc,
+      shortid.generate()
+    );
     handleClose();
   };
   const handleClose = () => {
@@ -64,7 +71,7 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
             name="studentCount"
             margin="dense"
             id="studentCount"
-            label="Number of Students"
+            label="Class Capacity"
             type="number"
             fullWidth
           />

@@ -3,6 +3,7 @@ import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherHome";
 import SectionsCard from "../components/SectionsCard";
 import AddSectionDialog from "../components/AddSectionDialog";
+
 import {
   Container,
   Typography,
@@ -19,6 +20,7 @@ let section = [
     section: "NW3D",
     students: 36,
     description: "Software Engineering 1",
+    classCode: "ABCD123",
     image: "https://source.unsplash.com/random",
   },
   {
@@ -26,6 +28,7 @@ let section = [
     section: "NW4B",
     students: 15,
     description: "Designs 1",
+    classCode: "ABCD123",
     image: "https://source.unsplash.com/random",
   },
   {
@@ -33,17 +36,18 @@ let section = [
     section: "NW1C",
     students: 54,
     description: "Diferrential Calculus",
+    classCode: "ABCD123",
     image: "https://source.unsplash.com/random",
   },
 ];
 
-// const sections = [];
+// let section = [];
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
   const [sections, setSections] = useState(section);
 
-  const handleAdd = (subject, sect, students, description) => {
+  const handleAdd = (subject, sect, students, description, classCode) => {
     setSections([
       ...sections,
       {
@@ -52,6 +56,7 @@ const StudentsTeacher = () => {
         students: students,
         description: description,
         image: "https://source.unsplash.com/random",
+        classCode: classCode,
       },
     ]);
   };
@@ -59,24 +64,26 @@ const StudentsTeacher = () => {
   useEffect(() => {}, [sections]);
 
   return (
-    <div>
-      <Fab
-        color="primary"
-        aria-label="add"
-        size="large"
-        style={{
-          margin: 0,
-          top: "auto",
-          right: 50,
-          bottom: 40,
-          left: "auto",
-          position: "fixed",
-        }}
-        onClick={() => {
-          setOpenAddSection(true);
-        }}>
-        <AddIcon />
-      </Fab>
+    <div style={{ minHeight: "100vh" }}>
+      <Box zIndex="tooltip" position="absolute">
+        <Fab
+          color="primary"
+          aria-label="add"
+          size="large"
+          style={{
+            margin: 0,
+            top: "auto",
+            right: 50,
+            bottom: 40,
+            left: "auto",
+            position: "fixed",
+          }}
+          onClick={() => {
+            setOpenAddSection(true);
+          }}>
+          <AddIcon />
+        </Fab>
+      </Box>
 
       <AddSectionDialog
         open={openAddSection}
@@ -99,7 +106,8 @@ const StudentsTeacher = () => {
           align="center"
           color="textSecondary"
           component="p">
-          Manage students here by creating sections
+          Manage students here by creating sections in which students can enroll
+          in
         </Typography>
         <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
@@ -128,9 +136,9 @@ const StudentsTeacher = () => {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections.length ? (
-            sections.map((section, i) => (
-              <SectionsCard key={i} post={section} />
-            ))
+            sections.map((section, i) => {
+              return <SectionsCard key={i} section={section} />;
+            })
           ) : (
             <Box pt={8} style={{ marginBottom: "3rem" }}>
               <Typography

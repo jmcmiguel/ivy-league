@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionsCard = ({ post }) => {
+const SectionsCard = ({ section }) => {
   const classes = useStyles();
 
   return (
@@ -30,16 +30,19 @@ const SectionsCard = ({ post }) => {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-                {post.subject}
+                {section.subject}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.description}
+                {section.description}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.section}
+                {section.section}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {`${post.students} students enrolled`}
+                {`${section.students} students enrolled`}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                {`Class Code: ${section.classCode}`}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Click to view all students
@@ -49,8 +52,8 @@ const SectionsCard = ({ post }) => {
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
-              image={post.image}
-              title={post.imageTitle}
+              image={section.image}
+              title={section.imageTitle}
             />
           </Hidden>
         </Card>

@@ -64,7 +64,7 @@ const cards = [
 
 const ExamTeacher = () => {
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Fab
         color="primary"
         aria-label="add"
@@ -122,7 +122,6 @@ const ExamTeacher = () => {
                     title={card.altText}
                     style={{ height: "8rem" }}
                   />
-                  {console.log("object :>> ", card)}
                   <CardContent className={classes.cardContent}>
                     <Typography
                       gutterBottom
