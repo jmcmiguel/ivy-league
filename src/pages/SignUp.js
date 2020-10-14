@@ -20,7 +20,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Copyright from "../components/Copyright";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
+import users from "../services/users";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -56,12 +56,10 @@ const SignUp = () => {
   const [showRePassword, setReShowPassword] = useState(false);
   const handleClickReShowPassword = () => setReShowPassword(!showRePassword);
   const handleMouseDownRePassword = () => setReShowPassword(!showRePassword);
-  const create = newRecord => {
-    const request = axios.post("http://localhost:3001/api/signup", newRecord);
-    return request.then(response => response.data);
-  };
-  const onSubmit = form => {
-    create(form)
+
+  const onSubmit = formData => {
+    users
+      .signup(formData)
       .then(returnedData => {
         console.log("User signed up succesfully");
       })
