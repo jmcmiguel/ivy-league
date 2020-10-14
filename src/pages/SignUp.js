@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  Typography,
+  makeStyles,
+  Container,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Copyright from "../components/Copyright";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
@@ -44,15 +50,24 @@ const SignUp = () => {
     setIsTeacher(!isTeacher);
     return isTeacher ? false : true;
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [showRePassword, setReShowPassword] = useState(false);
+  const handleClickReShowPassword = () => setReShowPassword(!showRePassword);
+  const handleMouseDownRePassword = () => setReShowPassword(!showRePassword);
   const create = newRecord => {
     const request = axios.post("http://localhost:3001/api/signup", newRecord);
     return request.then(response => response.data);
   };
   const onSubmit = form => {
-    create(form).then(returnedData => {
-      console.log("success", returnedData);
-    });
-    console.log("form :>> ", form);
+    create(form)
+      .then(returnedData => {
+        console.log("User signed up succesfully");
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
   };
 
   return (
@@ -169,9 +184,21 @@ const SignUp = () => {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}>
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -184,9 +211,21 @@ const SignUp = () => {
                 fullWidth
                 name="repassword"
                 label="Retype Password"
-                type="password"
                 id="repassword"
-                autoComplete="current-password"
+                autoComplete="re-password"
+                type={showRePassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickReShowPassword}
+                        onMouseDown={handleMouseDownRePassword}>
+                        {showRePassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
