@@ -49,9 +49,9 @@ const SignUp = () => {
     return request.then(response => response.data);
   };
   const onSubmit = form => {
-    // create(form).then(returnedData => {
-    //   console.log("success");
-    // });
+    create(form).then(returnedData => {
+      console.log("success", returnedData);
+    });
     console.log("form :>> ", form);
   };
 
