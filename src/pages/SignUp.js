@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../components/Copyright";
 import { Link as RouterLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,6 +38,22 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
+  const { control, handleSubmit } = useForm();
+  const [isTeacher, setIsTeacher] = useState(false);
+  const handleCheckboxChange = e => {
+    setIsTeacher(!isTeacher);
+    return isTeacher ? false : true;
+  };
+  const create = newRecord => {
+    const request = axios.post("http://localhost:3001/api/signup", newRecord);
+    return request.then(response => response.data);
+  };
+  const onSubmit = form => {
+    // create(form).then(returnedData => {
+    //   console.log("success");
+    // });
+    console.log("form :>> ", form);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,10 +65,16 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -63,7 +87,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 fullWidth
                 id="middleName"
@@ -74,7 +101,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 fullWidth
                 required
@@ -86,7 +116,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 fullWidth
                 required
@@ -98,7 +131,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 required
                 fullWidth
@@ -110,7 +146,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 fullWidth
                 id="contactNumber"
@@ -121,7 +160,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 required
                 fullWidth
@@ -133,7 +175,10 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Controller
+                as={TextField}
+                control={control}
+                defaultValue={""}
                 variant="outlined"
                 required
                 fullWidth
@@ -146,8 +191,23 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="isTeacher" color="primary" />}
-                label="Sign up as a teacher?"
+                control={
+                  <Controller
+                    name="isTeacher"
+                    defaultValue={false}
+                    render={({ onChange: onCheckChange }) => {
+                      return (
+                        <Checkbox
+                          checked={isTeacher}
+                          onChange={() => onCheckChange(handleCheckboxChange())}
+                        />
+                      );
+                    }}
+                    control={control}
+                  />
+                }
+                key={"isTeacher"}
+                label={"Sign up as teacher?"}
               />
             </Grid>
           </Grid>
