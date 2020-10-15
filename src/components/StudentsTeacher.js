@@ -178,7 +178,7 @@ const StudentsTeacher = () => {
                 align="center"
                 color="textSecondary"
                 component="p">
-                Create a section using the add button
+                Create a section using the add button to get started
               </Typography>
             </Box>
           )}
