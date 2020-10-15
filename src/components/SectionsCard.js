@@ -37,7 +37,8 @@ const SectionsCard = ({ section }) => {
               {section.section}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {`${section.students}/${section.classCapacity} students enrolled`}
+              {section.students ? section.students : 0}
+              {` / ${section.classCapacity} students enrolled`}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {`Class Code: ${section.classCode}`}
