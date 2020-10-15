@@ -1,25 +1,10 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3001/api/";
+const baseURL = process.env.REACT_APP_baseURL;
 
-const getAll = () => {
-  const request = axios.get(baseURL);
+const create = newSection => {
+  const request = axios.post(`${baseURL}/sections`, newSection);
   return request.then(response => response.data);
 };
 
-const create = newPerson => {
-  const request = axios.post(baseURL, newPerson);
-  return request.then(response => response.data);
-};
-
-const remove = id => {
-  const request = axios.delete(`${baseURL}/${id}`);
-  return request.then(response => response.status);
-};
-
-const update = (id, newPerson) => {
-  const request = axios.put(`${baseURL}/${id}`, newPerson);
-  return request.then(response => response.data);
-};
-
-export default { getAll, create, remove, update };
+export default { create };

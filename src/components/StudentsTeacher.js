@@ -3,7 +3,8 @@ import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherHome";
 import SectionsCard from "../components/SectionsCard";
 import AddSectionDialog from "../components/AddSectionDialog";
-
+import sectionServices from "../services/sections";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   Container,
   Typography,
@@ -12,16 +13,16 @@ import {
   Fab,
   Divider,
   Box,
+  Snackbar,
 } from "@material-ui/core";
 
-let section = [
+let initialSection = [
   {
     subject: "ITNW-1413",
     section: "NW3D",
     students: 36,
     description: "Software Engineering 1",
     classCode: "ABCD123",
-    image: "https://source.unsplash.com/random",
   },
   {
     subject: "ICTC-1314",
@@ -29,7 +30,6 @@ let section = [
     students: 15,
     description: "Designs 1",
     classCode: "ABCD123",
-    image: "https://source.unsplash.com/random",
   },
   {
     subject: "FOLA-1234",
@@ -37,7 +37,6 @@ let section = [
     students: 54,
     description: "Diferrential Calculus",
     classCode: "ABCD123",
-    image: "https://source.unsplash.com/random",
   },
 ];
 
@@ -45,20 +44,44 @@ let section = [
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
-  const [sections, setSections] = useState(section);
+  const [sections, setSections] = useState(initialSection);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("error");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   const handleAdd = (subject, sect, students, description, classCode) => {
-    setSections([
-      ...sections,
-      {
-        subject: subject,
-        section: sect,
-        students: students,
-        description: description,
-        image: "https://source.unsplash.com/random",
-        classCode: classCode,
-      },
-    ]);
+    const newSection = {
+      subject: subject,
+      section: sect,
+      students: students,
+      description: description,
+      classCode: classCode,
+    };
+
+    sectionServices
+      .create(newSection)
+      .then(returnedData => {
+        if (returnedData === "section already exists") {
+          setSnackbarSeverity("error");
+          setSnackbarMessage("A section with that subject already exists");
+          setOpenSnackbar(!openSnackbar);
+        } else {
+          setSnackbarSeverity("success");
+          setSnackbarMessage("Section created");
+          setOpenSnackbar(!openSnackbar);
+          setSections([...sections, newSection]);
+        }
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
   };
 
   useEffect(() => {}, [sections]);
@@ -84,6 +107,19 @@ const StudentsTeacher = () => {
           <AddIcon />
         </Fab>
       </Box>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}>
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
 
       <AddSectionDialog
         open={openAddSection}

@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "../components/styles/useStylesTeacherExam";
 import {
   Card,
   CardActions,
@@ -9,17 +10,16 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
-import classes from "../components/styles/useStylesTeacherExam";
 
-const ExamsCard = ({ key, section }) => {
+const ExamsCard = ({ section }) => {
   return (
-    <Grid item key={key} xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
           variant={"outlined"}
-          image={section.image}
-          title={section.altText}
+          image={"https://source.unsplash.com/random"}
+          title={section.title}
           style={{ height: "8rem" }}
         />
         <CardContent className={classes.cardContent}>
@@ -27,16 +27,22 @@ const ExamsCard = ({ key, section }) => {
             {section.title}
           </Typography>
           <Typography gutterBottom align="center">
+            {`${section.subject} (${section.section})`}
+          </Typography>
+          <Typography gutterBottom align="center">
             {section.desc}
           </Typography>
           <div style={{ marginTop: "2rem" }}>
             <Divider variant="middle" />
             <Typography gutterBottom color="secondary" align="center">
-              {section.status}
+              {section.tookExam === section.classCapacity
+                ? "Everyone "
+                : `${section.tookExam}/${section.classCapacity} `}
+              has taken this exam
             </Typography>
           </div>
         </CardContent>
-        <CardActions>
+        <CardActions style={{ justifyContent: "center" }}>
           <Button size="small" color="primary">
             View
           </Button>
