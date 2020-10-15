@@ -8,9 +8,19 @@ import {
 } from "@material-ui/core";
 import { Controller } from "react-hook-form";
 
-const ControlledSelect = ({ error, control, name, label, menu }) => {
+const ControlledSelect = ({
+  error,
+  control,
+  name,
+  label,
+  menu,
+  variant = "outlined",
+}) => {
   return (
-    <FormControl style={{ minWidth: "100%" }} error={Boolean(error[name])}>
+    <FormControl
+      style={{ minWidth: "100%" }}
+      error={Boolean(error[name])}
+      variant={variant}>
       <InputLabel id={`${name}Label`}>{label}</InputLabel>
       <Controller
         as={
