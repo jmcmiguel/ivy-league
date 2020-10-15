@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const baseURL = process.env.baseURL;
+const baseURL = process.env.REACT_APP_baseURL;
 
-const signup = newRecord => {
-  const request = axios.post(`${baseURL}/signup`, newRecord);
+const signup = newUser => {
+  const request = axios.post(`${baseURL}`, newUser);
   return request.then(response => response.data);
 };
 

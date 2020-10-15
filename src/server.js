@@ -79,7 +79,7 @@ const errorHandler = (error, request, response) => {
 };
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const PORT = process.env.SERVER_PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

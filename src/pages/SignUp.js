@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Copyright from "../components/Copyright";
+import { Link as RouterLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import users from "../services/users";
 import {
   Avatar,
   Button,
@@ -14,13 +21,6 @@ import {
   InputAdornment,
   IconButton,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Copyright from "../components/Copyright";
-import { Link as RouterLink } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
-import users from "../services/users";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, register } = useForm();
   const [isTeacher, setIsTeacher] = useState(false);
   const handleCheckboxChange = e => {
     setIsTeacher(!isTeacher);
@@ -56,6 +56,7 @@ const SignUp = () => {
   const [showRePassword, setReShowPassword] = useState(false);
   const handleClickReShowPassword = () => setReShowPassword(!showRePassword);
   const handleMouseDownRePassword = () => setReShowPassword(!showRePassword);
+  // const [firstNameError, setFirstNameError] = useState(false);
 
   const onSubmit = formData => {
     users
@@ -85,18 +86,24 @@ const SignUp = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                autoComplete="fname"
                 name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                placeholder="First Name"
-                autoFocus
+                as={
+                  <TextField
+                    id="firstName"
+                    fullWidth
+                    variant="outlined"
+                    autoComplete="fname"
+                    label="First Name"
+                    placeholder="First Name"
+                    required
+                    autoFocus
+                    // error={firstNameError}
+                    // helperText={firstNameError ? "error" : null}
+                  />
+                }
+                defaultValue={""}
+                control={control}
+                inputRef={register()}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -111,6 +118,7 @@ const SignUp = () => {
                 name="middleName"
                 autoComplete="mname"
                 placeholder="Middle Name"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -126,6 +134,7 @@ const SignUp = () => {
                 name="lastName"
                 autoComplete="lname"
                 placeholder="Last Name"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -141,6 +150,7 @@ const SignUp = () => {
                 name="studentNumber"
                 autoComplete="id"
                 placeholder="19-00000"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -152,10 +162,11 @@ const SignUp = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
                 name="email"
+                label="Email Address"
                 autoComplete="email"
                 placeholder="name@email.com"
+                inputRef={register()}
               />
             </Grid>
             <Grid item xs={12}>
@@ -170,6 +181,7 @@ const SignUp = () => {
                 name="contactNumber"
                 autoComplete="contact"
                 placeholder="09xxxxxxxxx"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -197,6 +209,7 @@ const SignUp = () => {
                     </InputAdornment>
                   ),
                 }}
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -224,6 +237,7 @@ const SignUp = () => {
                     </InputAdornment>
                   ),
                 }}
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -245,6 +259,7 @@ const SignUp = () => {
                 }
                 key={"isTeacher"}
                 label={"Sign up as teacher?"}
+                inputRef={register}
               />
             </Grid>
           </Grid>

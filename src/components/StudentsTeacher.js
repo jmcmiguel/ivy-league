@@ -136,9 +136,12 @@ const StudentsTeacher = () => {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections.length ? (
-            sections.map((section, i) => {
-              return <SectionsCard key={i} section={section} />;
-            })
+            sections
+              .slice(0)
+              .reverse()
+              .map((section, i) => {
+                return <SectionsCard key={i} section={section} />;
+              })
           ) : (
             <Box pt={8} style={{ marginBottom: "3rem" }}>
               <Typography
@@ -147,7 +150,7 @@ const StudentsTeacher = () => {
                 align="center"
                 color="textPrimary"
                 gutterBottom>
-                {` Awwww. You haven't created a section yet :(`}
+                {`Awwww. You haven't created a section yet :(`}
               </Typography>
               <Typography
                 variant="h5"
