@@ -1,18 +1,8 @@
 import React from "react";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import ControlledTextField from "../components/ControlledTextField";
-import {
-  Grid,
-  Button,
-  FormControl,
-  TextField,
-  Select,
-  MenuItem,
-  Typography,
-  InputLabel,
-  FormHelperText,
-} from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import ControlledSelect from "./ControlledSelect";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {

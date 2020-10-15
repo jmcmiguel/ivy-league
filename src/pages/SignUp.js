@@ -6,11 +6,12 @@ import Copyright from "../components/Copyright";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import users from "../services/users";
+import ControlledTextField from "../components/ControlledTextField";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   Avatar,
   Button,
   CssBaseline,
-  TextField,
   FormControlLabel,
   Checkbox,
   Grid,
@@ -20,6 +21,7 @@ import {
   Container,
   InputAdornment,
   IconButton,
+  Snackbar,
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const { control, handleSubmit, register } = useForm();
+  const { control, handleSubmit, errors, reset } = useForm();
   const [isTeacher, setIsTeacher] = useState(false);
   const handleCheckboxChange = e => {
     setIsTeacher(!isTeacher);
@@ -56,22 +58,60 @@ const SignUp = () => {
   const [showRePassword, setReShowPassword] = useState(false);
   const handleClickReShowPassword = () => setReShowPassword(!showRePassword);
   const handleMouseDownRePassword = () => setReShowPassword(!showRePassword);
-  // const [firstNameError, setFirstNameError] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("error");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   const onSubmit = formData => {
-    users
-      .signup(formData)
-      .then(returnedData => {
-        console.log("User signed up succesfully");
-      })
-      .catch(error => {
-        console.log("Error: ", error);
-      });
+    if (formData.password !== formData.repassword) {
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Password does not match");
+      setOpenSnackbar(!openSnackbar);
+    } else {
+      users
+        .signup(formData)
+        .then(returnedData => {
+          if (returnedData === "email already in use") {
+            setSnackbarSeverity("error");
+            setSnackbarMessage("Email is already in use");
+            setOpenSnackbar(!openSnackbar);
+          } else {
+            setSnackbarSeverity("success");
+            setSnackbarMessage("Signed up succesfully");
+            setOpenSnackbar(!openSnackbar);
+            reset();
+          }
+        })
+        .catch(error => {
+          console.log("Error: ", error);
+        });
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}>
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
+
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -84,119 +124,79 @@ const SignUp = () => {
           noValidate
           onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
+            {/* First Name */}
             <Grid item xs={12} sm={6}>
-              <Controller
+              <ControlledTextField
                 name="firstName"
-                as={
-                  <TextField
-                    id="firstName"
-                    fullWidth
-                    variant="outlined"
-                    autoComplete="fname"
-                    label="First Name"
-                    placeholder="First Name"
-                    required
-                    autoFocus
-                    // error={firstNameError}
-                    // helperText={firstNameError ? "error" : null}
-                  />
-                }
-                defaultValue={""}
+                label="First Name"
+                required={true}
+                error={errors}
                 control={control}
-                inputRef={register()}
               />
             </Grid>
+
+            {/* Middle Name */}
             <Grid item xs={12} sm={6}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                fullWidth
-                id="middleName"
-                label="Middle Name"
+              <ControlledTextField
                 name="middleName"
-                autoComplete="mname"
-                placeholder="Middle Name"
-                inputRef={register}
+                label="Middle Name"
+                error={errors}
+                control={control}
               />
             </Grid>
+
+            {/* Last Name */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                fullWidth
-                required
-                id="lastName"
-                label="Last Name"
+              <ControlledTextField
                 name="lastName"
-                autoComplete="lname"
-                placeholder="Last Name"
-                inputRef={register}
+                label="Last Name"
+                required={true}
+                error={errors}
+                control={control}
               />
             </Grid>
+
+            {/* ID Number */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                fullWidth
-                required
-                id="studentNumber"
+              <ControlledTextField
+                name="idNumber"
                 label="ID Number"
-                name="studentNumber"
-                autoComplete="id"
-                placeholder="19-00000"
-                inputRef={register}
+                required={true}
+                error={errors}
+                control={control}
               />
             </Grid>
+
+            {/* Email Address */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
+              <ControlledTextField
                 name="email"
                 label="Email Address"
-                autoComplete="email"
-                placeholder="name@email.com"
-                inputRef={register()}
+                required={true}
+                error={errors}
+                control={control}
               />
             </Grid>
+
+            {/* Contact Number */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                fullWidth
-                id="contactNumber"
-                label="Contact Number"
+              <ControlledTextField
                 name="contactNumber"
-                autoComplete="contact"
-                placeholder="09xxxxxxxxx"
-                inputRef={register}
+                label="Contact Number"
+                error={errors}
+                control={control}
               />
             </Grid>
+
+            {/* Password */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                required
-                fullWidth
+              <ControlledTextField
                 name="password"
                 label="Password"
+                required={true}
                 type={showPassword ? "text" : "password"}
-                id="password"
-                autoComplete="current-password"
+                error={errors}
+                control={control}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -209,22 +209,18 @@ const SignUp = () => {
                     </InputAdornment>
                   ),
                 }}
-                inputRef={register}
               />
             </Grid>
+
+            {/* Re:Password */}
             <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                defaultValue={""}
-                variant="outlined"
-                required
-                fullWidth
+              <ControlledTextField
                 name="repassword"
                 label="Retype Password"
-                id="repassword"
-                autoComplete="re-password"
+                required={true}
                 type={showRePassword ? "text" : "password"}
+                error={errors}
+                control={control}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -237,7 +233,6 @@ const SignUp = () => {
                     </InputAdornment>
                   ),
                 }}
-                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -259,7 +254,6 @@ const SignUp = () => {
                 }
                 key={"isTeacher"}
                 label={"Sign up as teacher?"}
-                inputRef={register}
               />
             </Grid>
           </Grid>

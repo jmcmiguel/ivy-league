@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
           }
         });
       } else {
-        res.send("Email is alreaydy in use");
+        res.send("email already in use");
       }
     })
     .catch(err => {
