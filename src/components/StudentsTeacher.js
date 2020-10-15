@@ -16,35 +16,9 @@ import {
   Snackbar,
 } from "@material-ui/core";
 
-let initialSection = [
-  {
-    subject: "ITNW-1413",
-    section: "NW3D",
-    students: 36,
-    description: "Software Engineering 1",
-    classCode: "ABCD123",
-  },
-  {
-    subject: "ICTC-1314",
-    section: "NW4B",
-    students: 15,
-    description: "Designs 1",
-    classCode: "ABCD123",
-  },
-  {
-    subject: "FOLA-1234",
-    section: "NW1C",
-    students: 54,
-    description: "Diferrential Calculus",
-    classCode: "ABCD123",
-  },
-];
-
-// let section = [];
-
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
-  const [sections, setSections] = useState(initialSection);
+  const [sections, setSections] = useState([]);
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
@@ -56,11 +30,11 @@ const StudentsTeacher = () => {
     setOpenSnackbar(false);
   };
 
-  const handleAdd = (subject, sect, students, description, classCode) => {
+  const handleAdd = (subject, sect, classCapacity, description, classCode) => {
     const newSection = {
       subject: subject,
       section: sect,
-      students: students,
+      classCapacity: classCapacity,
       description: description,
       classCode: classCode,
     };
@@ -83,6 +57,17 @@ const StudentsTeacher = () => {
         console.log("Error: ", error);
       });
   };
+
+  useEffect(() => {
+    sectionServices
+      .getAll()
+      .then(returnedData => {
+        setSections(returnedData);
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
+  }, []);
 
   useEffect(() => {}, [sections]);
 

@@ -14,10 +14,10 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
 
   const onSubmit = form => {
     handleAdd(
-      form.subject,
-      form.section,
+      form.subject.toUpperCase(),
+      form.section.toUpperCase(),
       form.studentCount,
-      form.desc,
+      form.desc.toUpperCase(),
       shortid.generate()
     );
     handleClose();
@@ -33,7 +33,6 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
       aria-labelledby="form-dialog-title">
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle id="form-dialog-title">Create new section</DialogTitle>
-
         <DialogContent>
           <DialogContentText>
             To create a new section, please enter the subject, section and
@@ -47,9 +46,9 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
             autoFocus
             margin="dense"
             id="subject"
-            label="Subject"
+            label="Course Code"
             type="text"
-            placeholder="ITNW-1X3X"
+            placeholder="ITNW-1XXX"
             fullWidth
           />
           <Controller

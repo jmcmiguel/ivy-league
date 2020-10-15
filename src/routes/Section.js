@@ -7,12 +7,14 @@ router.post("/sections", async (req, res) => {
     subject: req.body.subject,
     section: req.body.section,
     students: req.body.students,
+    classCapacity: req.body.classCapacity,
     description: req.body.description,
     classCode: req.body.classCode,
   });
 
   await Section.findOne({
     subject: newSection.subject,
+    section: newSection.section,
   })
     .then(async profile => {
       if (!profile) {
@@ -30,6 +32,16 @@ router.post("/sections", async (req, res) => {
     })
     .catch(err => {
       console.log("Error is", err.message);
+    });
+});
+
+router.get("/sections", async (req, res) => {
+  await Section.find({})
+    .then(section => {
+      res.send(section);
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
     });
 });
 
