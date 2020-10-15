@@ -5,15 +5,12 @@ import {
   Button,
   Box,
   Fab,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   Grid,
   Typography,
   Container,
   Divider,
 } from "@material-ui/core";
+import ExamsCard from "./ExamsCard";
 
 const cards = [
   {
@@ -112,48 +109,10 @@ const ExamTeacher = () => {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {cards.length ? (
-            cards.map((card, i) => (
-              <Grid item key={i} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    variant={"outlined"}
-                    image={card.image}
-                    title={card.altText}
-                    style={{ height: "8rem" }}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                      align="center">
-                      {card.title}
-                    </Typography>
-                    <Typography gutterBottom align="center">
-                      {card.desc}
-                    </Typography>
-                    <div style={{ marginTop: "2rem" }}>
-                      <Divider variant="middle" />
-                      <Typography gutterBottom color="secondary" align="center">
-                        {card.status}
-                      </Typography>
-                    </div>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                    <Button size="small" color="primary">
-                      Delete
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))
+            cards
+              .slice(0)
+              .reverse()
+              .map((card, i) => <ExamsCard key={i} section={card} />)
           ) : (
             <Box pt={8} style={{ marginBottom: "3rem" }}>
               <Typography
