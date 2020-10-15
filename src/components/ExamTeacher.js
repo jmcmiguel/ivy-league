@@ -1,6 +1,8 @@
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherExam";
+import ExamsCard from "./ExamsCard";
+import { Link } from "react-router-dom";
 import {
   Button,
   Box,
@@ -10,7 +12,6 @@ import {
   Container,
   Divider,
 } from "@material-ui/core";
-import ExamsCard from "./ExamsCard";
 
 const cards = [
   {
@@ -39,9 +40,7 @@ const cards = [
   },
 ];
 
-// const cards = [];
-
-const ExamTeacher = () => {
+const ExamTeacher = ({ match }) => {
   return (
     <div style={{ minHeight: "100vh" }}>
       <Fab
@@ -73,7 +72,11 @@ const ExamTeacher = () => {
           <Grid container spacing={2} justify="center">
             <Grid item>
               <Button variant="contained" color="primary">
-                Create New Exam
+                <Link
+                  to={`${match.url}/createexam`}
+                  style={{ color: "inherit", textDecoration: "inherit" }}>
+                  Create New Exam
+                </Link>
               </Button>
             </Grid>
             <Grid item>

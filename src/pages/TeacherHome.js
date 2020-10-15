@@ -9,6 +9,7 @@ import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
 import AccountTeacher from "../components/AccountTeacher";
 import Copyright from "../components/Copyright";
+import CreateExam from "../pages/CreateExam";
 
 const TeacherHome = () => {
   let match = useRouteMatch();
@@ -38,7 +39,9 @@ const TeacherHome = () => {
           {/* React Router */}
           <Switch>
             <Route path={`${match.path}`} exact component={DashboardTeacher} />
-            <Route path={`${match.path}/exams`} exact component={ExamTeacher} />
+            <Route path={`${match.path}/exams`} exact>
+              <ExamTeacher match={match} />
+            </Route>
             <Route
               path={`${match.path}/students`}
               exact
@@ -48,6 +51,11 @@ const TeacherHome = () => {
               path={`${match.path}/account`}
               exact
               component={AccountTeacher}
+            />
+            <Route
+              path={`${match.path}/createexam`}
+              exact
+              component={CreateExam}
             />
           </Switch>
         </Container>
