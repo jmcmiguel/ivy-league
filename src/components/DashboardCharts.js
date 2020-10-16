@@ -37,16 +37,6 @@ const DashboardCharts = ({
           </Typography>
         </Grid>
 
-        {/* Ranking Board */}
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <RankingBoard
-              title={`${subject}(${section}) Ranking Board`}
-              tableData={tableData}
-            />
-          </Paper>
-        </Grid>
-
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
@@ -64,6 +54,16 @@ const DashboardCharts = ({
               section={section}
               subject={subject}
               highestScore={topScore}
+            />
+          </Paper>
+        </Grid>
+
+        {/* Ranking Board */}
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <RankingBoard
+              title={`${subject}(${section}) Ranking Board`}
+              tableData={tableData}
             />
           </Paper>
         </Grid>

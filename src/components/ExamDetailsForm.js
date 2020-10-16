@@ -31,6 +31,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               label="Exam Name"
               error={errors}
               control={control}
+              required={true}
               rules={{ required: "this is required" }}
             />
           </Grid>
@@ -42,6 +43,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               label="Sample Text"
               error={errors}
               control={control}
+              required={true}
               rules={{ required: "this is required" }}
             />
           </Grid>
