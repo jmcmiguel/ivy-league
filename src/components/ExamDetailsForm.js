@@ -5,13 +5,20 @@ import ControlledTextField from "../components/ControlledTextField";
 import { Grid, Button, Typography } from "@material-ui/core";
 import ControlledSelect from "./ControlledSelect";
 import Section from "../services/sections";
+import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const { handleSubmit, errors, control } = useForm();
   const classes = useStylesForgotPassword();
   const [sections, setSections] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
   const submitHandle = formData => {
+    formData.schedule = selectedDate;
     submitExamDetails(formData);
     handleNext();
   };
@@ -68,6 +75,18 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               control={control}
               label="Section"
               menu={sections}
+            />
+          </Grid>
+
+          {/* Exam Date */}
+          <Grid item xs={12}>
+            <ControlledDateTimePicker
+              selectedDate={selectedDate}
+              handleDateChange={handleDateChange}
+              name="schedule"
+              error={errors}
+              control={control}
+              label="Start of Examination"
             />
           </Grid>
         </Grid>

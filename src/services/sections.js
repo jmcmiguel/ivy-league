@@ -12,7 +12,7 @@ const getAllSection = () => {
   return request.then(response =>
     response.data.map(section => {
       return {
-        label: `[${section.subject}] (${section.section}) ${section.description}`,
+        label: `[${section.subject}] ${section.description} (${section.section})`,
         value: section.classCode,
       };
     })

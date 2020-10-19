@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ExamDetailsForm from "../components/ExamDetailsForm";
-import EmailVerificationForm from "../components/EmailVerificationForm";
+import ExamQuestionsForm from "../components/ExamQuestionsForm";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
 import {
   CssBaseline,
@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-const steps = ["Enter exam details", "Input exam data", "Verify exam "];
+const steps = ["Enter exam details", "Input question pool", "Verify exam "];
 
 const ForgotPassword = () => {
   const [formDatas, setFormDatas] = useState([]);
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
           />
         );
       case 1:
-        return <EmailVerificationForm />;
+        return <ExamQuestionsForm />;
       default:
         throw new Error("Unknown step");
     }
