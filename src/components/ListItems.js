@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -6,6 +6,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
+import Section from "../services/sections";
 import {
   ListItem,
   ListItemIcon,
@@ -16,6 +17,18 @@ import {
 } from "@material-ui/core";
 
 const ListItems = ({ match }) => {
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    Section.getSections()
+      .then(returnedData => {
+        setSections(returnedData);
+      })
+      .catch(error => {
+        console.log("error :>> ", error);
+      });
+  }, []);
+
   return (
     <>
       <Divider />
@@ -54,24 +67,16 @@ const ListItems = ({ match }) => {
       <List>
         <div>
           <ListSubheader inset>Saved reports</ListSubheader>
-          <ListItem button>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="ICTC-1213(NW3D)" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="ICTC-1213(NW3A)" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="ITNW-0453(NW4B)" />
-          </ListItem>
+          {sections.map((section, i) => {
+            return (
+              <ListItem button key={i}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary={section.label} />
+              </ListItem>
+            );
+          })}
         </div>
       </List>
 

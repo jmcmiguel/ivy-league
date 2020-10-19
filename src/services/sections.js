@@ -12,6 +12,18 @@ const getAllSection = () => {
   return request.then(response =>
     response.data.map(section => {
       return {
+        label: `[${section.subject}] (${section.section}) ${section.description}`,
+        value: section.classCode,
+      };
+    })
+  );
+};
+
+const getSections = () => {
+  const request = axios.get(`${baseURL}/sections`);
+  return request.then(response =>
+    response.data.map(section => {
+      return {
         label: `${section.subject} (${section.section})`,
         value: section.classCode,
       };
@@ -24,4 +36,4 @@ const create = newSection => {
   return request.then(response => response.data);
 };
 
-export default { create, getAll, getAllSection };
+export default { create, getAll, getAllSection, getSections };

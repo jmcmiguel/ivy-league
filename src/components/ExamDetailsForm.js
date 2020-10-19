@@ -48,11 +48,11 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
             />
           </Grid>
 
-          {/* Sample text */}
+          {/* Exam description */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="sampletext"
-              label="Sample Text"
+              name="examdesc"
+              label="Exam Description"
               error={errors}
               control={control}
               required={true}

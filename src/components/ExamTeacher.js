@@ -43,20 +43,24 @@ const cards = [
 const ExamTeacher = ({ match }) => {
   return (
     <div style={{ minHeight: "100vh" }}>
-      <Fab
-        color="primary"
-        aria-label="add"
-        size="large"
-        style={{
-          margin: 0,
-          top: "auto",
-          right: 50,
-          bottom: 40,
-          left: "auto",
-          position: "fixed",
-        }}>
-        <AddIcon />
-      </Fab>
+      <Link
+        to={`${match.url}/createexam`}
+        style={{ color: "inherit", textDecoration: "inherit" }}>
+        <Fab
+          color="primary"
+          aria-label="add"
+          size="large"
+          style={{
+            margin: 0,
+            top: "auto",
+            right: 50,
+            bottom: 40,
+            left: "auto",
+            position: "fixed",
+          }}>
+          <AddIcon />
+        </Fab>
+      </Link>
 
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
