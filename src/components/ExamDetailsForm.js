@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
 import { useForm } from "react-hook-form";
 import ControlledTextField from "../components/ControlledTextField";
 import { Grid, Button, Typography } from "@material-ui/core";
 import ControlledSelect from "./ControlledSelect";
+import Section from "../services/sections";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const { handleSubmit, errors, control } = useForm();
   const classes = useStylesForgotPassword();
+  const [sections, setSections] = useState([]);
 
   const submitHandle = formData => {
     submitExamDetails(formData);
     handleNext();
   };
+
+  useEffect(() => {
+    Section.getAllSection()
+      .then(returnedData => {
+        setSections(returnedData);
+      })
+      .catch(error => {
+        console.log("Error :>> ", error);
+      });
+  }, []);
 
   return (
     <React.Fragment>
@@ -55,11 +67,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               error={errors}
               control={control}
               label="Section"
-              menu={[
-                { value: "NW3D", label: "ICTC-1213 (NW3D)" },
-                { value: "NW4A", label: "ITNW-1413 (NW4A)" },
-                { value: "NW5D", label: "FOLA-1213 (NW5D)" },
-              ]}
+              menu={sections}
             />
           </Grid>
         </Grid>

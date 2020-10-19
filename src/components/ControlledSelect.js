@@ -36,7 +36,7 @@ const ControlledSelect = ({
           </Select>
         }
         name={name}
-        rules={{ required: "this is required" }}
+        rules={{ required: `${label} is required` }}
         control={control}
         defaultValue=""
       />
