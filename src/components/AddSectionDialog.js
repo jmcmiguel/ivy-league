@@ -18,7 +18,8 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
       form.section.toUpperCase(),
       form.studentCount,
       form.desc.toUpperCase(),
-      shortid.generate()
+      shortid.generate(),
+      (form.image = `https://picsum.photos/seed/${form.subject}${form.section}/166/244`)
     );
     handleClose();
   };

@@ -30,13 +30,21 @@ const StudentsTeacher = () => {
     setOpenSnackbar(false);
   };
 
-  const handleAdd = (subject, sect, classCapacity, description, classCode) => {
+  const handleAdd = (
+    subject,
+    sect,
+    classCapacity,
+    description,
+    classCode,
+    image
+  ) => {
     const newSection = {
       subject: subject,
       section: sect,
       classCapacity: classCapacity,
       description: description,
       classCode: classCode,
+      image: image,
     };
 
     sectionServices

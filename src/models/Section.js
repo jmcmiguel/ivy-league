@@ -6,5 +6,6 @@ const SectionSchema = mongoose.Schema({
   classCapacity: { type: Number, require: true },
   description: { type: String, require: true },
   classCode: { type: String, require: true },
+  image: { type: String, require: true },
 });
 module.exports = mongoose.model("Section", SectionSchema);

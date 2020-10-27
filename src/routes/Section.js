@@ -3,13 +3,14 @@ var router = express.Router();
 const Section = require("../models/Section");
 
 router.post("/sections", async (req, res) => {
-  var newSection = Section({
+  let newSection = Section({
     subject: req.body.subject,
     section: req.body.section,
     students: req.body.students,
     classCapacity: req.body.classCapacity,
     description: req.body.description,
     classCode: req.body.classCode,
+    image: `${req.body.image}`,
   });
 
   await Section.findOne({

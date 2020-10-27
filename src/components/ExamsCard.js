@@ -4,7 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
   Divider,
@@ -15,13 +14,6 @@ const ExamsCard = ({ section }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
-        <CardMedia
-          className={classes.cardMedia}
-          variant={"outlined"}
-          image={"https://source.unsplash.com/random"}
-          title={section.title}
-          style={{ height: "8rem" }}
-        />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" align="center">
             {section.title}

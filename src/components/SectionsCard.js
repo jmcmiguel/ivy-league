@@ -51,7 +51,7 @@ const SectionsCard = ({ section }) => {
         <Hidden xsDown>
           <CardMedia
             className={classes.cardMedia}
-            image={"https://source.unsplash.com/random"}
+            image={section.image}
             title={section.imageTitle}
           />
         </Hidden>

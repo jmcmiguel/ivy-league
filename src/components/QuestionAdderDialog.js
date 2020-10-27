@@ -1,0 +1,84 @@
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { useForm } from "react-hook-form";
+import ControlledSelect from "../components/ControlledSelect";
+import ControlledTextField from "../components/ControlledTextField";
+import { Grid } from "@material-ui/core";
+
+const shortid = require("shortid");
+
+const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
+  const { control, handleSubmit, errors } = useForm();
+
+  const onSubmit = form => {
+    handleAdd(
+      form.subject.toUpperCase(),
+      form.section.toUpperCase(),
+      form.studentCount,
+      form.desc.toUpperCase(),
+      shortid.generate()
+    );
+    handleClose();
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogTitle id="form-dialog-title">Create new section</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To create a set of questions please specify what type of questions
+            you would like
+          </DialogContentText>
+
+          {/* Question Type */}
+          <Grid item xs={12}>
+            <ControlledSelect
+              error={errors}
+              control={control}
+              name="type"
+              label="Question Type"
+              menu={[
+                { value: "multichoice", label: "Multiple Choice" },
+                { value: "trueorfalse", label: "True or False" },
+                { value: "identification", label: "Identification" },
+                { value: "free", label: "Explanatory" },
+              ]}
+            />
+          </Grid>
+
+          {/* Number of items */}
+          <ControlledTextField
+            name="noitems"
+            label="Number of items"
+            type="number"
+            error={errors}
+            control={control}
+            required={true}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button color="primary" type="submit">
+            Create
+          </Button>
+        </DialogActions>
+      </form>
+    </Dialog>
+  );
+};
+
+export default QuestionAdderDialog;

@@ -66,7 +66,7 @@ const ListItems = ({ match }) => {
 
       <List>
         <div>
-          <ListSubheader inset>Saved reports</ListSubheader>
+          <ListSubheader inset>Class reports</ListSubheader>
           {sections.map((section, i) => {
             return (
               <ListItem button key={i}>
