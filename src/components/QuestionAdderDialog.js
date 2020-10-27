@@ -49,6 +49,7 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
               control={control}
               name="type"
               label="Question Type"
+              required={true}
               menu={[
                 { value: "multichoice", label: "Multiple Choice" },
                 { value: "trueorfalse", label: "True or False" },

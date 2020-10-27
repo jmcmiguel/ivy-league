@@ -15,6 +15,7 @@ const ControlledSelect = ({
   label,
   menu,
   variant = "outlined",
+  required = false,
 }) => {
   return (
     <FormControl
@@ -24,7 +25,7 @@ const ControlledSelect = ({
       <InputLabel id={`${name}Label`}>{label}</InputLabel>
       <Controller
         as={
-          <Select>
+          <Select required={required}>
             <MenuItem value="">None</MenuItem>
             {menu.map((menu, i) => {
               return (
