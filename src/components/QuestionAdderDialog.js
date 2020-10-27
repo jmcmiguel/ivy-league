@@ -35,7 +35,7 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogTitle id="form-dialog-title">Create new section</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Questions</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To create a set of questions please specify what type of questions
