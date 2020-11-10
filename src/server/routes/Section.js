@@ -1,19 +1,19 @@
 var express = require("express");
 var router = express.Router();
-const Section = require("../models/Section");
+const Class = require("../models/Section");
 
 router.post("/sections", async (req, res) => {
-  let newSection = Section({
-    subject: req.body.subject,
+  let newSection = Class({
+    courseCode: req.body.courseCode,
+    courseDesc: req.body.courseDesc,
     section: req.body.section,
-    students: req.body.students,
+    studentEnrolled: req.body.studentEnrolled,
     classCapacity: req.body.classCapacity,
-    description: req.body.description,
     classCode: req.body.classCode,
     image: `${req.body.image}`,
   });
 
-  await Section.findOne({
+  await Class.findOne({
     subject: newSection.subject,
     section: newSection.section,
   })
@@ -37,7 +37,7 @@ router.post("/sections", async (req, res) => {
 });
 
 router.get("/sections", async (req, res) => {
-  await Section.find({})
+  await Class.find({})
     .then(section => {
       res.send(section);
     })

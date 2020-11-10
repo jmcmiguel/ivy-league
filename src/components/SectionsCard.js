@@ -28,16 +28,13 @@ const SectionsCard = ({ section }) => {
         <div className={classes.cardDetails}>
           <CardContent>
             <Typography component="h2" variant="h5">
-              {section.subject}
+              {`${section.courseCode} (${section.section})`}
             </Typography>
             <Typography variant="subtitle1" color="textSecondary">
-              {section.description}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              {section.section}
+              {section.courseDesc}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {section.students ? section.students : 0}
+              {section.studentEnrolled ? section.studentEnrolled : 0}
               {` / ${section.classCapacity} students enrolled`}
             </Typography>
             <Typography variant="subtitle1" paragraph>
@@ -49,11 +46,7 @@ const SectionsCard = ({ section }) => {
           </CardContent>
         </div>
         <Hidden xsDown>
-          <CardMedia
-            className={classes.cardMedia}
-            image={section.image}
-            title={section.imageTitle}
-          />
+          <CardMedia className={classes.cardMedia} image={section.image} />
         </Hidden>
       </Card>
     </Grid>

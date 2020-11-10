@@ -1,9 +1,8 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import ControlledTextField from "../components/ControlledTextField";
 import {
   Button,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
@@ -19,15 +18,16 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
 
   const onSubmit = form => {
     handleAdd(
-      form.subject.toUpperCase(),
+      form.courseCode.toUpperCase(),
+      form.courseDesc.toUpperCase(),
       form.section.toUpperCase(),
-      form.studentCount,
-      form.desc.toUpperCase(),
+      form.classCapacity,
       shortid.generate(),
       (form.image = `https://picsum.photos/seed/${form.subject}${form.section}/166/244`)
     );
     handleClose();
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -48,7 +48,7 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
           {/* Course Code */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="subject"
+              name="courseCode"
               label="Course Code"
               variant="standard"
               error={errors}
@@ -61,7 +61,7 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
           {/* Course Name */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="desc"
+              name="courseDesc"
               label="Course Name"
               variant="standard"
               error={errors}
@@ -87,7 +87,7 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
           {/* Max Students */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="studentCount"
+              name="classCapacity"
               label="Max students allowed"
               variant="standard"
               type="number"

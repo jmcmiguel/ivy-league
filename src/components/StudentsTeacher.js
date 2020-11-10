@@ -31,18 +31,18 @@ const StudentsTeacher = () => {
   };
 
   const handleAdd = (
-    subject,
-    sect,
+    courseCode,
+    courseDesc,
+    section,
     classCapacity,
-    description,
     classCode,
     image
   ) => {
     const newSection = {
-      subject: subject,
-      section: sect,
+      courseCode: courseCode,
+      courseDesc: courseDesc,
+      section: section,
       classCapacity: classCapacity,
-      description: description,
       classCode: classCode,
       image: image,
     };

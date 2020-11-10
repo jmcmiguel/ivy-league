@@ -24,7 +24,7 @@ const getSections = () => {
   return request.then(response =>
     response.data.map(section => {
       return {
-        label: `${section.subject} (${section.section})`,
+        label: `${section.courseCode} (${section.section})`,
         value: section.classCode,
       };
     })
