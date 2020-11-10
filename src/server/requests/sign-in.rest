@@ -2,7 +2,7 @@ POST http://localhost:8080/api/signin
 Content-Type: application/json
 
 {
-    "email":"kamdo@email.com",
-    "password":"password123"
+    "email":"lkji@gmail.com",
+    "password":"password"
 
 }

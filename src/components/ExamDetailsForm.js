@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import ControlledTextField from "../components/ControlledTextField";
 import { Grid, Button, Typography } from "@material-ui/core";
 import ControlledSelect from "./ControlledSelect";
-import Section from "../services/sections";
+import Section from "../server/services/sections";
 import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {

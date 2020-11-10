@@ -5,7 +5,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Copyright from "../components/Copyright";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import users from "../services/users";
+import users from "../server/services/users";
 import ControlledTextField from "../components/ControlledTextField";
 import MuiAlert from "@material-ui/lab/Alert";
 import {

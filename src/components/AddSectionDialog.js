@@ -1,16 +1,21 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
+import ControlledTextField from "../components/ControlledTextField";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+} from "@material-ui/core";
+
 const shortid = require("shortid");
 
 const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, errors, control } = useForm();
 
   const onSubmit = form => {
     handleAdd(
@@ -39,53 +44,59 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
             To create a new section, please enter the subject, section and
             amount of students
           </DialogContentText>
-          <Controller
-            as={TextField}
-            control={control}
-            defaultValue=""
-            name="subject"
-            autoFocus
-            margin="dense"
-            id="subject"
-            label="Course Code"
-            type="text"
-            placeholder="ITNW-1XXX"
-            fullWidth
-          />
-          <Controller
-            as={TextField}
-            control={control}
-            defaultValue=""
-            name="section"
-            margin="dense"
-            id="section"
-            label="Section"
-            type="text"
-            placeholder="NW3G"
-            fullWidth
-          />
-          <Controller
-            as={TextField}
-            control={control}
-            defaultValue=""
-            name="studentCount"
-            margin="dense"
-            id="studentCount"
-            label="Class Capacity"
-            type="number"
-            fullWidth
-          />
-          <Controller
-            as={TextField}
-            control={control}
-            defaultValue=""
-            name="desc"
-            margin="dense"
-            id="desc"
-            label="Subject Name"
-            type="text"
-            fullWidth
-          />
+
+          {/* Course Code */}
+          <Grid item xs={12}>
+            <ControlledTextField
+              name="subject"
+              label="Course Code"
+              variant="standard"
+              error={errors}
+              control={control}
+              required={true}
+              rules={{ required: "this is required" }}
+            />
+          </Grid>
+
+          {/* Course Name */}
+          <Grid item xs={12}>
+            <ControlledTextField
+              name="desc"
+              label="Course Name"
+              variant="standard"
+              error={errors}
+              control={control}
+              required={true}
+              rules={{ required: "this is required" }}
+            />
+          </Grid>
+
+          {/* Section */}
+          <Grid item xs={12}>
+            <ControlledTextField
+              name="section"
+              label="Section"
+              variant="standard"
+              error={errors}
+              control={control}
+              required={true}
+              rules={{ required: "this is required" }}
+            />
+          </Grid>
+
+          {/* Max Students */}
+          <Grid item xs={12}>
+            <ControlledTextField
+              name="studentCount"
+              label="Max students allowed"
+              variant="standard"
+              type="number"
+              error={errors}
+              control={control}
+              required={true}
+              rules={{ required: "this is required" }}
+            />
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

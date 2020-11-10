@@ -6,7 +6,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
-import Section from "../services/sections";
+import Section from "../server/services/sections";
 import {
   ListItem,
   ListItemIcon,
