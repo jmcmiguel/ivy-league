@@ -10,21 +10,14 @@ import ControlledSelect from "../components/ControlledSelect";
 import ControlledTextField from "../components/ControlledTextField";
 import { Grid } from "@material-ui/core";
 
-const shortid = require("shortid");
-
 const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
   const { control, handleSubmit, errors } = useForm();
 
-  const onSubmit = form => {
-    handleAdd(
-      form.subject.toUpperCase(),
-      form.section.toUpperCase(),
-      form.studentCount,
-      form.desc.toUpperCase(),
-      shortid.generate()
-    );
+  const onSubmit = formData => {
+    handleAdd(formData);
     handleClose();
   };
+
   const handleClose = () => {
     setOpen(false);
   };

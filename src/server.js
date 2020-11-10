@@ -12,7 +12,6 @@ const passport = require("passport");
 const profile = require("./routes/Profile");
 const signin = require("./routes/Signin");
 const signup = require("./routes/Signup");
-const home = require("./routes/Home");
 const section = require("./routes/Section");
 // End of Routes Import
 
@@ -57,7 +56,6 @@ mongoose
 // End of Connect to MongoDB
 
 // Start of Routes
-app.use("/", home);
 app.use("/api", signin);
 app.use("/api", signup);
 app.use("/api", profile);

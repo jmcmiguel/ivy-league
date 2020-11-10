@@ -111,20 +111,18 @@ const Home = () => {
             BPSU Online Examination System
           </Typography>
           <nav>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
+            <BrowserLink
+              to="teacher"
+              style={{ color: "inherit", textDecoration: "none" }}
               className={classes.link}>
               For Teachers
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
+            </BrowserLink>
+            <BrowserLink
+              to=""
+              style={{ color: "inherit", textDecoration: "none" }}
               className={classes.link}>
               For Students
-            </Link>
+            </BrowserLink>
           </nav>
           <Button color="primary" variant="outlined" className={classes.link}>
             <BrowserLink

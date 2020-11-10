@@ -3,8 +3,8 @@ import { Button, Typography, Fab, Divider } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useForm } from "react-hook-form";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
-import ControlledTextField from "../components/ControlledTextField";
 import QuestionAdderDialog from "../components/QuestionAdderDialog";
+import ExamPool from "./ExamPool";
 
 const ExamQuestionsForm = () => {
   const [questions, setQuestions] = useState([]);
@@ -51,14 +51,12 @@ const ExamQuestionsForm = () => {
         <div>
           {questions.map((question, i) => {
             return (
-              <ControlledTextField
+              <ExamPool
                 key={i}
-                name="examname"
-                label="Exam Name"
-                error={errors}
+                question={question}
+                index={i}
+                errors={errors}
                 control={control}
-                required={true}
-                rules={{ required: "this is required" }}
               />
             );
           })}

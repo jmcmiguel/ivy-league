@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
   const handleSubmitExamDetails = formData => {
     setFormDatas(...formDatas, formData);
-    console.log(formData);
+    console.log("formData :>> ", formData);
   };
   const classes = useStylesForgotPassword();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -62,10 +62,11 @@ const ForgotPassword = () => {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Your account has been restored
+                  Exam has been uploaded to database
                 </Typography>
                 <Typography variant="subtitle1">
-                  You have succesfully restored your account
+                  It is available for students to be taken at specified time,
+                  exams can be modified only before it starts
                 </Typography>
               </React.Fragment>
             ) : (

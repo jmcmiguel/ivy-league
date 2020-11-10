@@ -12,6 +12,11 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const classes = useStylesForgotPassword();
   const [sections, setSections] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [examDuration, setExamDuration] = useState(0);
+
+  const getExamDuration = formData => {
+    setExamDuration(formData.examDuration);
+  };
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -38,7 +43,8 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
       <form
         className={classes.form}
         noValidate
-        onSubmit={handleSubmit(submitHandle)}>
+        onSubmit={handleSubmit(submitHandle)}
+        onChange={handleSubmit(getExamDuration)}>
         <Typography variant="h6" gutterBottom>
           Basic Exam Details
         </Typography>
@@ -87,6 +93,19 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               error={errors}
               control={control}
               label="Start of Examination"
+            />
+          </Grid>
+
+          {/* Exam Duration */}
+          <Grid item xs={12}>
+            <ControlledTextField
+              name="examDuration"
+              label="Exam Duration (in minutes)"
+              error={errors}
+              control={control}
+              required={true}
+              rules={{ required: "this is required" }}
+              type="number"
             />
           </Grid>
         </Grid>
