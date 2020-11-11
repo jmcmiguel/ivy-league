@@ -14,7 +14,7 @@ import CreateExam from "../pages/CreateExam";
 const TeacherHome = () => {
   let match = useRouteMatch();
   const classes = useStylesTeacherHome();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

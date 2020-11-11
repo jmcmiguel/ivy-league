@@ -13,6 +13,9 @@ const ControlledDateTimePicker = ({
   control,
   label,
   rules = {},
+  maxDate = null,
+  disableFuture = false,
+  openTo = "date",
 }) => {
   return (
     <FormControl style={{ width: "100%" }} error={Boolean(error[name])}>
@@ -21,11 +24,15 @@ const ControlledDateTimePicker = ({
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker
               name={name}
-              value={selectedDate}
-              disablePast
-              onChange={handleDateChange}
               label={label}
+              value={selectedDate}
+              onChange={handleDateChange}
+              maxDate={maxDate}
+              inputVariant="outlined"
               showTodayButton
+              disablePast
+              disableFuture={disableFuture}
+              openTo={openTo}
             />
           </MuiPickersUtilsProvider>
         }

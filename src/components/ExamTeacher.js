@@ -13,32 +13,18 @@ import {
   Divider,
 } from "@material-ui/core";
 
-const cards = [
-  {
-    title: "Exam 1",
-    desc: "Programming 1",
-    subject: "ICTC-1213",
-    section: "NW3D",
-    tookExam: 50,
-    classCapacity: 50,
-  },
-  {
-    title: "Exam 1",
-    desc: "Mobile Dev",
-    subject: "ICTC-1413",
-    section: "NW3D",
-    tookExam: 50,
-    classCapacity: 50,
-  },
-  {
-    title: "Exam 1",
-    desc: "Designs 1",
-    subject: "ICTC-1234",
-    section: "NW3D",
-    tookExam: 10,
-    classCapacity: 50,
-  },
-];
+// const cards = [
+//   {
+//     title: "Exam 1",
+//     desc: "Programming 1",
+//     subject: "ICTC-1213",
+//     section: "NW3D",
+//     tookExam: 50,
+//     classCapacity: 50,
+//   },
+// ];
+
+const cards = [];
 
 const ExamTeacher = ({ match }) => {
   return (

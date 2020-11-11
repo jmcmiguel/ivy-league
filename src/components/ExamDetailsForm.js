@@ -6,30 +6,43 @@ import ControlledSelect from "./ControlledSelect";
 import { Grid, Button, Typography } from "@material-ui/core";
 import Section from "../server/services/classes";
 import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
+import DateAdd from "date-fns/add";
+import DateSub from "date-fns/sub";
+import IsAfter from "date-fns/isAfter";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const { handleSubmit, errors, control } = useForm();
   const classes = useStylesForgotPassword();
   const [sections, setSections] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [examDuration, setExamDuration] = useState(0);
+  const [selectedDateSched, setSelectedDateSched] = useState(new Date());
+  const [selectedDateDeadline, setSelectedDateDeadline] = useState(
+    DateAdd(new Date(), { hours: 1, minutes: 30 })
+  );
 
-  const getExamDuration = formData => {
-    setExamDuration(formData.examDuration);
+  const handleDateChangeSched = sched => {
+    setSelectedDateSched(sched);
+    setSelectedDateDeadline(DateAdd(sched, { hours: 1, minutes: 30 }));
   };
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  const handleDateChangeDeadline = deadline => {
+    if (IsAfter(selectedDateSched, deadline)) {
+      setSelectedDateDeadline(deadline);
+      setSelectedDateSched(DateSub(deadline, { hours: 1, minutes: 30 }));
+    } else {
+      setSelectedDateDeadline(deadline);
+    }
   };
 
   const submitHandle = formData => {
-    formData.schedule = selectedDate;
+    formData.sched = selectedDateSched;
+    formData.deadline = selectedDateDeadline;
+
     submitExamDetails(formData);
     handleNext();
   };
 
   useEffect(() => {
-    Section.getAllSection()
+    Section.getClasses()
       .then(returnedData => {
         setSections(returnedData);
       })
@@ -43,8 +56,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
       <form
         className={classes.form}
         noValidate
-        onSubmit={handleSubmit(submitHandle)}
-        onChange={handleSubmit(getExamDuration)}>
+        onSubmit={handleSubmit(submitHandle)}>
         <Typography variant="h6" gutterBottom>
           Basic Exam Details
         </Typography>
@@ -52,7 +64,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
           {/* Exam name */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="examname"
+              name="examName"
               label="Exam Name"
               error={errors}
               control={control}
@@ -64,7 +76,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
           {/* Exam description */}
           <Grid item xs={12}>
             <ControlledTextField
-              name="examdesc"
+              name="examDesc"
               label="Exam Description"
               error={errors}
               control={control}
@@ -76,7 +88,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
           {/* Section */}
           <Grid item xs={12}>
             <ControlledSelect
-              name="section"
+              name="classCode"
               error={errors}
               control={control}
               label="Section"
@@ -87,25 +99,26 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
           {/* Exam Date */}
           <Grid item xs={12}>
             <ControlledDateTimePicker
-              selectedDate={selectedDate}
-              handleDateChange={handleDateChange}
-              name="schedule"
+              selectedDate={selectedDateSched}
+              handleDateChange={handleDateChangeSched}
+              name="sched"
               error={errors}
               control={control}
               label="Start of Examination"
+              maxDate={DateAdd(new Date(), { months: 6 })}
             />
           </Grid>
 
-          {/* Exam Duration */}
+          {/* Exam Deadline */}
           <Grid item xs={12}>
-            <ControlledTextField
-              name="examDuration"
-              label="Exam Duration (in minutes)"
+            <ControlledDateTimePicker
+              selectedDate={selectedDateDeadline}
+              handleDateChange={handleDateChangeDeadline}
+              name="deadline"
               error={errors}
               control={control}
-              required={true}
-              rules={{ required: "this is required" }}
-              type="number"
+              label="Deadline of Examination"
+              openTo="hours"
             />
           </Grid>
         </Grid>
