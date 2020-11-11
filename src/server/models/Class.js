@@ -1,5 +1,6 @@
-var mongoose = require("mongoose");
-const SectionSchema = mongoose.Schema({
+const mongoose = require("mongoose");
+
+const ClassSchema = mongoose.Schema({
   courseCode: { type: String, require: true },
   courseDesc: { type: String, require: true },
   section: { type: String, require: true },
@@ -9,4 +10,5 @@ const SectionSchema = mongoose.Schema({
   image: { type: String, require: true },
   prof: { type: String, require: false, default: "Prof. Dumbledore" },
 });
-module.exports = mongoose.model("Class", SectionSchema);
+
+module.exports = mongoose.model("Class", ClassSchema);
