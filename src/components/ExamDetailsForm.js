@@ -14,9 +14,11 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const { handleSubmit, errors, control } = useForm();
   const classes = useStylesForgotPassword();
   const [sections, setSections] = useState([]);
-  const [selectedDateSched, setSelectedDateSched] = useState(new Date());
+  const [selectedDateSched, setSelectedDateSched] = useState(
+    DateAdd(new Date(), { days: 1 })
+  );
   const [selectedDateDeadline, setSelectedDateDeadline] = useState(
-    DateAdd(new Date(), { hours: 1, minutes: 30 })
+    DateAdd(new Date(), { days: 1, hours: 1, minutes: 30 })
   );
 
   const handleDateChangeSched = sched => {
@@ -42,7 +44,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   };
 
   useEffect(() => {
-    Section.getClasses()
+    Section.getAllClass()
       .then(returnedData => {
         setSections(returnedData);
       })
@@ -119,6 +121,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               control={control}
               label="Deadline of Examination"
               openTo="hours"
+              maxDate={DateAdd(new Date(), { months: 6 })}
             />
           </Grid>
         </Grid>
