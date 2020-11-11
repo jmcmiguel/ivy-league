@@ -26,6 +26,7 @@ app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cookieparser());
+app.use(express.static("build"));
 
 morgan.token("body", req => {
   return req.method === "POST" || req.method === "PUT"
