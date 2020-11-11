@@ -6,7 +6,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
-import Section from "../server/services/sections";
+import Section from "../server/services/classes";
 import {
   ListItem,
   ListItemIcon,
@@ -20,7 +20,7 @@ const ListItems = ({ match }) => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    Section.getSections()
+    Section.getClasses()
       .then(returnedData => {
         setSections(returnedData);
       })

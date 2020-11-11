@@ -4,7 +4,7 @@ import useStylesForgotPassword from "../components/styles/useStylesForgotPasswor
 import ControlledTextField from "../components/ControlledTextField";
 import ControlledSelect from "./ControlledSelect";
 import { Grid, Button, Typography } from "@material-ui/core";
-import Section from "../server/services/sections";
+import Section from "../server/services/classes";
 import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {

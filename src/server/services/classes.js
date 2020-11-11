@@ -3,12 +3,12 @@ import axios from "axios";
 const baseURL = process.env.REACT_APP_baseURL;
 
 const getAll = () => {
-  const request = axios.get(`${baseURL}/sections`);
+  const request = axios.get(`${baseURL}/class`);
   return request.then(response => response.data);
 };
 
-const getAllSection = () => {
-  const request = axios.get(`${baseURL}/sections`);
+const getAllClass = () => {
+  const request = axios.get(`${baseURL}/class`);
   return request.then(response =>
     response.data.map(section => {
       return {
@@ -19,8 +19,8 @@ const getAllSection = () => {
   );
 };
 
-const getSections = () => {
-  const request = axios.get(`${baseURL}/sections`);
+const getClasses = () => {
+  const request = axios.get(`${baseURL}/class`);
   return request.then(response =>
     response.data.map(section => {
       return {
@@ -32,8 +32,13 @@ const getSections = () => {
 };
 
 const create = newSection => {
-  const request = axios.post(`${baseURL}/sections`, newSection);
+  const request = axios.post(`${baseURL}/class`, newSection);
   return request.then(response => response.data);
 };
 
-export default { create, getAll, getAllSection, getSections };
+export default {
+  create,
+  getAll,
+  getAllClass,
+  getClasses,
+};

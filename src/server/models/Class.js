@@ -9,4 +9,4 @@ const SectionSchema = mongoose.Schema({
   image: { type: String, require: true },
   prof: { type: String, require: false, default: "Prof. Dumbledore" },
 });
-module.exports = mongoose.model("Classes", SectionSchema);
+module.exports = mongoose.model("Class", SectionSchema);

@@ -1,7 +1,7 @@
 import React from "react";
 import { CssBaseline, Container, Box } from "@material-ui/core";
-import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
 import DashboardTeacher from "../components/DashboardTeacher.js";

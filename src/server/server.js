@@ -9,10 +9,10 @@ const cors = require("cors");
 const passport = require("passport");
 
 // Start of Routes Import
-const profile = require("./routes/Profile");
-const signin = require("./routes/Signin");
-const signup = require("./routes/Signup");
-const section = require("./routes/Section");
+const Profile = require("./routes/Profile");
+const Signin = require("./routes/Signin");
+const Signup = require("./routes/Signup");
+const Class = require("./routes/Class");
 // End of Routes Import
 
 // Start of Middlewares
@@ -56,10 +56,10 @@ mongoose
 // End of Connect to MongoDB
 
 // Start of Routes
-app.use("/api", signin);
-app.use("/api", signup);
-app.use("/api", profile);
-app.use("/api", section);
+app.use("/api", Signin);
+app.use("/api", Signup);
+app.use("/api", Profile);
+app.use("/api", Class);
 // End of Routes
 
 const UnknownEndpoint = (req, res) => {
