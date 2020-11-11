@@ -20,12 +20,11 @@ const Class = require("./routes/Class");
 // Config for JWT Strategy
 require("./strategies/jsonwtStrategies")(passport);
 app.use(passport.initialize());
-app.use(express.json());
-app.use(express.static("build"));
-app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
+app.use(cors());
 app.use(cookieparser());
+app.use(express.json());
 app.use(express.static("build"));
 
 morgan.token("body", req => {
