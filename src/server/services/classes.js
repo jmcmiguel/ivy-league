@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_baseURL;
+const baseURL = `https://localhost:${process.env.PORT}/api`;
 
 const getAll = () => {
   const request = axios.get(`${baseURL}/class`);
