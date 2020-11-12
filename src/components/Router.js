@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { MemoryRouter, Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Student from "../pages/Student";
 import SignIn from "../pages/SignIn";
@@ -10,7 +10,7 @@ import Error404 from "../pages/Error404";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/signin" component={SignIn} />
@@ -20,7 +20,7 @@ const Router = () => {
         <Route path="/teacher" component={TeacherHome} />
         <Route path="" component={Error404} />
       </Switch>
-    </BrowserRouter>
+    </MemoryRouter>
   );
 };
 
