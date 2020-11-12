@@ -191,7 +191,7 @@ const DashboardTeacher = () => {
               />
 
               {sampledata.length === i + 1 ? null : (
-                <Divider style={{ marginTop: "8rem", marginBottom: "3rem" }} />
+                <Divider style={{ marginTop: "8rem", marginBottom: "5rem" }} />
               )}
             </div>
           );

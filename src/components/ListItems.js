@@ -34,6 +34,7 @@ const ListItems = ({ match }) => {
       <Divider />
       <List>
         <div>
+          <ListSubheader inset>Student Management</ListSubheader>
           <Link to={`${match.url}`} style={{ all: "inherit" }}>
             <ListItem button>
               <ListItemIcon>
@@ -56,7 +57,7 @@ const ListItems = ({ match }) => {
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="Students" />
+              <ListItemText primary="Classes" />
             </ListItem>
           </Link>
         </div>

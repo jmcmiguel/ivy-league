@@ -128,14 +128,14 @@ const StudentsTeacher = () => {
           align="center"
           color="textPrimary"
           gutterBottom>
-          Students
+          Classes
         </Typography>
         <Typography
           variant="h5"
           align="center"
           color="textSecondary"
           component="p">
-          Manage students here by creating sections in which students can enroll
+          Manage your students here by creating classes in which they can enroll
           in
         </Typography>
         <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
@@ -147,7 +147,7 @@ const StudentsTeacher = () => {
                 onClick={() => {
                   setOpenAddSection(true);
                 }}>
-                Create New Section
+                Create New Class
               </Button>
             </Grid>
             <Grid item>
@@ -179,14 +179,14 @@ const StudentsTeacher = () => {
                 align="center"
                 color="textPrimary"
                 gutterBottom>
-                {`Awwww. You haven't created a section yet :(`}
+                {`Awwww. You haven't created a class yet :(`}
               </Typography>
               <Typography
                 variant="h5"
                 align="center"
                 color="textSecondary"
                 component="p">
-                Create a section using the add button to get started
+                Create a class using the add button to get started
               </Typography>
             </Box>
           )}

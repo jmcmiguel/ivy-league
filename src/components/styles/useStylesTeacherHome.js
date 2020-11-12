@@ -67,7 +67,7 @@ const useStylesTeacherHome = makeStyles(theme => ({
     overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(4),
   },
   paper: {
