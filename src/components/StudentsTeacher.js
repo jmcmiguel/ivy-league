@@ -70,6 +70,7 @@ const StudentsTeacher = () => {
     sectionServices
       .getAll()
       .then(returnedData => {
+        console.log("sectionServices :>> ", sectionServices);
         setSections(returnedData);
       })
       .catch(error => {
@@ -81,26 +82,22 @@ const StudentsTeacher = () => {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <Box zIndex="tooltip" position="absolute">
-        <Fab
-          color="primary"
-          aria-label="add"
-          size="large"
-          style={{
-            margin: 0,
-            top: "auto",
-            right: 50,
-            bottom: 40,
-            left: "auto",
-            position: "fixed",
-          }}
-          onClick={() => {
-            setOpenAddSection(true);
-          }}>
-          <AddIcon />
-        </Fab>
-      </Box>
-
+      <Fab
+        color="primary"
+        aria-label="add"
+        size="medium"
+        style={{
+          margin: 0,
+          top: "auto",
+          right: "2rem",
+          bottom: "5rem",
+          position: "fixed",
+        }}
+        onClick={() => {
+          setOpenAddSection(true);
+        }}>
+        <AddIcon />
+      </Fab>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
@@ -113,13 +110,11 @@ const StudentsTeacher = () => {
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>
-
       <AddSectionDialog
         open={openAddSection}
         setOpen={setOpenAddSection}
         handleAdd={handleAdd}
       />
-
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
         <Typography
@@ -159,9 +154,7 @@ const StudentsTeacher = () => {
         </div>
       </Container>
       {/* End hero unit */}
-
       <Divider style={{ marginTop: "3rem", marginBottom: "4rem" }} />
-
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections.length ? (

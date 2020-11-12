@@ -1,41 +1,58 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import { Link } from "react-router-dom";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
+import CreateIcon from "@material-ui/icons/Create";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1,
-    maxWidth: "100vw",
+    minWidth: "100vw",
+    bottom: 0,
+    position: "fixed",
+    zIndex: 1,
   },
 });
 
-export default function TeacherBottomNav() {
+export default function TeacherBottomNav({ match }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
-    <Paper square className={classes.root}>
-      <Tabs
-        centered
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        indicatorColor="secondary"
-        textColor="secondary"
-        aria-label="icon label tabs example">
-        <Tab icon={<PhoneIcon />} label="RECENTS" />
-        <Tab icon={<FavoriteIcon />} label="FAVORITES" />
-        <Tab icon={<PersonPinIcon />} label="NEARBY" />
-      </Tabs>
-    </Paper>
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      className={classes.root}>
+      <BottomNavigationAction
+        label="Dashboard"
+        icon={<DashboardIcon />}
+        component={Link}
+        to={`${match.url}`}
+      />
+      <BottomNavigationAction
+        label="Exams"
+        icon={<CreateIcon />}
+        component={Link}
+        to={`${match.url}/exams`}
+      />
+      <BottomNavigationAction
+        label="Classes"
+        icon={<PeopleIcon />}
+        component={Link}
+        to={`${match.url}/students`}
+      />
+      <BottomNavigationAction
+        label="Account"
+        icon={<AccountCircleIcon />}
+        component={Link}
+        to={`${match.url}/account`}
+      />
+    </BottomNavigation>
   );
 }

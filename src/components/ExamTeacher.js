@@ -1,5 +1,5 @@
 import React from "react";
-import AddIcon from "@material-ui/icons/Add";
+import CreateIcon from "@material-ui/icons/Create";
 import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
@@ -35,16 +35,15 @@ const ExamTeacher = ({ match }) => {
         <Fab
           color="primary"
           aria-label="add"
-          size="large"
+          size="medium"
           style={{
             margin: 0,
             top: "auto",
-            right: 50,
-            bottom: 40,
-            left: "auto",
+            right: "2rem",
+            bottom: "5rem",
             position: "fixed",
           }}>
-          <AddIcon />
+          <CreateIcon />
         </Fab>
       </Link>
 

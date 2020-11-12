@@ -118,7 +118,7 @@ const Home = () => {
               For Teachers
             </BrowserLink>
             <BrowserLink
-              to=""
+              to="student"
               style={{ color: "inherit", textDecoration: "none" }}
               className={classes.link}>
               For Students

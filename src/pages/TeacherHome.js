@@ -10,6 +10,7 @@ import StudentsTeacher from "../components/StudentsTeacher";
 import AccountTeacher from "../components/AccountTeacher";
 import Copyright from "../components/Copyright";
 import CreateExam from "../pages/CreateExam";
+import BottomNav from "../components/TeacherBottomNav";
 
 const TeacherHome = () => {
   let match = useRouteMatch();
@@ -35,6 +36,7 @@ const TeacherHome = () => {
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <BottomNav match={match} />
         <Container maxWidth="lg" className={classes.container}>
           {/* React Router */}
           <Switch>
