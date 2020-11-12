@@ -70,7 +70,6 @@ const StudentsTeacher = () => {
     sectionServices
       .getAll()
       .then(returnedData => {
-        console.log("sectionServices :>> ", sectionServices);
         setSections(returnedData);
       })
       .catch(error => {

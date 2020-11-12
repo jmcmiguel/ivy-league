@@ -4,8 +4,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 import { Drawer, IconButton } from "@material-ui/core";
 import ListItems from "../components/ListItems";
+import StudentListItems from "../components/StudentListItems";
 
-const HomeDrawer = ({ open, handleDrawerClose, match }) => {
+const HomeDrawer = ({ open, handleDrawerClose, match, listItems }) => {
   const classes = useStylesTeacherHome();
   return (
     <Drawer
@@ -19,7 +20,11 @@ const HomeDrawer = ({ open, handleDrawerClose, match }) => {
           <ChevronLeftIcon />
         </IconButton>
       </div>
-      <ListItems match={match} />
+      {listItems === "Student" ? (
+        <StudentListItems match={match} />
+      ) : (
+        <ListItems match={match} />
+      )}
     </Drawer>
   );
 };

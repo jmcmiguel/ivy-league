@@ -15,7 +15,7 @@ import BottomNav from "../components/TeacherBottomNav";
 const TeacherHome = () => {
   let match = useRouteMatch();
   const classes = useStylesTeacherHome();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

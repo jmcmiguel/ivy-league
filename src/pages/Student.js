@@ -4,12 +4,17 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
-import Student from "../components/TeacherBottomNav";
+import StudentBottomNav from "../components/StudentBottomNav";
+import Dashboard from "../components/DashboardStudent";
+import Exams from "../components/StudentExams";
+import Account from "../components/AccountStudent";
+import History from "../components/StudentExamHistory";
+import StudentAppBar from "../components/StudentAppBar";
 
-const TeacherHome = () => {
+const Student = () => {
   let match = useRouteMatch();
   const classes = useStylesTeacherHome();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -21,19 +26,29 @@ const TeacherHome = () => {
     <div className={classes.root}>
       <CssBaseline />
 
-      <HomeAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <StudentAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+
       <HomeDrawer
         open={open}
         handleDrawerClose={handleDrawerClose}
         match={match}
+        listItems="Student"
       />
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <StudentBottomNav match={match} />
         <Container maxWidth="lg" className={classes.container}>
           {/* React Router */}
           <Switch>
-            <Route path={`${match.path}`} exact component={Student} />
+            <Route path={`${match.path}`} exact component={Dashboard} />
+            <Route path={`${match.path}/exams`} exact component={Exams} />
+            <Route path={`${match.path}/account`} exact component={Account} />
+            <Route
+              path={`${match.path}/examhistory`}
+              exact
+              component={History}
+            />
           </Switch>
         </Container>
       </main>
@@ -41,4 +56,4 @@ const TeacherHome = () => {
   );
 };
 
-export default TeacherHome;
+export default Student;
