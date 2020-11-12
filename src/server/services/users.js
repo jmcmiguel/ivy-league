@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const signup = newUser => {
+const signup = async newUser => {
   const request = axios.post(`/api/signup`, newUser);
-  return request.then(response => response.data);
+  const response = await request;
+  return response.data;
 };
 
 export default { signup };

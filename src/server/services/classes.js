@@ -1,37 +1,37 @@
 import axios from "axios";
 
-const getAll = () => {
+const getAll = async () => {
   const request = axios.get(`/api/class`);
-  return request.then(response => response.data);
+  const response = await request;
+  return response.data;
 };
 
-const getAllClass = () => {
+const getAllClass = async () => {
   const request = axios.get(`/api/class`);
-  return request.then(response =>
-    response.data.map(section => {
-      return {
-        label: `[${section.courseCode}] ${section.courseDesc} (${section.section})`,
-        value: section.classCode,
-      };
-    })
-  );
+  const response = await request;
+  return response.data.map(section => {
+    return {
+      label: `[${section.courseCode}] ${section.courseDesc} (${section.section})`,
+      value: section.classCode,
+    };
+  });
 };
 
-const getClasses = () => {
+const getClasses = async () => {
   const request = axios.get(`/api/class`);
-  return request.then(response =>
-    response.data.map(section => {
-      return {
-        label: `${section.courseCode} (${section.section})`,
-        value: section.classCode,
-      };
-    })
-  );
+  const response = await request;
+  return response.data.map(section => {
+    return {
+      label: `${section.courseCode} (${section.section})`,
+      value: section.classCode,
+    };
+  });
 };
 
-const create = newSection => {
+const create = async newSection => {
   const request = axios.post(`/api/class`, newSection);
-  return request.then(response => response.data);
+  const response = await request;
+  return response.data;
 };
 
 export default {
