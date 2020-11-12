@@ -9,7 +9,7 @@ const HomeDrawer = ({ open, handleDrawerClose, match }) => {
   const classes = useStylesTeacherHome();
   return (
     <Drawer
-      variant="permanent"
+      variant="temporary"
       classes={{
         paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
       }}
