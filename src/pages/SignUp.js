@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const { control, handleSubmit, errors, reset } = useForm();
+  const { control, handleSubmit, errors } = useForm();
   const [isTeacher, setIsTeacher] = useState(false);
   const handleCheckboxChange = e => {
     setIsTeacher(!isTeacher);
@@ -86,7 +86,6 @@ const SignUp = () => {
             setSnackbarSeverity("success");
             setSnackbarMessage("Signed up succesfully");
             setOpenSnackbar(!openSnackbar);
-            reset();
           }
         })
         .catch(error => {

@@ -16,8 +16,6 @@ const Class = require("./routes/Class");
 // End of Routes Import
 
 // Start of Middlewares
-
-// Config for JWT Strategy
 require("./strategies/jsonwtStrategies")(passport);
 app.use(passport.initialize());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -36,7 +34,6 @@ morgan.token("body", req => {
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
-
 // End of Middlewares
 
 // Connect to MongoDB
@@ -52,13 +49,12 @@ mongoose
   .catch(error => {
     console.log("error connecting to MongoDB:", error.message);
   });
-
 // End of Connect to MongoDB
 
 // Start of Routes
+app.use("/api", Profile);
 app.use("/api", Signin);
 app.use("/api", Signup);
-app.use("/api", Profile);
 app.use("/api", Class);
 // End of Routes
 

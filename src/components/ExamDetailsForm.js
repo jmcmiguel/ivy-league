@@ -93,7 +93,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               name="classCode"
               error={errors}
               control={control}
-              label="Section"
+              label="Class"
               menu={sections}
             />
           </Grid>

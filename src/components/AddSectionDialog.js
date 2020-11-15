@@ -17,13 +17,15 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
   const { handleSubmit, errors, control } = useForm();
 
   const onSubmit = form => {
+    const classCode = shortid.generate();
+
     handleAdd(
       form.courseCode.toUpperCase(),
       form.courseDesc.toUpperCase(),
       form.section.toUpperCase(),
       form.classCapacity,
-      shortid.generate(),
-      (form.image = `https://picsum.photos/seed/${form.subject}${form.section}/166/244`)
+      classCode,
+      (form.image = `https://picsum.photos/seed/${classCode}/166/244`)
     );
     handleClose();
   };

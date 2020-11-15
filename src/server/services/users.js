@@ -6,4 +6,10 @@ const signup = async newUser => {
   return response.data;
 };
 
-export default { signup };
+const signin = async user => {
+  const request = axios.post(`/api/signin`, user);
+  const response = await request;
+  return response.data;
+};
+
+export default { signup, signin };

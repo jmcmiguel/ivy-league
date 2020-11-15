@@ -1,18 +1,26 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import React, { useState } from "react";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Copyright from "../components/Copyright";
 import { Link as BrowserLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import ControlledTextField from "../components/ControlledTextField";
+import users from "../server/services/users";
+import MuiAlert from "@material-ui/lab/Alert";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles,
+  InputAdornment,
+  IconButton,
+  Snackbar,
+} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,10 +44,59 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = () => {
   const classes = useStyles();
+  const { control, handleSubmit, errors, reset } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("error");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const onSubmit = formData => {
+    users
+      .signin(formData)
+      .then(returnedData => {
+        console.log("returnedData :>> ", returnedData);
+        if (returnedData.success) {
+          setSnackbarSeverity("success");
+          setSnackbarMessage("Sign in Success");
+          setOpenSnackbar(!openSnackbar);
+        } else {
+          reset();
+          setSnackbarSeverity("error");
+          setSnackbarMessage("Invalid Credentials");
+          setOpenSnackbar(!openSnackbar);
+        }
+      })
+      .catch(error => {
+        console.log("Error :>> ", error);
+      });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}>
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
+
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -47,33 +104,43 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="email"
+                label="Email Address"
+                required={true}
+                error={errors}
+                control={control}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="password"
+                label="Password"
+                required={true}
+                type={showPassword ? "text" : "password"}
+                error={errors}
+                control={control}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}>
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             fullWidth

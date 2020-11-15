@@ -7,7 +7,7 @@ const ControlledTextField = ({
   error,
   label,
   control,
-  rules = null,
+  rules,
   variant = "outlined",
   required = false,
   type = "text",
@@ -31,7 +31,7 @@ const ControlledTextField = ({
         name={name}
         defaultValue={""}
         control={control}
-        rules={{ required: `${label} is required` }}
+        rules={required ? { required: `${label} is required` } : {}}
       />
       <FormHelperText>{error[name] && error[name].message}</FormHelperText>
     </FormControl>
