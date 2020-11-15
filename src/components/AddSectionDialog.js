@@ -46,58 +46,59 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
             To create a new section, please enter the subject, section and
             amount of students
           </DialogContentText>
+          <Grid container spacing={2}>
+            {/* Course Code */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="courseCode"
+                label="Course Code"
+                variant="standard"
+                error={errors}
+                control={control}
+                required={true}
+                rules={{ required: "this is required" }}
+              />
+            </Grid>
 
-          {/* Course Code */}
-          <Grid item xs={12}>
-            <ControlledTextField
-              name="courseCode"
-              label="Course Code"
-              variant="standard"
-              error={errors}
-              control={control}
-              required={true}
-              rules={{ required: "this is required" }}
-            />
-          </Grid>
+            {/* Course Name */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="courseDesc"
+                label="Course Name"
+                variant="standard"
+                error={errors}
+                control={control}
+                required={true}
+                rules={{ required: "this is required" }}
+              />
+            </Grid>
 
-          {/* Course Name */}
-          <Grid item xs={12}>
-            <ControlledTextField
-              name="courseDesc"
-              label="Course Name"
-              variant="standard"
-              error={errors}
-              control={control}
-              required={true}
-              rules={{ required: "this is required" }}
-            />
-          </Grid>
+            {/* Section */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="section"
+                label="Section"
+                variant="standard"
+                error={errors}
+                control={control}
+                required={true}
+                rules={{ required: "this is required" }}
+              />
+            </Grid>
 
-          {/* Section */}
-          <Grid item xs={12}>
-            <ControlledTextField
-              name="section"
-              label="Section"
-              variant="standard"
-              error={errors}
-              control={control}
-              required={true}
-              rules={{ required: "this is required" }}
-            />
-          </Grid>
-
-          {/* Max Students */}
-          <Grid item xs={12}>
-            <ControlledTextField
-              name="classCapacity"
-              label="Max students allowed"
-              variant="standard"
-              type="number"
-              error={errors}
-              control={control}
-              required={true}
-              rules={{ required: "this is required" }}
-            />
+            {/* Max Students */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                name="classCapacity"
+                label="Max students allowed"
+                variant="standard"
+                type="number"
+                error={errors}
+                control={control}
+                required={true}
+                rules={{ required: "this is required" }}
+              />
+            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
