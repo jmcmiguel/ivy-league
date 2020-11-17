@@ -12,6 +12,8 @@ const ControlledTextField = ({
   required = false,
   type = "text",
   InputProps = null,
+  multiline = false,
+  rows = null,
 }) => {
   return (
     <FormControl style={{ minWidth: "100%" }} error={Boolean(error[name])}>
@@ -26,6 +28,8 @@ const ControlledTextField = ({
             variant={variant}
             error={Boolean(error[name])}
             InputProps={InputProps}
+            multiline={multiline}
+            rows={rows}
           />
         }
         name={name}

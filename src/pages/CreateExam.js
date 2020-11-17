@@ -14,12 +14,19 @@ import {
 const steps = ["Enter exam details", "Input question pool", "Verify exam "];
 
 const ForgotPassword = () => {
-  const [formDatas, setFormDatas] = useState([]);
+  const [examDetails, setExamDetails] = useState([]);
+  const [examQuestions, setExamQuestions] = useState([]);
 
-  const handleSubmitExamDetails = formData => {
-    setFormDatas(...formDatas, formData);
-    console.log("formData :>> ", formData);
+  const handleSubmitExamDetails = examDetail => {
+    setExamDetails(...examDetails, examDetail);
+    console.log("Exam Detail :>> ", examDetail);
   };
+
+  const handleSubmitExamQuestions = examQuestion => {
+    setExamQuestions(...examQuestions, examQuestion);
+    console.log("Exam Question :>> ", examQuestion);
+  };
+
   const classes = useStylesForgotPassword();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -37,7 +44,12 @@ const ForgotPassword = () => {
           />
         );
       case 1:
-        return <ExamQuestionsForm />;
+        return (
+          <ExamQuestionsForm
+            submitExamQuestions={handleSubmitExamQuestions}
+            handleNext={handleNext}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }

@@ -6,7 +6,7 @@ import useStylesForgotPassword from "../components/styles/useStylesForgotPasswor
 import QuestionAdderDialog from "../components/QuestionAdderDialog";
 import ExamPool from "./ExamPool";
 
-const ExamQuestionsForm = () => {
+const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
   const [questions, setQuestions] = useState([]);
   const [openQuestionAdder, setOpenQuestionAdder] = useState(false);
   const { handleSubmit, errors, control } = useForm();
@@ -19,6 +19,11 @@ const ExamQuestionsForm = () => {
     setQuestions([...questions, newQuestion]);
   };
 
+  const onSubmit = formData => {
+    submitExamQuestions(formData);
+    handleNext();
+  };
+
   return (
     <React.Fragment>
       <Fab
@@ -29,9 +34,8 @@ const ExamQuestionsForm = () => {
         style={{
           margin: 0,
           top: "auto",
-          right: 50,
-          bottom: 40,
-          left: "auto",
+          right: "2rem",
+          bottom: "5rem",
           position: "fixed",
         }}>
         <AddIcon />
@@ -43,7 +47,10 @@ const ExamQuestionsForm = () => {
         setOpen={setOpenQuestionAdder}
       />
 
-      <form className={classes.form} noValidate onSubmit={handleSubmit()}>
+      <form
+        className={classes.form}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom>
           Question Pool
         </Typography>
@@ -54,7 +61,7 @@ const ExamQuestionsForm = () => {
               <ExamPool
                 key={i}
                 question={question}
-                index={i}
+                questionss={questions}
                 errors={errors}
                 control={control}
               />
