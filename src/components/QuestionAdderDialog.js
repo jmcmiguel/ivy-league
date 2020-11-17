@@ -35,32 +35,38 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
             you would like
           </DialogContentText>
 
-          {/* Question Type */}
-          <Grid item xs={12}>
-            <ControlledSelect
-              error={errors}
-              control={control}
-              name="type"
-              label="Question Type"
-              required={true}
-              menu={[
-                { value: "multichoice", label: "Multiple Choice" },
-                { value: "trueorfalse", label: "True or False" },
-                { value: "identification", label: "Identification" },
-                { value: "free", label: "Explanatory" },
-              ]}
-            />
-          </Grid>
+          <Grid container spacing={2}>
+            {/* Question Type */}
+            <Grid item xs={12}>
+              <ControlledSelect
+                variant="standard"
+                error={errors}
+                control={control}
+                name="type"
+                label="Question Type"
+                required={true}
+                menu={[
+                  { value: "multichoice", label: "Multiple Choice" },
+                  { value: "trueorfalse", label: "True or False" },
+                  { value: "identification", label: "Identification" },
+                  { value: "essaytype", label: "Explanatory" },
+                ]}
+              />
+            </Grid>
 
-          {/* Number of items */}
-          <ControlledTextField
-            name="noitems"
-            label="Number of items"
-            type="number"
-            error={errors}
-            control={control}
-            required={true}
-          />
+            {/* Number of items */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                variant="standard"
+                name="noitems"
+                label="Number of items"
+                type="number"
+                error={errors}
+                control={control}
+                required={true}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

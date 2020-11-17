@@ -1,13 +1,15 @@
 import axios from "axios";
 
+const baseURL = "localhost:8080";
+
 const getAll = async () => {
-  const request = axios.get(`/api/class`);
+  const request = axios.get(`${baseURL}/api/class`);
   const response = await request;
   return response.data;
 };
 
 const getAllClass = async () => {
-  const request = axios.get(`/api/class`);
+  const request = axios.get(`${baseURL}/api/class`);
   const response = await request;
   return response.data.map(section => {
     return {
@@ -18,7 +20,7 @@ const getAllClass = async () => {
 };
 
 const getClasses = async () => {
-  const request = axios.get(`/api/class`);
+  const request = axios.get(`${baseURL}/api/class`);
   const response = await request;
   return response.data.map(section => {
     return {
@@ -29,7 +31,7 @@ const getClasses = async () => {
 };
 
 const create = async newSection => {
-  const request = axios.post(`/api/class`, newSection);
+  const request = axios.post(`${baseURL}/api/class`, newSection);
   const response = await request;
   return response.data;
 };
