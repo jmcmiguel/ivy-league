@@ -3,7 +3,6 @@ import { CssBaseline, Container } from "@material-ui/core";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
-import HomeAppBar from "../components/HomeAppBar";
 import StudentBottomNav from "../components/StudentBottomNav";
 import Dashboard from "../components/DashboardStudent";
 import Exams from "../components/StudentExams";

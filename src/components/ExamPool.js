@@ -3,11 +3,8 @@ import ControlledTextField from "../components/ControlledTextField";
 import ControlledSelect from "../components/ControlledSelect";
 import { Divider, Grid, Typography } from "@material-ui/core";
 
-const ExamPool = ({ question, questionss, errors, control }) => {
+const ExamPool = ({ question, errors, control, index }) => {
   let questions = [];
-
-  console.log("questionss :>> ", questionss);
-  console.log("question :>> ", question);
 
   switch (question.type) {
     case "multichoice":
@@ -19,12 +16,12 @@ const ExamPool = ({ question, questionss, errors, control }) => {
               gutterBottom
               style={{
                 marginTop: "2rem",
-                marginBottom: "rem",
+                marginLeft: "1rem",
               }}>{`Question ${i} (Multiple Choice)`}</Typography>
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Question${i}`}
+                name={`Set${index}|Question${i}|multichoice`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -35,8 +32,8 @@ const ExamPool = ({ question, questionss, errors, control }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`c1`}
-                label={`Choice 1`}
+                name={`Set${index}|Choice${i}|c1`}
+                label={`Choice A`}
                 error={errors}
                 control={control}
                 required={true}
@@ -44,8 +41,8 @@ const ExamPool = ({ question, questionss, errors, control }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`c2`}
-                label={`Choice 2`}
+                name={`Set${index}|Choice${i}|c2`}
+                label={`Choice B`}
                 error={errors}
                 control={control}
                 required={true}
@@ -53,8 +50,8 @@ const ExamPool = ({ question, questionss, errors, control }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`c3`}
-                label={`Choice 3`}
+                name={`Set${index}|Choice${i}|c3`}
+                label={`Choice C`}
                 error={errors}
                 control={control}
                 required={true}
@@ -62,8 +59,8 @@ const ExamPool = ({ question, questionss, errors, control }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`c4`}
-                label={`Choice 4`}
+                name={`Set${index}|Choice${i}|c4`}
+                label={`Choice D`}
                 error={errors}
                 control={control}
                 required={true}
@@ -71,12 +68,17 @@ const ExamPool = ({ question, questionss, errors, control }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledSelect
-                name={`answer`}
+                name={`Set${index}|Answer${i}|Answer`}
                 label={`Answer`}
                 error={errors}
                 control={control}
                 required={true}
-                menu={["A", "B", "C", "D"]}
+                menu={[
+                  { value: "a", label: "A" },
+                  { value: "b", label: "B" },
+                  { value: "c", label: "C" },
+                  { value: "d", label: "D" },
+                ]}
               />
             </Grid>
           </Grid>
@@ -87,6 +89,15 @@ const ExamPool = ({ question, questionss, errors, control }) => {
 
       return (
         <Grid container spacing={5}>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+                marginBottom: "-3rem",
+              }}>{`Set ${index + 1}`}</Typography>
+          </Grid>
           {questions.map((question, index) => {
             return (
               <Grid key={index} item xs={12}>

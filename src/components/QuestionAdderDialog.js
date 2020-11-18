@@ -66,6 +66,19 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
                 required={true}
               />
             </Grid>
+
+            {/* Number of items */}
+            <Grid item xs={12}>
+              <ControlledTextField
+                variant="standard"
+                name="points"
+                label="Points per item"
+                type="number"
+                error={errors}
+                control={control}
+                required={true}
+              />
+            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
