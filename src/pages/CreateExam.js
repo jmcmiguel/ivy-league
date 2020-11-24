@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ExamDetailsForm from "../components/ExamDetailsForm";
 import ExamQuestionsForm from "../components/ExamQuestionsForm";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
+import VerifyExamQuestions from "../components/VerifyExamQuestions";
 import {
   CssBaseline,
   Paper,
@@ -47,6 +48,14 @@ const ForgotPassword = () => {
         return (
           <ExamQuestionsForm
             submitExamQuestions={handleSubmitExamQuestions}
+            handleNext={handleNext}
+          />
+        );
+
+      case 2:
+        return (
+          <VerifyExamQuestions
+            questions={examQuestions}
             handleNext={handleNext}
           />
         );
