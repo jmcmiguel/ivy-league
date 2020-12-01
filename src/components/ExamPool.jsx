@@ -68,7 +68,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledSelect
-                name={`Set${index}|Answer${i}|Answer`}
+                name={`Set${index}|Answer${i}|multichoice`}
                 label={`Answer`}
                 error={errors}
                 control={control}
@@ -97,7 +97,7 @@ const ExamPool = ({ question, errors, control, index }) => {
                 marginLeft: "1rem",
                 marginBottom: "-3rem",
               }}>
-              {`Set ${index + 1}`}
+              {`Set ${index + 1} [${question.points} point per item]`}
             </Typography>
           </Grid>
           {questions.map((question, index) => {
@@ -127,7 +127,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|multichoice`}
+                name={`Set${index}|Question${i}|trueorfalse`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -139,7 +139,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledSelect
-                name={`Set${index}|Answer${i}|Answer`}
+                name={`Set${index}|Answer${i}|trueorfalse`}
                 label={`Answer`}
                 error={errors}
                 control={control}
@@ -164,7 +164,9 @@ const ExamPool = ({ question, errors, control, index }) => {
                 marginTop: "2rem",
                 marginLeft: "1rem",
                 marginBottom: "-3rem",
-              }}>{`Set ${index + 1}`}</Typography>
+              }}>{`Set ${index + 1} [${
+              question.points
+            } points per item]`}</Typography>
           </Grid>
           {questions.map((question, index) => {
             return (
@@ -180,10 +182,180 @@ const ExamPool = ({ question, errors, control, index }) => {
       );
 
     case "identification":
-      return <div>Identification</div>;
+      for (let i = 1; i <= question.noitems; i++) {
+        const questionItem = (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                style={{
+                  marginTop: "2rem",
+                  marginLeft: "1rem",
+                }}>{`Question ${i} (Identification)`}</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <ControlledTextField
+                name={`Set${index}|Question${i}|identification`}
+                label={`Question ${i}`}
+                error={errors}
+                control={control}
+                required={true}
+                multiline={true}
+                rows={5}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <ControlledTextField
+                name={`Set${index}|Answer${i}|identification`}
+                label={`Answer`}
+                error={errors}
+                control={control}
+                required={true}
+              />
+            </Grid>
+          </Grid>
+        );
+
+        questions.push(questionItem);
+      }
+
+      return (
+        <Grid container spacing={5}>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+                marginBottom: "-3rem",
+              }}>{`Set ${index + 1} [${
+              question.points
+            } points per item]`}</Typography>
+          </Grid>
+          {questions.map((question, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                {question}
+                {index >= questions.length - 1 ? null : (
+                  <Divider style={{ marginTop: "5rem" }} />
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
+
+    case "enumeration":
+      for (let i = 1; i <= question.noitems; i++) {
+        const questionItem = (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <ControlledTextField
+                name={`Set${index}|Question${i}|enumeration`}
+                label={`Question ${i}`}
+                error={errors}
+                control={control}
+                required={true}
+                multiline={true}
+                rows={5}
+              />
+            </Grid>
+
+            <Grid item xs={12}></Grid>
+          </Grid>
+        );
+
+        questions.push(questionItem);
+      }
+
+      return (
+        <Grid container spacing={5}>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+                marginBottom: "-3rem",
+              }}>{`Set ${index + 1} [${
+              question.points
+            } points per item]`}</Typography>
+          </Grid>
+          {questions.map((question, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                {question}
+                {index >= questions.length - 1 ? null : (
+                  <Divider style={{ marginTop: "5rem" }} />
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
+
+    case "essaytype":
+      for (let i = 1; i <= question.noitems; i++) {
+        const questionItem = (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                style={{
+                  marginTop: "2rem",
+                  marginLeft: "1rem",
+                }}>{`Question ${i} (Essay Type)`}</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <ControlledTextField
+                name={`Set${index}|Question${i}|essaytype`}
+                label={`Question ${i}`}
+                error={errors}
+                control={control}
+                required={true}
+                multiline={true}
+                rows={5}
+              />
+            </Grid>
+          </Grid>
+        );
+
+        questions.push(questionItem);
+      }
+
+      return (
+        <Grid container spacing={5}>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+                marginBottom: "-3rem",
+              }}>{`Set ${index + 1} [${
+              question.noitems
+            } points per item]`}</Typography>
+          </Grid>
+          {questions.map((question, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                {question}
+                {index >= questions.length - 1 ? null : (
+                  <Divider style={{ marginTop: "5rem" }} />
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
 
     default:
-      return <div>Nothing</div>;
+      return <div>Nothing rendered</div>;
   }
 };
 
