@@ -47,7 +47,7 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
                 dummyObj.type = "multipleChoice";
                 dummyObj.question = formDataClone[key];
                 dummyObj.answer =
-                  formDataClone[`Set${index}|Answer${i}|Answer`];
+                  formDataClone[`Set${index}|Answer${i}|multichoice`];
                 choices[0] = {
                   label: formDataClone[`Set${index}|Choice${i}|c1`],
                   value: "a",
