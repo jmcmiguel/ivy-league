@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
-import DashboardTeacher from "../components/DashboardTeacher.js";
+import DashboardTeacher from "../components/DashboardTeacher";
 import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
 import AccountTeacher from "../components/AccountTeacher";

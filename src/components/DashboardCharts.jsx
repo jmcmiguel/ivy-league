@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import AverageScoreChart from "../components/AverageScoreChart.js";
+import AverageScoreChart from "../components/AverageScoreChart";
 import TopScorer from "../components/TopScorer";
 import RankingBoard from "../components/RankingBoard";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";

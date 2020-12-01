@@ -96,7 +96,9 @@ const ExamPool = ({ question, errors, control, index }) => {
                 marginTop: "2rem",
                 marginLeft: "1rem",
                 marginBottom: "-3rem",
-              }}>{`Set ${index + 1}`}</Typography>
+              }}>
+              {`Set ${index + 1}`}
+            </Typography>
           </Grid>
           {questions.map((question, index) => {
             return (
@@ -112,7 +114,70 @@ const ExamPool = ({ question, errors, control, index }) => {
       );
 
     case "trueorfalse":
-      return <div>True or False</div>;
+      for (let i = 1; i <= question.noitems; i++) {
+        const questionItem = (
+          <Grid container spacing={2}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+              }}>{`Question ${i} (True or False)`}</Typography>
+
+            <Grid item xs={12}>
+              <ControlledTextField
+                name={`Set${index}|Question${i}|multichoice`}
+                label={`Question ${i}`}
+                error={errors}
+                control={control}
+                required={true}
+                multiline={true}
+                rows={5}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <ControlledSelect
+                name={`Set${index}|Answer${i}|Answer`}
+                label={`Answer`}
+                error={errors}
+                control={control}
+                required={true}
+                menu={[
+                  { value: "t", label: "True" },
+                  { value: "f", label: "False" },
+                ]}
+              />
+            </Grid>
+          </Grid>
+        );
+        questions.push(questionItem);
+      }
+
+      return (
+        <Grid container spacing={5}>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "2rem",
+                marginLeft: "1rem",
+                marginBottom: "-3rem",
+              }}>{`Set ${index + 1}`}</Typography>
+          </Grid>
+          {questions.map((question, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                {question}
+                {index >= questions.length - 1 ? null : (
+                  <Divider style={{ marginTop: "5rem" }} />
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
 
     case "identification":
       return <div>Identification</div>;

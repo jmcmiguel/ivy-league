@@ -67,7 +67,7 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
               />
             </Grid>
 
-            {/* Number of items */}
+            {/* Points per items */}
             <Grid item xs={12}>
               <ControlledTextField
                 variant="standard"

@@ -83,6 +83,8 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
               error={errors}
               control={control}
               required={true}
+              multiline={true}
+              rows={3}
               rules={{ required: "this is required" }}
             />
           </Grid>
