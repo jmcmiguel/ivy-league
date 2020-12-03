@@ -26,10 +26,9 @@ const RankingBoard = ({ title, tableData }) => {
     const rank = data.rank;
     const idNumber = data.idNumber;
     const name = data.name;
-    const section = data.section;
     const avgScore = data.avgScore;
     const ttlScore = data.ttlScore;
-    return { id, rank, idNumber, name, section, avgScore, ttlScore };
+    return { id, rank, idNumber, name, avgScore, ttlScore };
   });
 
   return (
@@ -41,7 +40,6 @@ const RankingBoard = ({ title, tableData }) => {
             <TableCell>Ranking</TableCell>
             <TableCell>ID Number</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Section</TableCell>
             <TableCell>Average Score</TableCell>
             <TableCell align="right">Total Score</TableCell>
           </TableRow>
@@ -52,7 +50,6 @@ const RankingBoard = ({ title, tableData }) => {
               <TableCell>{row.rank}</TableCell>
               <TableCell>{row.idNumber}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.section}</TableCell>
               <TableCell>{row.avgScore}</TableCell>
               <TableCell align="right">{row.ttlScore}</TableCell>
             </TableRow>

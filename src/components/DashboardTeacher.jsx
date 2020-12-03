@@ -1,6 +1,8 @@
 import React from "react";
-import { Divider, Box, Typography } from "@material-ui/core";
+import { Divider, Box, Typography, Paper } from "@material-ui/core";
 import DashboardCharts from "../components/DashboardCharts";
+import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
+import clsx from "clsx";
 
 const DashboardTeacher = () => {
   const sampledata = [
@@ -22,7 +24,6 @@ const DashboardTeacher = () => {
           rank: 1,
           idNumber: "18-0xxxx",
           name: "Rick Sanchez",
-          section: "NW3D",
           avgScore: 102,
           ttlScore: 9000,
         },
@@ -30,7 +31,6 @@ const DashboardTeacher = () => {
           rank: 2,
           idNumber: "20-0xxxx",
           name: "Morty Smith",
-          section: "NW2C",
           avgScore: 10,
           ttlScore: 90,
         },
@@ -38,7 +38,6 @@ const DashboardTeacher = () => {
           rank: 3,
           idNumber: "14-0xxxx",
           name: "Light Yagami",
-          section: "NW4F",
           avgScore: 400,
           ttlScore: 10000,
         },
@@ -46,7 +45,6 @@ const DashboardTeacher = () => {
           rank: 4,
           idNumber: "16-0xxxx",
           name: "Tanjiro Kamado",
-          section: "NW4A",
           avgScore: 1123,
           ttlScore: 901230,
         },
@@ -54,7 +52,6 @@ const DashboardTeacher = () => {
           rank: 5,
           idNumber: "18-0xxxx",
           name: "Nezuko-Chan",
-          section: "NW3D",
           avgScore: 1023,
           ttlScore: 9420,
         },
@@ -78,7 +75,6 @@ const DashboardTeacher = () => {
           rank: 1,
           idNumber: "18-0xxxx",
           name: "Rick Sanchez",
-          section: "NW3D",
           avgScore: 102,
           ttlScore: 9000,
         },
@@ -86,7 +82,6 @@ const DashboardTeacher = () => {
           rank: 2,
           idNumber: "20-0xxxx",
           name: "Morty Smith",
-          section: "NW2C",
           avgScore: 10,
           ttlScore: 90,
         },
@@ -94,7 +89,6 @@ const DashboardTeacher = () => {
           rank: 3,
           idNumber: "14-0xxxx",
           name: "Light Yagami",
-          section: "NW4F",
           avgScore: 400,
           ttlScore: 10000,
         },
@@ -102,7 +96,6 @@ const DashboardTeacher = () => {
           rank: 4,
           idNumber: "16-0xxxx",
           name: "Tanjiro Kamado",
-          section: "NW4A",
           avgScore: 1123,
           ttlScore: 901230,
         },
@@ -110,7 +103,6 @@ const DashboardTeacher = () => {
           rank: 5,
           idNumber: "18-0xxxx",
           name: "Nezuko-Chan",
-          section: "NW3D",
           avgScore: 1023,
           ttlScore: 9420,
         },
@@ -118,25 +110,31 @@ const DashboardTeacher = () => {
     },
   ];
 
+  const classes = useStylesTeacherHome();
+  const fixedHeightPaper = clsx(classes.paper);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       {sampledata.length ? (
         sampledata.map((data, i) => {
           return (
             <div key={i}>
-              <DashboardCharts
-                section={data.section}
-                subject={data.subject}
-                desc={data.desc}
-                highestScorer={data.highestScorer}
-                topScore={data.topScore}
-                chartData={data.chartData}
-                tableData={data.tableData}
-              />
-
-              {sampledata.length === i + 1 ? null : (
+              <Paper
+                className={fixedHeightPaper}
+                style={{ marginBottom: "3.5rem" }}>
+                <DashboardCharts
+                  section={data.section}
+                  subject={data.subject}
+                  desc={data.desc}
+                  highestScorer={data.highestScorer}
+                  topScore={data.topScore}
+                  chartData={data.chartData}
+                  tableData={data.tableData}
+                />
+              </Paper>
+              {/* {sampledata.length === i + 1 ? null : (
                 <Divider style={{ marginTop: "8rem", marginBottom: "5rem" }} />
-              )}
+              )} */}
             </div>
           );
         })

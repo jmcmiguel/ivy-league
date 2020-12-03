@@ -65,6 +65,7 @@ const SignIn = () => {
       .then(returnedData => {
         console.log("returnedData :>> ", returnedData);
         if (returnedData.success) {
+          reset();
           setSnackbarSeverity("success");
           setSnackbarMessage("Sign in Success");
           setOpenSnackbar(!openSnackbar);
