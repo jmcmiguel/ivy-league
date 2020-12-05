@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, Box, Typography, Paper } from "@material-ui/core";
+import { Box, Typography, Paper } from "@material-ui/core";
 import DashboardCharts from "../components/DashboardCharts";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import clsx from "clsx";
