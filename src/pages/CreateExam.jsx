@@ -19,12 +19,12 @@ const ForgotPassword = () => {
   const [examQuestions, setExamQuestions] = useState([]);
 
   const handleSubmitExamDetails = examDetail => {
-    setExamDetails(...examDetails, examDetail);
+    setExamDetails([...examDetails, examDetail]);
     console.log("Exam Detail :>> ", examDetail);
   };
 
   const handleSubmitExamQuestions = examQuestion => {
-    setExamQuestions(...examQuestions, examQuestion);
+    setExamQuestions([...examQuestions, examQuestion]);
     console.log("Exam Question :>> ", examQuestion);
   };
 

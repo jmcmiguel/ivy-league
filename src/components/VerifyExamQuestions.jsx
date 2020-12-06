@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Typography, Divider } from "@material-ui/core";
 import useStylesForgotPassword from "./styles/useStylesForgotPassword";
+import VerifyQuestions from "./VerifyQuestions";
 
 const ExamQuestionsForm = ({ questions, handleNext }) => {
   const classes = useStylesForgotPassword();
@@ -13,9 +14,7 @@ const ExamQuestionsForm = ({ questions, handleNext }) => {
         </Typography>
         <Divider />
 
-        {questions.map((question, i) => {
-          return <Typography></Typography>;
-        })}
+        <VerifyQuestions questions={questions} />
 
         <div className={classes.buttons}>
           <Button
