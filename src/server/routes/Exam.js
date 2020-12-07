@@ -37,4 +37,14 @@ router.post("/exam", async (req, res) => {
     });
 });
 
+router.get("/exam", async (req, res) => {
+  await Exam.find({})
+    .then(exam => {
+      res.send(exam);
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+});
+
 module.exports = router;

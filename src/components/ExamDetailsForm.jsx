@@ -19,7 +19,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
     DateAdd(new Date(), { days: 1 })
   );
   const [selectedDateDeadline, setSelectedDateDeadline] = useState(
-    DateAdd(new Date(), { hours: 1, minutes: 30 })
+    DateAdd(new Date(), { days: 1, hours: 1, minutes: 30 })
   );
 
   const handleDateChangeSched = sched => {

@@ -4,6 +4,7 @@ import ExamQuestionsForm from "../components/ExamQuestionsForm";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
 import VerifyExamQuestions from "../components/VerifyExamQuestions";
 import examServices from "../server/services/exams";
+import { Link } from "react-router-dom";
 import {
   CssBaseline,
   Paper,
@@ -111,7 +112,8 @@ const ForgotPassword = () => {
                 </Typography>
                 <Typography variant="subtitle1">
                   It is available for students to be taken at specified time.
-                  Exams can be modified only before it starts
+                  Exams can be modified only before it starts.{" "}
+                  <Link to="/teacher">Click here to return to dashboard</Link>
                 </Typography>
               </React.Fragment>
             ) : (

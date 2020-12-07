@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
+import classServices from "../server/services/classes";
 import {
   Card,
   CardActions,
@@ -10,26 +11,42 @@ import {
   Button,
 } from "@material-ui/core";
 
-const ExamsCard = ({ section }) => {
+const ExamsCard = ({ exam }) => {
+  const [section, setSection] = useState({});
+
+  useEffect(() => {
+    classServices
+      .getClass(exam.classCode)
+      .then(returnedData => {
+        setSection(returnedData);
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
+  });
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2" align="center">
-            {section.title}
+          <Typography gutterBottom variant="h5" align="center">
+            {exam.examName}
           </Typography>
           <Typography gutterBottom align="center">
-            {`${section.subject} (${section.section})`}
+            {`${section.courseCode} (${section.section})`}
           </Typography>
-          <Typography gutterBottom align="center">
-            {section.desc}
+          <Typography variant="subtitle2" gutterBottom align="center">
+            {exam.examDesc}
           </Typography>
-          <div style={{ marginTop: "2rem" }}>
-            <Divider variant="middle" />
+          <div>
+            <Divider
+              variant="middle"
+              style={{ marginTop: "1rem", marginBottom: "1rem" }}
+            />
             <Typography gutterBottom color="secondary" align="center">
-              {section.tookExam === section.classCapacity
+              {exam.submittedExam.length === section.classCapacity
                 ? "Everyone "
-                : `${section.tookExam}/${section.classCapacity} `}
+                : `${exam.submittedExam.length}/${section.classCapacity} `}
               has taken this exam
             </Typography>
           </div>

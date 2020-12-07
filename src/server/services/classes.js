@@ -30,6 +30,14 @@ const getClasses = async () => {
   });
 };
 
+const getClass = async courseCode => {
+  const request = axios.get(`${baseURL}/api/class`);
+  const response = await request;
+  for (const section of response.data) {
+    if (section.classCode === courseCode) return section;
+  }
+};
+
 const create = async newSection => {
   const request = axios.post(`${baseURL}/api/class`, newSection);
   const response = await request;
@@ -41,4 +49,5 @@ export default {
   getAll,
   getAllClass,
   getClasses,
+  getClass,
 };

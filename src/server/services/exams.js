@@ -8,6 +8,13 @@ const create = async newExam => {
   return response.data;
 };
 
+const getAll = async () => {
+  const request = axios.get(`${baseURL}/api/exam`);
+  const response = await request;
+  return response.data;
+};
+
 export default {
   create,
+  getAll,
 };
