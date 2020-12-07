@@ -11,15 +11,15 @@ const VerifyQuestions = ({ questions }) => {
           {/* Question */}
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions.question} (${questions.points} ${
+              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
                 questions.points > 1 ? "points" : "point"
               })`}
             </Typography>
           </Grid>
           {/* Choices */}
-          {questions.choices.map((choice, i) => {
+          {questions[i].choices.map((choice, i) => {
             return (
-              <Grid item>
+              <Grid item key={i}>
                 <Typography variant="body1">
                   {`${choice.value.toUpperCase()}.) ${choice.label}`}
                 </Typography>
@@ -30,7 +30,7 @@ const VerifyQuestions = ({ questions }) => {
           <Grid item xs={12}>
             <Typography
               variant="body1"
-              gutterBottom>{`Answer: ${questions.answer}`}</Typography>
+              gutterBottom>{`Answer: ${questions[i].answer}`}</Typography>
           </Grid>
         </Grid>
       );
@@ -41,15 +41,15 @@ const VerifyQuestions = ({ questions }) => {
             {/* Question */}
             <Grid item xs={12}>
               <Typography variant="body1" gutterBottom>
-                {`${i + 1}.) ${questions.question} (${questions.points} ${
-                  questions.points > 1 ? "points" : "point"
+                {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
+                  questions[i].points > 1 ? "points" : "point"
                 })`}
               </Typography>
             </Grid>
             {/* Answer */}
             <Grid item xs={12}>
               <Typography variant="body1" gutterBottom>
-                {`Answer: ${questions.answer === "t" ? "True" : "False"}`}
+                {`Answer: ${questions[i].answer === "t" ? "True" : "False"}`}
               </Typography>
             </Grid>
           </Grid>
@@ -61,15 +61,15 @@ const VerifyQuestions = ({ questions }) => {
           {/* Question */}
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions.question} (${questions.points} ${
-                questions.points > 1 ? "points" : "point"
+              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
+                questions[i].points > 1 ? "points" : "point"
               })`}
             </Typography>
           </Grid>
           {/* Answer */}
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
-              {`Answer: ${questions.answer}`}
+              {`Answer: ${questions[i].answer}`}
             </Typography>
           </Grid>
         </Grid>
@@ -80,23 +80,21 @@ const VerifyQuestions = ({ questions }) => {
           {/* Question */}
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions.question} (${questions.points} ${
-                questions.points > 1 ? "points" : "point"
+              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
+                questions[i].points > 1 ? "points" : "point"
               })`}
             </Typography>
           </Grid>
         </Grid>
       );
-    } else {
-      examQuestions.push("WAH");
     }
   }
 
-  console.log("examQuestions :>> ", examQuestions);
-
   return (
     <Grid container spacing={3}>
-      {examQuestions.map(qstn => qstn)}
+      {examQuestions.map((qstn, i) => (
+        <div key={i}>{qstn}</div>
+      ))}
     </Grid>
   );
 };

@@ -3,6 +3,7 @@ import ExamDetailsForm from "../components/ExamDetailsForm";
 import ExamQuestionsForm from "../components/ExamQuestionsForm";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
 import VerifyExamQuestions from "../components/VerifyExamQuestions";
+import examServices from "../server/services/exams";
 import {
   CssBaseline,
   Paper,
@@ -15,21 +16,43 @@ import {
 const steps = ["Enter exam details", "Input question pool", "Verify exam "];
 
 const ForgotPassword = () => {
-  const [examDetails, setExamDetails] = useState([]);
+  const [examDetails, setExamDetails] = useState({});
   const [examQuestions, setExamQuestions] = useState([]);
+  const classes = useStylesForgotPassword();
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleSubmitExamDetails = examDetail => {
-    setExamDetails([...examDetails, examDetail]);
-    console.log("Exam Detail :>> ", examDetail);
+    setExamDetails(examDetail);
   };
 
   const handleSubmitExamQuestions = examQuestion => {
-    setExamQuestions([...examQuestions, examQuestion]);
-    console.log("Exam Question :>> ", examQuestion);
+    setExamQuestions(examQuestion);
   };
 
-  const classes = useStylesForgotPassword();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const handleSubmitQuestions = questions => {
+    const newExam = {
+      uuid: examDetails.uuid,
+      examName: examDetails.examName,
+      examDesc: examDetails.examDesc,
+      classCode: examDetails.classCode,
+      sched: examDetails.sched,
+      deadline: examDetails.deadline,
+      submittedExam: [],
+      isChecked: false,
+      questions: examQuestions,
+    };
+
+    examServices
+      .create(newExam)
+      .then(returnedData => {
+        if (returnedData !== "exam uuid already exists") {
+          console.log("Exam inserted into database");
+        }
+      })
+      .catch(error => {
+        console.log("error :>> ", error);
+      });
+  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -55,6 +78,7 @@ const ForgotPassword = () => {
       case 2:
         return (
           <VerifyExamQuestions
+            submitQuestions={handleSubmitQuestions}
             questions={examQuestions}
             handleNext={handleNext}
           />
@@ -86,8 +110,8 @@ const ForgotPassword = () => {
                   Exam has been uploaded to database
                 </Typography>
                 <Typography variant="subtitle1">
-                  It is available for students to be taken at specified time,
-                  exams can be modified only before it starts
+                  It is available for students to be taken at specified time.
+                  Exams can be modified only before it starts
                 </Typography>
               </React.Fragment>
             ) : (

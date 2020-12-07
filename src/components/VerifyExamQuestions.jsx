@@ -3,16 +3,22 @@ import { Button, Typography, Divider } from "@material-ui/core";
 import useStylesForgotPassword from "./styles/useStylesForgotPassword";
 import VerifyQuestions from "./VerifyQuestions";
 
-const ExamQuestionsForm = ({ questions, handleNext }) => {
+const ExamQuestionsForm = ({ questions, handleNext, submitQuestions }) => {
   const classes = useStylesForgotPassword();
+
+  const handleSubmit = () => {
+    submitQuestions(questions);
+    handleNext();
+  };
 
   return (
     <React.Fragment>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <Typography variant="h6" gutterBottom>
           Verify Questions
         </Typography>
-        <Divider />
+
+        <Divider style={{ marginBottom: "2rem" }} />
 
         <VerifyQuestions questions={questions} />
 
