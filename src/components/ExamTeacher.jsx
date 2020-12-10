@@ -4,6 +4,7 @@ import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
 import examServices from "../server/services/exams";
+import classServices from "../server/services/classes";
 import {
   Button,
   Box,
@@ -18,6 +19,8 @@ const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState([]);
 
   useEffect(() => {
+    const classes = classServices.getClass();
+
     examServices
       .getAll()
       .then(returnedData => {
