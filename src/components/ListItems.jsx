@@ -20,7 +20,7 @@ const ListItems = ({ match }) => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    Section.getClasses()
+    Section.getProfClasses(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
       })
