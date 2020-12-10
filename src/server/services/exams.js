@@ -1,7 +1,6 @@
 import axios from "axios";
-import classServices from "./classes";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "";
 
 const create = async newExam => {
   const request = axios.post(`${baseURL}/api/exam`, newExam);
