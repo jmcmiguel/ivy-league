@@ -11,6 +11,7 @@ router.post("/class", async (req, res) => {
     classCapacity: req.body.classCapacity,
     classCode: req.body.classCode,
     image: `${req.body.image}`,
+    prof: req.body.prof,
   });
 
   await Class.findOne({

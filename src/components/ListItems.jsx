@@ -96,6 +96,7 @@ const ListItems = ({ match }) => {
               </ListItem>
             </Link>
             <Link
+              to="/"
               style={{ all: "inherit" }}
               onClick={() => {
                 localStorage.clear();

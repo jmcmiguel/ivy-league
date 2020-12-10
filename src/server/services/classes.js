@@ -44,10 +44,17 @@ const create = async newSection => {
   return response.data;
 };
 
+const getProfClass = async email => {
+  const request = axios.get(`${baseURL}/api/class`);
+  const response = await request;
+  return response.data.filter(section => section.prof === email);
+};
+
 export default {
   create,
   getAll,
   getAllClass,
   getClasses,
   getClass,
+  getProfClass,
 };
