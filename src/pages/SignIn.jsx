@@ -66,6 +66,7 @@ const SignIn = () => {
         console.log("returnedData :>> ", returnedData);
         if (returnedData.success) {
           reset();
+          localStorage.setItem("jwtCookie", returnedData.token);
           setSnackbarSeverity("success");
           setSnackbarMessage("Sign in Success");
           setOpenSnackbar(!openSnackbar);
