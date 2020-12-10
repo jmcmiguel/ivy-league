@@ -8,7 +8,8 @@ router.get(
   (req, res) => {
     // console.log(req);
     res.json({
-      id: req.user.id,
+      isTeacher: req.user.isTeacher,
+      idNumber: req.user.idNumber,
       lastName: req.user.lastName,
       email: req.user.email,
     });

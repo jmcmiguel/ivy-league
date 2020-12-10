@@ -27,7 +27,11 @@ const TeacherHome = () => {
     <div className={classes.root}>
       <CssBaseline />
 
-      <HomeAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <HomeAppBar
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        name={localStorage.getItem("lastName")}
+      />
       <HomeDrawer
         open={open}
         handleDrawerClose={handleDrawerClose}

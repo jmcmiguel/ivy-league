@@ -13,6 +13,8 @@ const Profile = require("./routes/Profile");
 const Signin = require("./routes/Signin");
 const Signup = require("./routes/Signup");
 const Class = require("./routes/Class");
+const Exam = require("./routes/Exam");
+const User = require("./routes/User");
 // End of Routes Import
 
 // Start of Middlewares
@@ -56,6 +58,8 @@ app.use("/api", Profile);
 app.use("/api", Signin);
 app.use("/api", Signup);
 app.use("/api", Class);
+app.use("/api", Exam);
+app.use("/api", User);
 // End of Routes
 
 const UnknownEndpoint = (req, res) => {

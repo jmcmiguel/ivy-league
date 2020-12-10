@@ -1,7 +1,7 @@
 import React from "react";
 import ControlledTextField from "../components/ControlledTextField";
 import ControlledSelect from "../components/ControlledSelect";
-import { Divider, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 const ExamPool = ({ question, errors, control, index }) => {
   let questions = [];
@@ -18,7 +18,6 @@ const ExamPool = ({ question, errors, control, index }) => {
                 marginTop: "2rem",
                 marginLeft: "1rem",
               }}>{`Question ${i} (Multiple Choice)`}</Typography>
-
             <Grid item xs={12}>
               <ControlledTextField
                 name={`Set${index}|Question${i}|multichoice`}
@@ -87,31 +86,7 @@ const ExamPool = ({ question, errors, control, index }) => {
         questions.push(questionItem);
       }
 
-      return (
-        <Grid container spacing={5}>
-          <Grid item>
-            <Typography
-              variant="h4"
-              style={{
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                marginBottom: "-3rem",
-              }}>
-              {`Set ${index + 1} [${question.points} point per item]`}
-            </Typography>
-          </Grid>
-          {questions.map((question, index) => {
-            return (
-              <Grid key={index} item xs={12}>
-                {question}
-                {index >= questions.length - 1 ? null : (
-                  <Divider style={{ marginTop: "5rem" }} />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+      break;
 
     case "trueorfalse":
       for (let i = 1; i <= question.noitems; i++) {
@@ -155,31 +130,7 @@ const ExamPool = ({ question, errors, control, index }) => {
         questions.push(questionItem);
       }
 
-      return (
-        <Grid container spacing={5}>
-          <Grid item>
-            <Typography
-              variant="h4"
-              style={{
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                marginBottom: "-3rem",
-              }}>{`Set ${index + 1} [${
-              question.points
-            } points per item]`}</Typography>
-          </Grid>
-          {questions.map((question, index) => {
-            return (
-              <Grid key={index} item xs={12}>
-                {question}
-                {index >= questions.length - 1 ? null : (
-                  <Divider style={{ marginTop: "5rem" }} />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+      break;
 
     case "identification":
       for (let i = 1; i <= question.noitems; i++) {
@@ -222,31 +173,7 @@ const ExamPool = ({ question, errors, control, index }) => {
         questions.push(questionItem);
       }
 
-      return (
-        <Grid container spacing={5}>
-          <Grid item>
-            <Typography
-              variant="h4"
-              style={{
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                marginBottom: "-3rem",
-              }}>{`Set ${index + 1} [${
-              question.points
-            } points per item]`}</Typography>
-          </Grid>
-          {questions.map((question, index) => {
-            return (
-              <Grid key={index} item xs={12}>
-                {question}
-                {index >= questions.length - 1 ? null : (
-                  <Divider style={{ marginTop: "5rem" }} />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+      break;
 
     case "enumeration":
       for (let i = 1; i <= question.noitems; i++) {
@@ -271,31 +198,7 @@ const ExamPool = ({ question, errors, control, index }) => {
         questions.push(questionItem);
       }
 
-      return (
-        <Grid container spacing={5}>
-          <Grid item>
-            <Typography
-              variant="h4"
-              style={{
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                marginBottom: "-3rem",
-              }}>{`Set ${index + 1} [${
-              question.points
-            } points per item]`}</Typography>
-          </Grid>
-          {questions.map((question, index) => {
-            return (
-              <Grid key={index} item xs={12}>
-                {question}
-                {index >= questions.length - 1 ? null : (
-                  <Divider style={{ marginTop: "5rem" }} />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+      break;
 
     case "essaytype":
       for (let i = 1; i <= question.noitems; i++) {
@@ -328,35 +231,34 @@ const ExamPool = ({ question, errors, control, index }) => {
         questions.push(questionItem);
       }
 
-      return (
-        <Grid container spacing={5}>
-          <Grid item>
-            <Typography
-              variant="h4"
-              style={{
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                marginBottom: "-3rem",
-              }}>{`Set ${index + 1} [${
-              question.noitems
-            } points per item]`}</Typography>
-          </Grid>
-          {questions.map((question, index) => {
-            return (
-              <Grid key={index} item xs={12}>
-                {question}
-                {index >= questions.length - 1 ? null : (
-                  <Divider style={{ marginTop: "5rem" }} />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+      break;
 
     default:
       return <div>Nothing rendered</div>;
   }
+
+  return (
+    <Grid container spacing={1}>
+      <Grid item>
+        <Typography
+          variant="h4"
+          style={{
+            marginTop: "2rem",
+            marginLeft: "1rem",
+            marginBottom: "-1rem",
+          }}>
+          {`Set ${index + 1} [${question.points} points per item]`}
+        </Typography>
+      </Grid>
+      {questions.map((question, index) => {
+        return (
+          <Grid key={index} item xs={12}>
+            {question}
+          </Grid>
+        );
+      })}
+    </Grid>
+  );
 };
 
 export default ExamPool;

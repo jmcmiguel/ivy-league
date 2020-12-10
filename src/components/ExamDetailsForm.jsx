@@ -9,6 +9,7 @@ import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 import DateAdd from "date-fns/add";
 import DateSub from "date-fns/sub";
 import IsAfter from "date-fns/isAfter";
+import { v4 as uuidv4 } from "uuid";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const { handleSubmit, errors, control } = useForm();
@@ -38,13 +39,14 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   const submitHandle = formData => {
     formData.sched = selectedDateSched;
     formData.deadline = selectedDateDeadline;
+    formData.uuid = uuidv4();
 
     submitExamDetails(formData);
     handleNext();
   };
 
   useEffect(() => {
-    Section.getAllClass()
+    Section.getAllProfClasses(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
       })

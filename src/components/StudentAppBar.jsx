@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 
-const HomeAppBar = ({ open, handleDrawerOpen }) => {
+const HomeAppBar = ({ open, handleDrawerOpen, name }) => {
   const classes = useStylesTeacherHome();
 
   return (
@@ -29,7 +29,7 @@ const HomeAppBar = ({ open, handleDrawerOpen }) => {
           color="inherit"
           noWrap
           className={classes.title}>
-          Welcome Student!
+          {`Welcome Student ${localStorage.getItem("lastName")}!`}
         </Typography>
       </Toolbar>
     </AppBar>

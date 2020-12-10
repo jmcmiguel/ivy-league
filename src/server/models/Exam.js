@@ -10,6 +10,7 @@ const ExamSchema = mongoose.Schema({
   submittedExam: { type: Array, default: [] },
   isChecked: { type: Boolean, default: false },
   questions: { type: Array, default: [] },
+  prof: { type: String, require: true },
 });
 
 module.exports = mongoose.model("Exam", ExamSchema);

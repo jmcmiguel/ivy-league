@@ -29,20 +29,20 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
     let transformedQuestions = [];
     let formDataClone = formData;
 
-    console.log("formData :>> ", formData);
-
     for (let ii = 0; ii < totalItems; ii++) {
       let dummyObj = {};
       let choices = [];
       let dummyIndex = 0;
       let dummyI = 0;
 
-      for (const key in formDataClone) {
+      outerloop: for (const key in formDataClone) {
         if (formDataClone.hasOwnProperty(key)) {
-          outerloop: for (let index = 0; index < questions.length; index++) {
+          for (let index = 0; index < questions.length; index++) {
             for (let i = 1; i <= questions[index].noitems; i++) {
               // Multiple choice
               if (key === `Set${index}|Question${i}|multichoice`) {
+                dummyObj.uuid = uuidv4();
+                dummyObj.choices = choices;
                 dummyObj.points = questions[index].points;
                 dummyObj.type = "multipleChoice";
                 dummyObj.question = formDataClone[key];
@@ -68,23 +68,67 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
                 dummyI = i;
                 dummyIndex = index;
 
+                delete formDataClone[
+                  `Set${dummyIndex}|Question${dummyI}|multichoice`
+                ];
+                delete formDataClone[`Set${dummyIndex}|Answer${dummyI}|Answer`];
+                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c1`];
+                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c2`];
+                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c3`];
+                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c4`];
+
+                break outerloop;
+              } // True or False
+              else if (key === `Set${index}|Question${i}|trueorfalse`) {
+                dummyObj.uuid = uuidv4();
+                dummyObj.points = questions[index].points;
+                dummyObj.type = "trueOrFalse";
+                dummyObj.question = formDataClone[key];
+                dummyObj.answer =
+                  formDataClone[`Set${index}|Answer${i}|trueorfalse`];
+
+                dummyI = i;
+                dummyIndex = index;
+
+                delete formDataClone[`Set${index}|Question${i}|trueorfalse`];
+                delete formDataClone[`Set${index}|Answer${i}|trueorfalse`];
+
+                break outerloop;
+              } // Identification
+              else if (key === `Set${index}|Question${i}|identification`) {
+                dummyObj.uuid = uuidv4();
+                dummyObj.points = questions[index].points;
+                dummyObj.type = "identification";
+                dummyObj.question = formDataClone[key];
+                dummyObj.answer =
+                  formDataClone[`Set${index}|Answer${i}|identification`];
+
+                dummyI = i;
+                dummyIndex = index;
+
+                delete formDataClone[`Set${index}|Question${i}|identification`];
+                delete formDataClone[`Set${index}|Answer${i}|identification`];
+
+                break outerloop;
+              } // Essay Type
+              else if (key === `Set${index}|Question${i}|essaytype`) {
+                dummyObj.uuid = uuidv4();
+                dummyObj.points = questions[index].points;
+                dummyObj.type = "essayType";
+                dummyObj.question = formDataClone[key];
+
+                dummyI = i;
+                dummyIndex = index;
+
+                delete formDataClone[`Set${index}|Question${i}|essaytype`];
+
                 break outerloop;
               }
             }
           }
         }
       }
-
-      dummyObj.uuid = uuidv4();
-      dummyObj.choices = choices;
       transformedQuestions.push(dummyObj);
-      delete formDataClone[`Set${dummyIndex}|Question${dummyI}|multichoice`];
-      delete formDataClone[`Set${dummyIndex}|Answer${dummyI}|Answer`];
-      delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c1`];
-      delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c2`];
-      delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c3`];
-      delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c4`];
-      console.log("formData :>> ", formData);
     }
 
     submitExamQuestions(transformedQuestions);

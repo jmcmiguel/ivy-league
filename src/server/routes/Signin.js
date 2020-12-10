@@ -36,6 +36,9 @@ router.post("/signin", async (req, res) => {
                   res.json({
                     success: true,
                     token: "Bearer " + token,
+                    email: profile.email,
+                    isTeacher: profile.isTeacher,
+                    lastName: profile.lastName,
                   });
                 }
               );

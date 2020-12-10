@@ -63,7 +63,13 @@ const StudentListItems = ({ match }) => {
                 <ListItemText primary="My Account" />
               </ListItem>
             </Link>
-            <Link to="/" style={{ all: "inherit" }}>
+            <Link
+              to="/"
+              style={{ all: "inherit" }}
+              onClick={() => {
+                localStorage.clear();
+                window.location.replace("/");
+              }}>
               <ListItem button>
                 <ListItemIcon>
                   <ExitToAppIcon />

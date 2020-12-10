@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
+import examServices from "../server/services/exams";
 import {
   Button,
   Box,
@@ -13,20 +14,22 @@ import {
   Divider,
 } from "@material-ui/core";
 
-// const cards = [
-//   {
-//     title: "Exam 1",
-//     desc: "Programming 1",
-//     subject: "ICTC-1213",
-//     section: "NW3D",
-//     tookExam: 50,
-//     classCapacity: 50,
-//   },
-// ];
-
-const cards = [];
-
 const ExamTeacher = ({ match }) => {
+  const [exams, setExams] = useState([]);
+
+  useEffect(() => {
+    examServices
+      .getProfExams(localStorage.getItem("email"))
+      .then(returnedData => {
+        setExams(returnedData);
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
+  }, []);
+
+  useEffect(() => {}, [exams]);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <Link
@@ -57,7 +60,14 @@ const ExamTeacher = ({ match }) => {
           gutterBottom>
           Exams
         </Typography>
-        <div className={classes.heroButtons}>
+        <Typography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p">
+          Create and manage exam for your students here
+        </Typography>
+        <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
             <Grid item>
               <Button variant="contained" color="primary">
@@ -80,13 +90,13 @@ const ExamTeacher = ({ match }) => {
 
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
-      <Container className={classes.cardGrid} maxWidth="md">
+      <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={4}>
-          {cards.length ? (
-            cards
+          {exams.length ? (
+            exams
               .slice(0)
               .reverse()
-              .map((card, i) => <ExamsCard key={i} section={card} />)
+              .map((exam, i) => <ExamsCard key={i} exam={exam} />)
           ) : (
             <Box pt={8} style={{ marginBottom: "3rem" }}>
               <Typography

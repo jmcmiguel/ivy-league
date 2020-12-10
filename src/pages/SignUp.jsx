@@ -3,7 +3,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Copyright from "../components/Copyright";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import users from "../server/services/users";
 import ControlledTextField from "../components/ControlledTextField";
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const { control, handleSubmit, errors } = useForm();
+  const { control, handleSubmit, errors, reset } = useForm();
   const [isTeacher, setIsTeacher] = useState(false);
   const handleCheckboxChange = e => {
     setIsTeacher(!isTeacher);
@@ -61,6 +61,7 @@ const SignUp = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  let history = useHistory();
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -83,9 +84,13 @@ const SignUp = () => {
             setSnackbarMessage("Email is already in use");
             setOpenSnackbar(!openSnackbar);
           } else {
+            reset();
             setSnackbarSeverity("success");
             setSnackbarMessage("Signed up succesfully");
             setOpenSnackbar(!openSnackbar);
+            setTimeout(() => {
+              history.push("signin");
+            }, 1000);
           }
         })
         .catch(error => {
@@ -262,7 +267,7 @@ const SignUp = () => {
             variant="contained"
             color="primary"
             className={classes.submit}>
-            Sign Up
+            Sign in
           </Button>
           <Grid container justify="flex-end">
             <Grid item>

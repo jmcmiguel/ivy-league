@@ -20,7 +20,7 @@ const ListItems = ({ match }) => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    Section.getClasses()
+    Section.getProfClasses(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
       })
@@ -95,7 +95,13 @@ const ListItems = ({ match }) => {
                 <ListItemText primary="My Account" />
               </ListItem>
             </Link>
-            <Link to="/" style={{ all: "inherit" }}>
+            <Link
+              to="/"
+              style={{ all: "inherit" }}
+              onClick={() => {
+                localStorage.clear();
+                window.location.replace("/");
+              }}>
               <ListItem button>
                 <ListItemIcon>
                   <ExitToAppIcon />

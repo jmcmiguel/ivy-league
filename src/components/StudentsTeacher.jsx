@@ -45,6 +45,7 @@ const StudentsTeacher = () => {
       classCapacity: classCapacity,
       classCode: classCode,
       image: image,
+      prof: localStorage.getItem("email"),
     };
 
     sectionServices
@@ -68,7 +69,7 @@ const StudentsTeacher = () => {
 
   useEffect(() => {
     sectionServices
-      .getAll()
+      .getProfClass(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
       })

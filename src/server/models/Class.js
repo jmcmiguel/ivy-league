@@ -8,7 +8,7 @@ const ClassSchema = mongoose.Schema({
   classCapacity: { type: Number, require: true },
   classCode: { type: String, require: true },
   image: { type: String, require: true },
-  prof: { type: String, require: false, default: "Prof. Dumbledore" },
+  prof: { type: String, require: true },
 });
 
 module.exports = mongoose.model("Class", ClassSchema);
