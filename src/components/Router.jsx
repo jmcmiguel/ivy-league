@@ -14,7 +14,7 @@ const Router = () => {
 
   if (localStorage.getItem("jwtCookie")) {
     loggedIn = true;
-    if (localStorage.getItem("isTeacher") === true) {
+    if (localStorage.getItem("isTeacher") === "true") {
       redirectURL = "/teacher";
     } else {
       redirectURL = "/student";
