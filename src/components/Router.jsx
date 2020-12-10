@@ -1,5 +1,5 @@
 import React from "react";
-import { MemoryRouter, Switch, Route } from "react-router-dom";
+import { MemoryRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../pages/Home";
 import Student from "../pages/Student";
 import SignIn from "../pages/SignIn";
@@ -9,10 +9,24 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Error404 from "../pages/Error404";
 
 const Router = () => {
+  let loggedIn = false;
+  let redirectURL = "";
+
+  if (localStorage.getItem("jwtCookie")) {
+    loggedIn = true;
+    if (localStorage.getItem("isTeacher")) {
+      redirectURL = "/teacher";
+    } else {
+      redirectURL = "/student";
+    }
+  }
+
   return (
     <MemoryRouter>
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact>
+          {loggedIn ? <Redirect to={redirectURL} /> : <Home />}
+        </Route>
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/forgotpassword" component={ForgotPassword} />

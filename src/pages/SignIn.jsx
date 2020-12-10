@@ -67,9 +67,13 @@ const SignIn = () => {
         if (returnedData.success) {
           reset();
           localStorage.setItem("jwtCookie", returnedData.token);
+          localStorage.setItem("email", returnedData.email);
+          localStorage.setItem("isTeacher", returnedData.isTeacher);
+          localStorage.setItem("lastName", returnedData.lastName);
           setSnackbarSeverity("success");
           setSnackbarMessage("Sign in Success");
           setOpenSnackbar(!openSnackbar);
+          window.location.replace("/");
         } else {
           reset();
           setSnackbarSeverity("error");
