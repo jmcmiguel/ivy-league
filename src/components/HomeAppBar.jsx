@@ -11,7 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 
-const HomeAppBar = ({ open, handleDrawerOpen }) => {
+const HomeAppBar = ({ open, handleDrawerOpen, name }) => {
   const classes = useStylesTeacherHome();
 
   return (
@@ -36,7 +36,7 @@ const HomeAppBar = ({ open, handleDrawerOpen }) => {
           color="inherit"
           noWrap
           className={classes.title}>
-          Welcome Professor Dumbledore!
+          {`Welcome Professor ${name}!`}
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
