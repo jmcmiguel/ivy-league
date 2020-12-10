@@ -62,6 +62,18 @@ const getProfClasses = async email => {
   });
 };
 
+const getAllProfClasses = async email => {
+  const request = axios.get(`${baseURL}/api/class`);
+  const response = await request;
+  const sections = response.data.filter(section => section.prof === email);
+  return sections.map(section => {
+    return {
+      label: `[${section.courseCode}] ${section.courseDesc} (${section.section})`,
+      value: section.classCode,
+    };
+  });
+};
+
 export default {
   create,
   getAll,
@@ -70,4 +82,5 @@ export default {
   getClass,
   getProfClass,
   getProfClasses,
+  getAllProfClasses,
 };

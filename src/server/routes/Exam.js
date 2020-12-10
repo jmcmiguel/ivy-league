@@ -13,6 +13,7 @@ router.post("/exam", async (req, res) => {
     submittedExam: req.body.submittedExam,
     isChecked: req.body.isChecked,
     questions: req.body.questions,
+    prof: req.body.prof,
   });
 
   await Exam.findOne({

@@ -4,7 +4,6 @@ import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
 import examServices from "../server/services/exams";
-import classServices from "../server/services/classes";
 import {
   Button,
   Box,
@@ -19,10 +18,8 @@ const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState([]);
 
   useEffect(() => {
-    const classes = classServices.getClass();
-
     examServices
-      .getAll()
+      .getProfExams(localStorage.getItem("email"))
       .then(returnedData => {
         setExams(returnedData);
       })
@@ -63,7 +60,14 @@ const ExamTeacher = ({ match }) => {
           gutterBottom>
           Exams
         </Typography>
-        <div className={classes.heroButtons}>
+        <Typography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p">
+          Create and manage exam for your students here
+        </Typography>
+        <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
             <Grid item>
               <Button variant="contained" color="primary">

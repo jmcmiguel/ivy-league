@@ -46,7 +46,7 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   };
 
   useEffect(() => {
-    Section.getAllClass()
+    Section.getAllProfClasses(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
       })

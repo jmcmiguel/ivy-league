@@ -1,4 +1,5 @@
 import axios from "axios";
+import classServices from "./classes";
 
 const baseURL = "http://localhost:8080";
 
@@ -14,7 +15,14 @@ const getAll = async () => {
   return response.data;
 };
 
+const getProfExams = async email => {
+  const request = axios.get(`${baseURL}/api/exam`);
+  const response = await request;
+  return response.data.filter(exam => exam.prof === email);
+};
+
 export default {
   create,
   getAll,
+  getProfExams,
 };

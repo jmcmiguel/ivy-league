@@ -41,6 +41,7 @@ const ForgotPassword = () => {
       submittedExam: [],
       isChecked: false,
       questions: examQuestions,
+      prof: localStorage.getItem("email"),
     };
 
     examServices
