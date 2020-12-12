@@ -1,5 +1,4 @@
 import axios from "axios";
-import classServices from "./classes";
 
 const baseURL = "http://localhost:8080";
 
