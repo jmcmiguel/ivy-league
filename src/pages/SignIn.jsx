@@ -20,6 +20,8 @@ import {
   InputAdornment,
   IconButton,
   Snackbar,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -42,6 +44,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const backdropUseStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
+
 const SignIn = () => {
   const classes = useStyles();
   const { control, handleSubmit, errors, reset } = useForm();
@@ -52,6 +61,12 @@ const SignIn = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
 
+  const backdropClasses = backdropUseStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -60,6 +75,7 @@ const SignIn = () => {
   };
 
   const onSubmit = formData => {
+    setOpen(!open);
     users
       .signin(formData)
       .then(returnedData => {
@@ -70,9 +86,6 @@ const SignIn = () => {
           localStorage.setItem("email", returnedData.email);
           localStorage.setItem("isTeacher", returnedData.isTeacher);
           localStorage.setItem("lastName", returnedData.lastName);
-          setSnackbarSeverity("success");
-          setSnackbarMessage("Sign in Success");
-          setOpenSnackbar(!openSnackbar);
           window.location.replace("/");
         } else {
           reset();
@@ -102,6 +115,13 @@ const SignIn = () => {
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>
+
+      <Backdrop
+        className={backdropClasses.backdrop}
+        open={open}
+        onClick={handleClose}>
+        <CircularProgress color="secondary" />
+      </Backdrop>
 
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
