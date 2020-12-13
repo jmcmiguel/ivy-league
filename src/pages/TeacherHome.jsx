@@ -32,6 +32,7 @@ const TeacherHome = () => {
         handleDrawerOpen={handleDrawerOpen}
         name={localStorage.getItem("lastName")}
       />
+
       <HomeDrawer
         open={open}
         handleDrawerClose={handleDrawerClose}
