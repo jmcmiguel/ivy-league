@@ -160,7 +160,7 @@ const StudentsTeacher = () => {
         </div>
       </Container>
       {/* End hero unit */}
-      <Divider style={{ marginTop: "3rem", marginBottom: "4rem" }} />
+      <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections.length ? (

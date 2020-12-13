@@ -90,7 +90,7 @@ const ExamTeacher = ({ match }) => {
 
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
-      <Container className={classes.cardGrid} maxWidth="lg">
+      <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {exams.length ? (
             exams
