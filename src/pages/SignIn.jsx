@@ -79,7 +79,6 @@ const SignIn = () => {
     users
       .signin(formData)
       .then(returnedData => {
-        console.log("returnedData :>> ", returnedData);
         if (returnedData.success) {
           reset();
           localStorage.setItem("jwtCookie", returnedData.token);
@@ -88,6 +87,7 @@ const SignIn = () => {
           localStorage.setItem("lastName", returnedData.lastName);
           window.location.replace("/");
         } else {
+          handleClose();
           reset();
           setSnackbarSeverity("error");
           setSnackbarMessage("Invalid Credentials");

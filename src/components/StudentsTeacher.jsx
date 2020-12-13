@@ -14,6 +14,10 @@ import {
   Divider,
   Box,
   Snackbar,
+  Skeleton,
+  makeStyles,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 
 const StudentsTeacher = () => {
@@ -21,7 +25,8 @@ const StudentsTeacher = () => {
   const [sections, setSections] = useState([]);
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -72,6 +77,7 @@ const StudentsTeacher = () => {
       .getProfClass(localStorage.getItem("email"))
       .then(returnedData => {
         setSections(returnedData);
+        setLoading(false);
       })
       .catch(error => {
         console.log("Error: ", error);
