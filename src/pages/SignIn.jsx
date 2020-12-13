@@ -80,7 +80,7 @@ const SignIn = () => {
       .signin(formData)
       .then(returnedData => {
         if (returnedData.success) {
-          reset();
+          reset({ email: "", password: "" });
           localStorage.setItem("jwtCookie", returnedData.token);
           localStorage.setItem("email", returnedData.email);
           localStorage.setItem("isTeacher", returnedData.isTeacher);
@@ -88,7 +88,7 @@ const SignIn = () => {
           window.location.replace("/");
         } else {
           handleClose();
-          reset();
+          reset({ email: "", password: "" });
           setSnackbarSeverity("error");
           setSnackbarMessage("Invalid Credentials");
           setOpenSnackbar(!openSnackbar);
