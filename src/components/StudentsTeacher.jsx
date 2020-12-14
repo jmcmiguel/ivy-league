@@ -21,7 +21,7 @@ const StudentsTeacher = () => {
   const [sections, setSections] = useState([]);
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -154,7 +154,7 @@ const StudentsTeacher = () => {
         </div>
       </Container>
       {/* End hero unit */}
-      <Divider style={{ marginTop: "3rem", marginBottom: "4rem" }} />
+      <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections.length ? (
