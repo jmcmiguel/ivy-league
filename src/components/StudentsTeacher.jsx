@@ -15,10 +15,11 @@ import {
   Box,
   Snackbar,
 } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
-  const [sections, setSections] = useState([]);
+  const [sections, setSections] = useState();
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -79,6 +80,37 @@ const StudentsTeacher = () => {
   }, []);
 
   useEffect(() => {}, [sections]);
+
+  const renderClasses = classesLength => {
+    if (classesLength) {
+      return sections
+        .slice(0)
+        .reverse()
+        .map((section, i) => {
+          return <SectionsCard key={i} section={section} />;
+        });
+    } else {
+      return (
+        <Box pt={8} style={{ marginBottom: "3rem" }}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom>
+            {`Awwww. You haven't created a class yet :(`}
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p">
+            Create a class using the add button to get started
+          </Typography>
+        </Box>
+      );
+    }
+  };
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -157,31 +189,23 @@ const StudentsTeacher = () => {
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {sections.length ? (
-            sections
-              .slice(0)
-              .reverse()
-              .map((section, i) => {
-                return <SectionsCard key={i} section={section} />;
-              })
+          {sections ? (
+            renderClasses(sections.length)
           ) : (
-            <Box pt={8} style={{ marginBottom: "3rem" }}>
-              <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="textPrimary"
-                gutterBottom>
-                {`Awwww. You haven't created a class yet :(`}
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="textSecondary"
-                component="p">
-                Create a class using the add button to get started
-              </Typography>
-            </Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+            </Grid>
           )}
         </Grid>
       </Container>

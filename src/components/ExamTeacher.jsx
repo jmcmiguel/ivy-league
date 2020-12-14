@@ -13,9 +13,10 @@ import {
   Container,
   Divider,
 } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 
 const ExamTeacher = ({ match }) => {
-  const [exams, setExams] = useState([]);
+  const [exams, setExams] = useState();
 
   useEffect(() => {
     examServices
@@ -29,6 +30,35 @@ const ExamTeacher = ({ match }) => {
   }, []);
 
   useEffect(() => {}, [exams]);
+
+  const renderExams = examsLength => {
+    if (examsLength) {
+      return exams
+        .slice(0)
+        .reverse()
+        .map((exam, i) => <ExamsCard key={i} exam={exam} />);
+    } else {
+      return (
+        <Box pt={8} style={{ marginBottom: "3rem" }}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom>
+            {`Yikes! you haven't created an exam yet :/`}
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p">
+            Create an exam using the add button
+          </Typography>
+        </Box>
+      );
+    }
+  };
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -92,29 +122,23 @@ const ExamTeacher = ({ match }) => {
 
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {exams.length ? (
-            exams
-              .slice(0)
-              .reverse()
-              .map((exam, i) => <ExamsCard key={i} exam={exam} />)
+          {exams ? (
+            renderExams(exams.length)
           ) : (
-            <Box pt={8} style={{ marginBottom: "3rem" }}>
-              <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="textPrimary"
-                gutterBottom>
-                {`Yikes! you haven't created an exam yet :/`}
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="textSecondary"
-                component="p">
-                Create an exam using the add button
-              </Typography>
-            </Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Skeleton variant="rect" height="12.625rem" />
+              </Grid>
+            </Grid>
           )}
         </Grid>
       </Container>
