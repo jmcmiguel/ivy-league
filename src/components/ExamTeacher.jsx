@@ -12,8 +12,8 @@ import {
   Typography,
   Container,
   Divider,
+  CircularProgress,
 } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
 
 const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState();
@@ -125,19 +125,13 @@ const ExamTeacher = ({ match }) => {
           {exams ? (
             renderExams(exams.length)
           ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justify="center"
+              style={{ marginTop: "5rem" }}>
+              <CircularProgress />
             </Grid>
           )}
         </Grid>

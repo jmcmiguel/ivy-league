@@ -14,8 +14,8 @@ import {
   Divider,
   Box,
   Snackbar,
+  CircularProgress,
 } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
@@ -192,19 +192,13 @@ const StudentsTeacher = () => {
           {sections ? (
             renderClasses(sections.length)
           ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Skeleton variant="rect" height="12.625rem" />
-              </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justify="center"
+              style={{ marginTop: "5rem" }}>
+              <CircularProgress />
             </Grid>
           )}
         </Grid>
