@@ -68,7 +68,7 @@ const StudentsTeacher = () => {
       });
   };
 
-  useEffect(() => {
+  const getClasses = () => {
     sectionServices
       .getProfClass(localStorage.getItem("email"))
       .then(returnedData => {
@@ -77,9 +77,27 @@ const StudentsTeacher = () => {
       .catch(error => {
         console.log("Error: ", error);
       });
+  };
+
+  useEffect(() => {
+    getClasses();
   }, []);
 
   useEffect(() => {}, [sections]);
+
+  const handleDelete = classCode => {
+    sectionServices
+      .deleteClass(classCode)
+      .then(returnedData => {
+        getClasses();
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Class succesfully deleted");
+        setOpenSnackbar(!openSnackbar);
+      })
+      .catch(err => {
+        console.log("Error :>> ", err.message);
+      });
+  };
 
   const renderClasses = classesLength => {
     if (classesLength) {
@@ -87,7 +105,13 @@ const StudentsTeacher = () => {
         .slice(0)
         .reverse()
         .map((section, i) => {
-          return <SectionsCard key={i} section={section} />;
+          return (
+            <SectionsCard
+              key={i}
+              section={section}
+              handleDelete={handleDelete}
+            />
+          );
         });
     } else {
       return (

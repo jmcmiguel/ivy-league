@@ -74,6 +74,15 @@ const getAllProfClasses = async email => {
   });
 };
 
+const deleteClass = async classCode => {
+  const request = axios.delete(`${baseURL}/api/class`, {
+    params: { classCode: classCode },
+  });
+
+  const response = await request;
+  return response.status;
+};
+
 export default {
   create,
   getAll,
@@ -83,4 +92,5 @@ export default {
   getProfClass,
   getProfClasses,
   getAllProfClasses,
+  deleteClass,
 };
