@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "../components/styles/useStylesTeacherHome";
 import {
   Container,
@@ -9,8 +9,11 @@ import {
   Fab,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import JoinClassDialog from "../components/JoinClassDialog";
 
 const DashboardStudent = () => {
+  const [openJoinClass, setOpenJoinClass] = useState(false);
+
   return (
     <div>
       {/* Floating Action Button */}
@@ -24,9 +27,15 @@ const DashboardStudent = () => {
           right: "2rem",
           bottom: "5rem",
           position: "fixed",
+        }}
+        onClick={() => {
+          setOpenJoinClass(true);
         }}>
         <AddIcon />
       </Fab>
+
+      {/* Join Class Dialog */}
+      <JoinClassDialog open={openJoinClass} setOpen={setOpenJoinClass} />
 
       <Container maxWidth="sm">
         <Typography
@@ -47,7 +56,12 @@ const DashboardStudent = () => {
         <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
             <Grid item>
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setOpenJoinClass(true);
+                }}>
                 Join New Class
               </Button>
             </Grid>
