@@ -66,9 +66,9 @@ const TeacherHome = () => {
             />
           </Switch>
         </Container>
-        <Box pt={8}>
+        {/* <Box pt={8}>
           <Copyright />
-        </Box>
+        </Box> */}
       </main>
     </div>
   );
