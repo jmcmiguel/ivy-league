@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionsCard = ({ section, handleDelete }) => {
+const SectionsCard = ({ section, handleDialogOpen }) => {
   const classes = useStyles();
 
   return (
@@ -56,7 +56,9 @@ const SectionsCard = ({ section, handleDelete }) => {
             <Button
               size="small"
               color="primary"
-              onClick={() => handleDelete(section.classCode)}>
+              onClick={() => {
+                handleDialogOpen(section.classCode);
+              }}>
               Delete
             </Button>
           </CardActions>

@@ -78,7 +78,6 @@ const deleteClass = async classCode => {
   const request = axios.delete(`${baseURL}/api/class`, {
     params: { classCode: classCode },
   });
-
   const response = await request;
   return response.status;
 };

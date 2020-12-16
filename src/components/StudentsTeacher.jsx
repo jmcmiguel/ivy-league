@@ -15,6 +15,11 @@ import {
   Box,
   Snackbar,
   CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
 } from "@material-ui/core";
 
 const StudentsTeacher = () => {
@@ -23,6 +28,37 @@ const StudentsTeacher = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [classCode, setClassCode] = useState("");
+
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = classCode => {
+    sectionServices
+      .deleteClass(classCode)
+      .then(returnedData => {
+        getClasses();
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Class succesfully deleted");
+        setOpenSnackbar(!openSnackbar);
+      })
+      .catch(err => {
+        console.log("Error :>> ", err.message);
+      });
+  };
+
+  const handleClickOpen = classCode => {
+    setOpen(true);
+    setClassCode(classCode);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleYes = () => {
+    handleDelete(classCode);
+    handleClose();
+  };
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -85,20 +121,6 @@ const StudentsTeacher = () => {
 
   useEffect(() => {}, [sections]);
 
-  const handleDelete = classCode => {
-    sectionServices
-      .deleteClass(classCode)
-      .then(returnedData => {
-        getClasses();
-        setSnackbarSeverity("success");
-        setSnackbarMessage("Class succesfully deleted");
-        setOpenSnackbar(!openSnackbar);
-      })
-      .catch(err => {
-        console.log("Error :>> ", err.message);
-      });
-  };
-
   const renderClasses = classesLength => {
     if (classesLength) {
       return sections
@@ -109,7 +131,8 @@ const StudentsTeacher = () => {
             <SectionsCard
               key={i}
               section={section}
-              handleDelete={handleDelete}
+              handleYes={handleYes}
+              handleDialogOpen={handleClickOpen}
             />
           );
         });
@@ -138,6 +161,7 @@ const StudentsTeacher = () => {
 
   return (
     <div style={{ minHeight: "100vh" }}>
+      {/* Floating Action Button */}
       <Fab
         color="primary"
         aria-label="add"
@@ -154,6 +178,8 @@ const StudentsTeacher = () => {
         }}>
         <AddIcon />
       </Fab>
+
+      {/* Snackbar */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
@@ -166,6 +192,30 @@ const StudentsTeacher = () => {
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>
+
+      {/* Yes/No Dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">{"Delete class?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This process is unreversible.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleYes} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Add section Dialog */}
       <AddSectionDialog
         open={openAddSection}
         setOpen={setOpenAddSection}
