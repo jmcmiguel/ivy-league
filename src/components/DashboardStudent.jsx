@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherHome";
+import MuiAlert from "@material-ui/lab/Alert";
+import AddIcon from "@material-ui/icons/Add";
+import JoinClassDialog from "../components/JoinClassDialog";
+import classServices from "../server/services/classes";
+import StudentClassCard from "../components/StudentClassCard";
 import {
   Container,
   Typography,
@@ -8,11 +13,9 @@ import {
   Divider,
   Fab,
   Snackbar,
+  Box,
+  CircularProgress,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import AddIcon from "@material-ui/icons/Add";
-import JoinClassDialog from "../components/JoinClassDialog";
-import classServices from "../server/services/classes";
 
 const DashboardStudent = () => {
   const [openJoinClass, setOpenJoinClass] = useState(false);
@@ -28,6 +31,17 @@ const DashboardStudent = () => {
     setOpenSnackbar(false);
   };
 
+  const getStudentClasses = () => {
+    classServices
+      .getStudentClass(localStorage.getItem("email"))
+      .then(newStudentClasses => {
+        setStudentClasses(newStudentClasses);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
   const handleAdd = classCode => {
     classServices.getStudents(classCode).then(students => {
       if (students.includes(localStorage.getItem("email"))) {
@@ -41,6 +55,7 @@ const DashboardStudent = () => {
             setSnackbarSeverity("success");
             setSnackbarMessage("Class enrolled succesfully");
             setOpenSnackbar(!openSnackbar);
+            getStudentClasses();
           })
           .catch(err => {
             console.log("Error :>> ", err.message);
@@ -49,8 +64,45 @@ const DashboardStudent = () => {
     });
   };
 
+  const renderDashboard = studentsClassesLength => {
+    if (studentsClassesLength) {
+      return studentClasses
+        .slice(0)
+        .reverse()
+        .map((section, i) => {
+          return <StudentClassCard key={i} section={section} />;
+        });
+    } else {
+      return (
+        <Box pt={8} style={{ marginBottom: "3rem" }}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom>
+            {`Heeey, why haven't you joined a class yet? :/`}
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p">
+            Join a class using the join class button
+          </Typography>
+        </Box>
+      );
+    }
+  };
+
+  useEffect(() => {
+    getStudentClasses();
+  }, []);
+
+  useEffect(() => {}, [studentClasses]);
+
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       {/* Snackbar */}
       <Snackbar
         open={openSnackbar}
@@ -90,6 +142,7 @@ const DashboardStudent = () => {
         handleAdd={handleAdd}
       />
 
+      {/* Title */}
       <Container maxWidth="sm">
         <Typography
           component="h1"
@@ -104,7 +157,7 @@ const DashboardStudent = () => {
           align="center"
           color="textSecondary"
           component="p">
-          Oversee your statistics here
+          Oversee your statistics and enrolled classes here
         </Typography>
         <div className={classes.heroButtons} style={{ marginTop: "2rem" }}>
           <Grid container spacing={2} justify="center">
@@ -122,6 +175,25 @@ const DashboardStudent = () => {
         </div>
       </Container>
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
+
+      {/* Contents */}
+
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {studentClasses ? (
+            renderDashboard(studentClasses.length)
+          ) : (
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justify="center"
+              style={{ marginTop: "5rem" }}>
+              <CircularProgress />
+            </Grid>
+          )}
+        </Grid>
+      </Container>
     </div>
   );
 };

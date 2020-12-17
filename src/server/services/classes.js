@@ -98,6 +98,12 @@ const getStudents = async classCode => {
   return classes.studentEnrolled;
 };
 
+const getStudentClass = async email => {
+  const classes = await getAll();
+
+  return classes.filter(clas => clas.studentEnrolled.includes(email));
+};
+
 export default {
   create,
   getAll,
@@ -110,4 +116,5 @@ export default {
   deleteClass,
   addStudent,
   getStudents,
+  getStudentClass,
 };

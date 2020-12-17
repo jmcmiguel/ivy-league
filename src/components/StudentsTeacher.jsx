@@ -131,7 +131,6 @@ const StudentsTeacher = () => {
             <SectionsCard
               key={i}
               section={section}
-              handleYes={handleYes}
               handleDialogOpen={handleClickOpen}
             />
           );
@@ -221,6 +220,7 @@ const StudentsTeacher = () => {
         setOpen={setOpenAddSection}
         handleAdd={handleAdd}
       />
+
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
         <Typography
@@ -259,8 +259,11 @@ const StudentsTeacher = () => {
           </Grid>
         </div>
       </Container>
+
       {/* End hero unit */}
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
+
+      {/* Contents */}
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {sections ? (
