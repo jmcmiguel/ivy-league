@@ -27,6 +27,7 @@ const AddSectionDialog = ({ open, setOpen, handleAdd }) => {
       classCode,
       (form.image = `https://picsum.photos/seed/${classCode}/166/244`)
     );
+
     handleClose();
   };
 

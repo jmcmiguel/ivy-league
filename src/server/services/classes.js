@@ -82,6 +82,22 @@ const deleteClass = async classCode => {
   return response.status;
 };
 
+const addStudent = async (classCode, email) => {
+  const request = axios.put(`${baseURL}/api/class`, {
+    classCode: classCode,
+    email: email,
+  });
+
+  const response = await request;
+
+  return response.data;
+};
+
+const getStudents = async classCode => {
+  const classes = await getClass(classCode);
+  return classes.studentEnrolled;
+};
+
 export default {
   create,
   getAll,
@@ -92,4 +108,6 @@ export default {
   getProfClasses,
   getAllProfClasses,
   deleteClass,
+  addStudent,
+  getStudents,
 };

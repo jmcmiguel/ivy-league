@@ -11,10 +11,11 @@ import {
   Grid,
 } from "@material-ui/core";
 
-const JoinClassDialog = ({ open, setOpen }) => {
+const JoinClassDialog = ({ open, setOpen, handleAdd }) => {
   const { handleSubmit, errors, control } = useForm();
 
   const onSubmit = form => {
+    handleAdd(form.classCode);
     handleClose();
   };
 
@@ -34,11 +35,12 @@ const JoinClassDialog = ({ open, setOpen }) => {
             To enroll in a class, ask your professor for a classcode
           </DialogContentText>
           <Grid container spacing={2}>
-            {/* Course Code */}
+            {/* Class Code */}
             <Grid item xs={12}>
               <ControlledTextField
-                name="courseCode"
-                label="Course Code"
+                autoFocus={true}
+                name="classCode"
+                label="Class Code"
                 variant="standard"
                 error={errors}
                 control={control}
