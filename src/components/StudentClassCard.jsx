@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userServices from "../server/services/users";
+import examServices from "../server/services/exams";
 import {
   makeStyles,
   Typography,
@@ -27,14 +28,27 @@ const useStyles = makeStyles({
 const SectionsCard = ({ section }) => {
   const classes = useStyles();
   const [profName, setProfName] = useState();
+  const [exams, setExams] = useState();
 
-  // Get Prof Name
-  userServices
-    .getUser(section.prof)
-    .then(user => {
-      setProfName(`${user.firstName} ${user.middleName} ${user.lastName}`);
-    })
-    .catch(err => console.log(err.message));
+  useEffect(() => {
+    // Get Prof Name
+    userServices
+      .getUser(section.prof)
+      .then(user => {
+        setProfName(`${user.firstName} ${user.middleName} ${user.lastName}`);
+      })
+      .catch(err => console.log(err.message));
+
+    // Get Upcoming Exams
+    examServices
+      .getUpcomingExams(section.classCode)
+      .then(exams => {
+        setExams(exams);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  }, [section]);
 
   return (
     <Grid item xs={12} md={6}>
@@ -50,6 +64,9 @@ const SectionsCard = ({ section }) => {
               </Typography>
               <Typography variant="subtitle1">
                 {profName ? `Professor: ${profName}` : <Skeleton />}
+              </Typography>
+              <Typography variant="subtitle1">
+                {exams ? `Upcoming Exams: ${exams.length}` : <Skeleton />}
               </Typography>
             </CardContent>
           </div>

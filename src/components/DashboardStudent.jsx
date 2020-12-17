@@ -177,8 +177,10 @@ const DashboardStudent = () => {
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
       {/* Contents */}
-
-      <Container className={classes.cardGrid} maxWidth="md">
+      <Container
+        className={classes.cardGrid}
+        maxWidth="md"
+        style={{ marginBottom: "3rem" }}>
         <Grid container spacing={4}>
           {studentClasses ? (
             renderDashboard(studentClasses.length)

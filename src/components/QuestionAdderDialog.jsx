@@ -49,7 +49,6 @@ const QuestionAdderDialog = ({ open, setOpen, handleAdd }) => {
                   { value: "multichoice", label: "Multiple Choice" },
                   { value: "trueorfalse", label: "True or False" },
                   { value: "identification", label: "Identification" },
-                  { value: "enumeration", label: "Enumeration" },
                   { value: "essaytype", label: "Essay Type" },
                 ]}
               />
