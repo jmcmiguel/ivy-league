@@ -19,6 +19,7 @@ const DashboardStudent = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("error");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [studentClasses, setStudentClasses] = useState();
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
