@@ -120,7 +120,10 @@ const ExamTeacher = ({ match }) => {
 
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
-      <Container className={classes.cardGrid} maxWidth="md">
+      <Container
+        className={classes.cardGrid}
+        maxWidth="md"
+        style={{ marginBottom: "3rem" }}>
         <Grid container spacing={4}>
           {exams ? (
             renderExams(exams.length)
