@@ -50,6 +50,11 @@ const SectionsCard = ({ section }) => {
       });
   }, [section]);
 
+  const renderUpcomingExams = examsLength => {
+    if (examsLength) return `Upcoming Exams: ${exams.length}`;
+    else return "No Upcoming Exams";
+  };
+
   return (
     <Grid item xs={12} md={6}>
       <Card className={classes.card}>
@@ -66,7 +71,7 @@ const SectionsCard = ({ section }) => {
                 {profName ? `Professor: ${profName}` : <Skeleton />}
               </Typography>
               <Typography variant="subtitle1">
-                {exams ? `Upcoming Exams: ${exams.length}` : <Skeleton />}
+                {exams ? renderUpcomingExams(exams.length) : <Skeleton />}
               </Typography>
             </CardContent>
           </div>
