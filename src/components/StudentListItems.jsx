@@ -1,6 +1,5 @@
 import React from "react";
 import CreateIcon from "@material-ui/icons/Create";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import HistoryIcon from "@material-ui/icons/History";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";

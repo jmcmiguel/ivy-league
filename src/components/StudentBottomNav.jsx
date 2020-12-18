@@ -4,7 +4,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Link } from "react-router-dom";
 import CreateIcon from "@material-ui/icons/Create";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import HistoryIcon from "@material-ui/icons/History";
 

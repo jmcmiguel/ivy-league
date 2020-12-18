@@ -18,8 +18,6 @@ const StudentExams = () => {
     examServices
       .getStudentExams()
       .then(returnedData => {
-        console.log("returnedData :>> ", returnedData);
-        console.log("returnedData.length :>> ", returnedData.length);
         setExams(returnedData);
       })
       .catch(err => console.log(err.message));
@@ -27,14 +25,10 @@ const StudentExams = () => {
 
   const renderExams = examsLength => {
     if (examsLength) {
-      return exams.map(exams => {
-        return exams
-          .slice(0)
-          .reverse()
-          .map((exam, i) => {
-            return <StudentExamsCard key={exam.uuid} exam={exam} />;
-          });
-      });
+      return exams
+        .slice(0)
+        .reverse()
+        .map(exam => <StudentExamsCard key={exam.uuid} exam={exam} />);
     } else {
       return (
         <Box pt={8} style={{ marginBottom: "3rem" }}>

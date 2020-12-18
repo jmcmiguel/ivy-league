@@ -34,28 +34,24 @@ const getUpcomingExams = async classcode => {
   );
 };
 
-const getStudentExams = async () => {
-  let studentClasses = [];
-  let exams = [];
-  // Get student classes
-  await classServices
-    .getStudentClass(localStorage.getItem("email"))
-    .then(newStudentClasses => {
-      studentClasses = newStudentClasses.map(classes => {
-        return classes.classCode;
-      });
-      // Get student exams
-      studentClasses.forEach(classes => {
-        getUpcomingExams(classes).then(exam => {
-          if (exam.length) exams.push(exam);
-        });
-      });
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
+const getAllClasses = async () => {
+  const request = axios.get(`${baseURL}/api/class`);
+  const response = await request;
+  return response.data;
+};
 
-  return exams;
+const getStudentClass = async email => {
+  const classes = await getAllClasses();
+  return classes.filter(clas => clas.studentEnrolled.includes(email));
+};
+
+const getStudentExams = async () => {
+  const studentClasses = await getStudentClass(localStorage.getItem("email"));
+  const classCodes = studentClasses.map(classes => classes.classCode);
+
+  const allExams = await getAll();
+
+  return allExams.filter(exam => classCodes.includes(exam.classCode));
 };
 
 export default {
