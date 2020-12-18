@@ -2,7 +2,6 @@ import axios from "axios";
 import isAfter from "date-fns/isAfter";
 import DateAdd from "date-fns/add";
 import { parseISO } from "date-fns";
-import classServices from "./classes";
 
 const baseURL = "http://localhost:8080";
 
