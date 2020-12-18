@@ -47,12 +47,6 @@ export default function TeacherBottomNav({ match }) {
         component={Link}
         to={`${match.url}/students`}
       />
-      <BottomNavigationAction
-        label="Account"
-        icon={<AccountCircleIcon />}
-        component={Link}
-        to={`${match.url}/account`}
-      />
     </BottomNavigation>
   );
 }

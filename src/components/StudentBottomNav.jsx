@@ -47,12 +47,6 @@ export default function StudentBottomNav({ match }) {
         component={Link}
         to={`${match.url}/examhistory`}
       />
-      <BottomNavigationAction
-        label="Account"
-        icon={<AccountCircleIcon />}
-        component={Link}
-        to={`${match.url}/account`}
-      />
     </BottomNavigation>
   );
 }

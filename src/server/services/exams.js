@@ -2,6 +2,7 @@ import axios from "axios";
 import isAfter from "date-fns/isAfter";
 import DateAdd from "date-fns/add";
 import { parseISO } from "date-fns";
+import classServices from "./classes";
 
 const baseURL = "http://localhost:8080";
 
@@ -33,9 +34,34 @@ const getUpcomingExams = async classcode => {
   );
 };
 
+const getStudentExams = async () => {
+  let studentClasses = [];
+  let exams = [];
+  // Get student classes
+  await classServices
+    .getStudentClass(localStorage.getItem("email"))
+    .then(newStudentClasses => {
+      studentClasses = newStudentClasses.map(classes => {
+        return classes.classCode;
+      });
+      // Get student exams
+      studentClasses.forEach(classes => {
+        getUpcomingExams(classes).then(exam => {
+          if (exam.length) exams.push(exam);
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+
+  return exams;
+};
+
 export default {
   create,
   getAll,
   getProfExams,
   getUpcomingExams,
+  getStudentExams,
 };

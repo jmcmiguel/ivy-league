@@ -86,15 +86,6 @@ const ListItems = ({ match }) => {
       <List>
         <div>
           <div>
-            <ListSubheader inset>Account Settings</ListSubheader>
-            <Link to={`${match.url}/account`} style={{ all: "inherit" }}>
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText primary="My Account" />
-              </ListItem>
-            </Link>
             <Link
               to="/"
               style={{ all: "inherit" }}

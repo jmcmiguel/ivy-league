@@ -66,12 +66,9 @@ const DashboardStudent = () => {
 
   const renderDashboard = studentsClassesLength => {
     if (studentsClassesLength) {
-      return studentClasses
-        .slice(0)
-        .reverse()
-        .map((section, i) => {
-          return <StudentClassCard key={i} section={section} />;
-        });
+      return studentClasses.map((section, i) => {
+        return <StudentClassCard key={i} section={section} />;
+      });
     } else {
       return (
         <Box pt={8} style={{ marginBottom: "3rem" }}>
