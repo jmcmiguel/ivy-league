@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline, Container, Box } from "@material-ui/core";
+import { CssBaseline, Container } from "@material-ui/core";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
@@ -8,7 +8,6 @@ import DashboardTeacher from "../components/DashboardTeacher";
 import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
 import AccountTeacher from "../components/AccountTeacher";
-import Copyright from "../components/Copyright";
 import CreateExam from "../pages/CreateExam";
 import BottomNav from "../components/TeacherBottomNav";
 
@@ -66,9 +65,9 @@ const TeacherHome = () => {
             />
           </Switch>
         </Container>
-        <Box pt={8}>
+        {/* <Box pt={8}>
           <Copyright />
-        </Box>
+        </Box> */}
       </main>
     </div>
   );

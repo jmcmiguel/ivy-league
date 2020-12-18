@@ -9,6 +9,7 @@ import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 import DateAdd from "date-fns/add";
 import DateSub from "date-fns/sub";
 import IsAfter from "date-fns/isAfter";
+import formatISO from "date-fns/formatISO";
 import { v4 as uuidv4 } from "uuid";
 
 const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
@@ -37,8 +38,8 @@ const ForgotPasswordForm = ({ submitExamDetails, handleNext }) => {
   };
 
   const submitHandle = formData => {
-    formData.sched = selectedDateSched;
-    formData.deadline = selectedDateDeadline;
+    formData.sched = formatISO(selectedDateSched);
+    formData.deadline = formatISO(selectedDateDeadline);
     formData.uuid = uuidv4();
 
     submitExamDetails(formData);

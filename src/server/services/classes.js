@@ -74,6 +74,36 @@ const getAllProfClasses = async email => {
   });
 };
 
+const deleteClass = async classCode => {
+  const request = axios.delete(`${baseURL}/api/class`, {
+    params: { classCode: classCode },
+  });
+  const response = await request;
+  return response.status;
+};
+
+const addStudent = async (classCode, email) => {
+  const request = axios.put(`${baseURL}/api/class`, {
+    classCode: classCode,
+    email: email,
+  });
+
+  const response = await request;
+
+  return response.data;
+};
+
+const getStudents = async classCode => {
+  const classes = await getClass(classCode);
+  return classes.studentEnrolled;
+};
+
+const getStudentClass = async email => {
+  const classes = await getAll();
+
+  return classes.filter(clas => clas.studentEnrolled.includes(email));
+};
+
 export default {
   create,
   getAll,
@@ -83,4 +113,8 @@ export default {
   getProfClass,
   getProfClasses,
   getAllProfClasses,
+  deleteClass,
+  addStudent,
+  getStudents,
+  getStudentClass,
 };

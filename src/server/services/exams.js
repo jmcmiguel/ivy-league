@@ -1,4 +1,6 @@
 import axios from "axios";
+import isAfter from "date-fns/isAfter";
+import { parseISO } from "date-fns";
 
 const baseURL = "";
 
@@ -20,8 +22,44 @@ const getProfExams = async email => {
   return response.data.filter(exam => exam.prof === email);
 };
 
+const getUpcomingExams = async classcode => {
+  const request = axios.get(`${baseURL}/api/exam`);
+  const response = await request;
+  return response.data.filter(
+    exam =>
+      exam.classCode === classcode &&
+      isAfter(parseISO(exam.deadline), new Date())
+  );
+};
+
+const getAllClasses = async () => {
+  const request = axios.get(`${baseURL}/api/class`);
+  const response = await request;
+  return response.data;
+};
+
+const getStudentClass = async email => {
+  const classes = await getAllClasses();
+  return classes.filter(clas => clas.studentEnrolled.includes(email));
+};
+
+const getStudentExams = async () => {
+  const studentClasses = await getStudentClass(localStorage.getItem("email"));
+  const classCodes = studentClasses.map(classes => classes.classCode);
+
+  const allExams = await getAll();
+
+  return allExams.filter(
+    exam =>
+      classCodes.includes(exam.classCode) &&
+      isAfter(parseISO(exam.deadline), new Date())
+  );
+};
+
 export default {
   create,
   getAll,
   getProfExams,
+  getUpcomingExams,
+  getStudentExams,
 };

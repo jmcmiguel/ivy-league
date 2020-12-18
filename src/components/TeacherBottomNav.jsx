@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import CreateIcon from "@material-ui/icons/Create";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles({
   root: {
@@ -46,12 +45,6 @@ export default function TeacherBottomNav({ match }) {
         icon={<PeopleIcon />}
         component={Link}
         to={`${match.url}/students`}
-      />
-      <BottomNavigationAction
-        label="Account"
-        icon={<AccountCircleIcon />}
-        component={Link}
-        to={`${match.url}/account`}
       />
     </BottomNavigation>
   );

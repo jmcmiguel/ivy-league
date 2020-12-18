@@ -23,7 +23,7 @@ const ExamsCard = ({ exam }) => {
       .catch(error => {
         console.log("Error: ", error);
       });
-  });
+  }, [exam]);
 
   return (
     <Grid item xs={12} md={6}>

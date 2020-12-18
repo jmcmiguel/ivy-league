@@ -14,12 +14,14 @@ const ControlledTextField = ({
   InputProps = null,
   multiline = false,
   rows = null,
+  autoFocus = null,
 }) => {
   return (
     <FormControl style={{ minWidth: "100%" }} error={Boolean(error[name])}>
       <Controller
         as={
           <TextField
+            autoFocus={autoFocus}
             type={type}
             required={required}
             name={name}

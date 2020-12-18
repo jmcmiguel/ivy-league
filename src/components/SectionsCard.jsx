@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionsCard = ({ section }) => {
+const SectionsCard = ({ section, handleDialogOpen }) => {
   const classes = useStyles();
 
   return (
@@ -38,7 +38,7 @@ const SectionsCard = ({ section }) => {
               {section.courseDesc}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {section.studentEnrolled ? section.studentEnrolled : 0}
+              {section.studentEnrolled ? section.studentEnrolled.length : 0}
               {` / ${section.classCapacity} students enrolled`}
             </Typography>
             <Typography variant="subtitle1" paragraph>
@@ -53,7 +53,12 @@ const SectionsCard = ({ section }) => {
             <Button size="small" color="primary">
               Edit
             </Button>
-            <Button size="small" color="primary">
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                handleDialogOpen(section.classCode);
+              }}>
               Delete
             </Button>
           </CardActions>

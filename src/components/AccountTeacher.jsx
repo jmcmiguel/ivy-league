@@ -1,10 +1,9 @@
 import React from "react";
-import { Container, Typography } from "@material-ui/core";
+import { Container, Typography, Divider } from "@material-ui/core";
 
 const AccountTeacher = () => {
   return (
-    <div style={{ minHeight: "100vh" }}>
-      {/* Start Hero Unit */}
+    <div>
       <Container maxWidth="sm">
         <Typography
           component="h1"
@@ -12,10 +11,17 @@ const AccountTeacher = () => {
           align="center"
           color="textPrimary"
           gutterBottom>
-          Your Account
+          Account
+        </Typography>
+        <Typography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p">
+          Manage your account settings here
         </Typography>
       </Container>
-      {/* End hero unit */}
+      <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
     </div>
   );
 };

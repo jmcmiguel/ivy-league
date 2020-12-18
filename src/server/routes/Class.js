@@ -47,4 +47,27 @@ router.get("/class", async (req, res) => {
     });
 });
 
+router.delete("/class", async (req, res) => {
+  await Class.deleteOne({ classCode: req.query.classCode })
+    .then(() => {
+      res.sendStatus(204).end();
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
+router.put("/class", async (req, res) => {
+  await Class.updateOne(
+    { classCode: req.body.classCode },
+    { $push: { studentEnrolled: req.body.email } }
+  )
+    .then(() => {
+      res.sendStatus(200).end();
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
 module.exports = router;
