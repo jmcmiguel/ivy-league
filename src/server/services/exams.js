@@ -27,7 +27,8 @@ const getUpcomingExams = async classcode => {
   const response = await request;
   return response.data.filter(
     exam =>
-      exam.classCode === classcode && isAfter(parseISO(exam.sched), new Date())
+      exam.classCode === classcode &&
+      isAfter(parseISO(exam.deadline), new Date())
   );
 };
 
@@ -51,7 +52,7 @@ const getStudentExams = async () => {
   return allExams.filter(
     exam =>
       classCodes.includes(exam.classCode) &&
-      isAfter(parseISO(exam.sched), new Date())
+      isAfter(parseISO(exam.deadline), new Date())
   );
 };
 

@@ -43,7 +43,11 @@ const StudentExamsCard = ({ exam }) => {
           </Typography>
 
           {/* Course Code & Section */}
-          <Typography gutterBottom align="center" paragraph>
+          <Typography
+            gutterBottom
+            align="center"
+            paragraph
+            style={{ marginTop: "-0.5rem" }}>
             {section ? (
               `${section.courseCode} (${section.section})`
             ) : (
@@ -52,23 +56,30 @@ const StudentExamsCard = ({ exam }) => {
           </Typography>
 
           {/* Exam Description */}
-          <Typography variant="subtitle2" gutterBottom align="center">
+          <Typography variant="subtitle2" gutterBottom align="center" paragraph>
             {exam.examDesc}
           </Typography>
 
-          {/* Exam Schedule */}
-          <Typography variant="subtitle2" gutterBottom align="center">
+          {/* Exam Schedule  */}
+          <Typography variant="caption" gutterBottom align="center" paragraph>
             {`Schedule: ${format(parseISO(exam.sched), "PPpp")}`}
           </Typography>
 
+          {/* Exam Deadline */}
+          <Typography
+            variant="caption"
+            gutterBottom
+            align="center"
+            paragraph
+            style={{ marginTop: "-1rem" }}>
+            {`Deadline: ${format(parseISO(exam.deadline), "PPpp")}`}
+          </Typography>
+
           <div>
-            <Divider
-              variant="middle"
-              style={{ marginTop: "1rem", marginBottom: "1rem" }}
-            />
+            <Divider variant="middle" style={{ marginTop: "1rem" }} />
           </div>
         </CardContent>
-        <CardActions style={{ justifyContent: "center" }}>
+        <CardActions style={{ justifyContent: "center", marginBottom: "1rem" }}>
           <Button size="small" color="primary">
             View
           </Button>
