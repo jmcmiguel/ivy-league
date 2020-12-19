@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
 import classServices from "../server/services/classes";
+import { format, parseISO } from "date-fns";
 import {
   Card,
   CardActions,
@@ -29,14 +30,34 @@ const ExamsCard = ({ exam }) => {
     <Grid item xs={12} md={6}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
+          {/* Exam Name */}
           <Typography gutterBottom variant="h5" align="center">
             {exam.examName}
           </Typography>
+
+          {/* Course Code and Section */}
           <Typography gutterBottom align="center">
             {`${section.courseCode} (${section.section})`}
           </Typography>
+
+          {/* Exam Desc */}
           <Typography variant="subtitle2" gutterBottom align="center">
             {exam.examDesc}
+          </Typography>
+
+          {/* Exam Schedule  */}
+          <Typography variant="caption" gutterBottom align="center" paragraph>
+            {`Schedule: ${format(parseISO(exam.sched), "PPpp")}`}
+          </Typography>
+
+          {/* Exam Deadline */}
+          <Typography
+            variant="caption"
+            gutterBottom
+            align="center"
+            paragraph
+            style={{ marginTop: "-1rem" }}>
+            {`Deadline: ${format(parseISO(exam.deadline), "PPpp")}`}
           </Typography>
           <div>
             <Divider

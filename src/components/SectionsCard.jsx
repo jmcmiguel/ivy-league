@@ -37,7 +37,7 @@ const SectionsCard = ({ section, handleDialogOpen }) => {
             <Typography variant="subtitle1" color="textSecondary">
               {section.courseDesc}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
+            <Typography variant="subtitle1">
               {section.studentEnrolled ? section.studentEnrolled.length : 0}
               {` / ${section.classCapacity} students enrolled`}
             </Typography>
