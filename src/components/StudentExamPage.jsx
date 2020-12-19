@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Divider } from "@material-ui/core";
 import { differenceInSeconds, parseISO, addSeconds, format } from "date-fns";
-import renderExamQuestions from "../components/renderExamQuestions";
-import { Skeleton } from "@material-ui/lab";
+import RenderExamQuestions from "./RenderExamQuestions";
 
 const StudentExamPage = props => {
   const exam = props.location.examProps.exam;
   const [counter, setCounter] = useState(
     differenceInSeconds(parseISO(exam.deadline), parseISO(exam.sched))
   );
-  const [timer, setTimer] = useState();
 
   const formattedTime = seconds => {
     var helperDate = addSeconds(new Date(0), seconds);
@@ -21,13 +19,12 @@ const StudentExamPage = props => {
       counter > 0 &&
       setInterval(() => {
         setCounter(counter - 1);
-        setTimer(formattedTime(counter));
       }, 1000);
     return () => clearInterval(timer);
   }, [counter]);
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh", marginBottom: "3rem" }}>
       <Container maxWidth="sm">
         {/* Exam Title */}
         <Typography
@@ -52,18 +49,18 @@ const StudentExamPage = props => {
 
       {/* Exam Timer */}
       <Typography
-        variant="body"
+        variant="body1"
         align="center"
         color="textSecondary"
         component="p">
-        {timer ? `Exam will auto-submit in: ${timer}` : <Skeleton />}
+        {`Exam will auto-submit in: ${formattedTime(counter)}`}
       </Typography>
 
       {/* Divider */}
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
       {/* Render Exam Questions */}
-      <renderExamQuestions exam={exam} />
+      <RenderExamQuestions exam={exam} style={{ marginBottom: "3rem" }} />
     </div>
   );
 };
