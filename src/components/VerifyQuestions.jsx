@@ -16,6 +16,7 @@ const VerifyQuestions = ({ questions }) => {
               })`}
             </Typography>
           </Grid>
+
           {/* Choices */}
           {questions[i].choices.map((choice, i) => {
             return (
@@ -26,6 +27,7 @@ const VerifyQuestions = ({ questions }) => {
               </Grid>
             );
           })}
+
           {/* Answer */}
           <Grid item xs={12}>
             <Typography
@@ -46,6 +48,7 @@ const VerifyQuestions = ({ questions }) => {
                 })`}
               </Typography>
             </Grid>
+
             {/* Answer */}
             <Grid item xs={12}>
               <Typography variant="body1" gutterBottom>
@@ -66,6 +69,7 @@ const VerifyQuestions = ({ questions }) => {
               })`}
             </Typography>
           </Grid>
+
           {/* Answer */}
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>

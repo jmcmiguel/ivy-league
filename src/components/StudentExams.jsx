@@ -11,7 +11,7 @@ import {
   Box,
 } from "@material-ui/core";
 
-const StudentExams = () => {
+const StudentExams = ({ match }) => {
   const [exams, setExams] = useState();
 
   const getStudentExams = () => {
@@ -28,7 +28,9 @@ const StudentExams = () => {
       return exams
         .slice(0)
         .reverse()
-        .map(exam => <StudentExamsCard key={exam.uuid} exam={exam} />);
+        .map(exam => (
+          <StudentExamsCard key={exam.uuid} exam={exam} match={match} />
+        ));
     } else {
       return (
         <Box pt={8} style={{ marginBottom: "3rem" }}>

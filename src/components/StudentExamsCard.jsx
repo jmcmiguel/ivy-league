@@ -12,8 +12,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { Link } from "react-router-dom";
 
-const StudentExamsCard = ({ exam }) => {
+const StudentExamsCard = ({ exam, match }) => {
   const [section, setSection] = useState();
 
   useEffect(() => {
@@ -81,7 +82,14 @@ const StudentExamsCard = ({ exam }) => {
         </CardContent>
         <CardActions style={{ justifyContent: "center", marginBottom: "1rem" }}>
           <Button size="small" color="primary">
-            View
+            <Link
+              to={{
+                pathname: `${match.path}/studentexampage`,
+                examProps: { exam: exam },
+              }}
+              style={{ color: "inherit", textDecoration: "inherit" }}>
+              View Exam
+            </Link>
           </Button>
         </CardActions>
       </Card>
