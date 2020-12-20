@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Divider } from "@material-ui/core";
-import { differenceInSeconds, parseISO, addSeconds, format } from "date-fns";
 import RenderExamQuestions from "./RenderExamQuestions";
+import { differenceInSeconds, parseISO, addSeconds, format } from "date-fns";
+import {
+  Container,
+  Typography,
+  Divider,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from "@material-ui/core";
 
 const StudentExamPage = props => {
   const exam = props.location.examProps.exam;
+  const [open, setOpen] = useState(false);
+  const [examAnswers, setExamAnswers] = useState();
   const [counter, setCounter] = useState(
     differenceInSeconds(parseISO(exam.deadline), parseISO(exam.sched))
   );
@@ -12,6 +22,20 @@ const StudentExamPage = props => {
   const formattedTime = seconds => {
     var helperDate = addSeconds(new Date(0), seconds);
     return format(helperDate, "mm:ss");
+  };
+
+  const handleClickOpen = formData => {
+    setExamAnswers(formData);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleYes = () => {
+    console.log("examAnswers :>> ", examAnswers);
+    handleClose();
   };
 
   useEffect(() => {
@@ -25,6 +49,23 @@ const StudentExamPage = props => {
 
   return (
     <div style={{ minHeight: "100vh", marginBottom: "3rem" }}>
+      {/* Yes/No Dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">{"Submit Exam?"}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleYes} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Container maxWidth="sm">
         {/* Exam Title */}
         <Typography
@@ -60,7 +101,11 @@ const StudentExamPage = props => {
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
       {/* Render Exam Questions */}
-      <RenderExamQuestions exam={exam} style={{ marginBottom: "3rem" }} />
+      <RenderExamQuestions
+        exam={exam}
+        style={{ marginBottom: "3rem" }}
+        handleDialogOpen={handleClickOpen}
+      />
     </div>
   );
 };
