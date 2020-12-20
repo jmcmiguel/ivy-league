@@ -14,7 +14,7 @@ import {
 import { Skeleton } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 
-const StudentExamsCard = ({ exam, match }) => {
+const StudentExamsCard = ({ exam, match, totalScore, score }) => {
   const [section, setSection] = useState();
 
   const alreadySubmitted = () => {
@@ -57,7 +57,7 @@ const StudentExamsCard = ({ exam, match }) => {
       .catch(error => {
         console.log("Error: ", error);
       });
-  }, [exam.classCode]);
+  }, [exam.classCode, exam.questions]);
 
   useEffect(() => {}, [section]);
 
@@ -108,9 +108,18 @@ const StudentExamsCard = ({ exam, match }) => {
             {`Deadline: ${format(parseISO(exam.deadline), "PPpp")}`}
           </Typography>
 
-          <div>
-            <Divider variant="middle" style={{ marginTop: "1rem" }} />
-          </div>
+          <Divider variant="middle" style={{ marginTop: "1rem" }} />
+
+          {/* Exam Score  */}
+          <Typography
+            variant="caption"
+            gutterBottom
+            align="center"
+            paragraph
+            color="secondary"
+            style={{ marginTop: "1rem", marginBottom: "-1rem" }}>
+            {alreadySubmitted() ? `Score: ${score} / ${totalScore}` : null}
+          </Typography>
         </CardContent>
         <CardActions style={{ justifyContent: "center", marginBottom: "1rem" }}>
           <Button size="small" color="primary" disabled={renderButtonText()}>

@@ -23,13 +23,54 @@ const StudentExamHistory = ({ match }) => {
       .catch(err => console.log(err.message));
   };
 
+  const getTotalScore = exam => {
+    const total = exam.questions.reduce((acc, cur) => ({
+      points: parseInt(acc.points) + parseInt(cur.points),
+    }));
+
+    return total.points;
+  };
+
+  const getScore = exam => {
+    const questions = exam.questions.map(question => {
+      return {
+        uuid: question.uuid,
+        points: question.points,
+        answer: question.answer,
+      };
+    });
+
+    const answers = exam.submittedExam.filter(
+      submission => submission.submittedBy === localStorage.getItem("email")
+    );
+
+    let points = 0;
+
+    for (let i = 0; i < questions.length; i++) {
+      const questionUUID = questions[i].uuid;
+      const answer = questions[i].answer;
+
+      if (answer === answers[questionUUID]) {
+        points += parseInt(questions[i].points);
+      }
+    }
+
+    return points;
+  };
+
   const renderExams = examsLength => {
     if (examsLength) {
       return exams
         .slice(0)
         .reverse()
         .map(exam => (
-          <StudentExamsCard key={exam.uuid} exam={exam} match={match} />
+          <StudentExamsCard
+            key={exam.uuid}
+            exam={exam}
+            match={match}
+            totalScore={getTotalScore(exam)}
+            score={getScore(exam)}
+          />
         ));
     } else {
       return (
