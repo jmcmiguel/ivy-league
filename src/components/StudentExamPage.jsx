@@ -40,6 +40,7 @@ const StudentExamPage = props => {
     examServices
       .addExamSubmission(examUUID, examAnswers)
       .then(returnedData => {
+        window.location.replace("/");
         console.log("returnedData :>> ", returnedData);
       })
       .catch(err => console.log(err.message));

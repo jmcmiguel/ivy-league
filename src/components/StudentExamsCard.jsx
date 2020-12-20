@@ -17,6 +17,12 @@ import { Link } from "react-router-dom";
 const StudentExamsCard = ({ exam, match }) => {
   const [section, setSection] = useState();
 
+  const alreadySubmitted = () => {
+    return exam.submittedExam.some(
+      submission => submission["submittedBy"] === localStorage.getItem("email")
+    );
+  };
+
   useEffect(() => {
     classServices
       .getClass(exam.classCode)
@@ -81,14 +87,16 @@ const StudentExamsCard = ({ exam, match }) => {
           </div>
         </CardContent>
         <CardActions style={{ justifyContent: "center", marginBottom: "1rem" }}>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" disabled={alreadySubmitted()}>
             <Link
               to={{
                 pathname: `${match.path}/studentexampage`,
                 examProps: { exam: exam },
               }}
               style={{ color: "inherit", textDecoration: "inherit" }}>
-              View Exam
+              {alreadySubmitted()
+                ? `Exam has already been submitted`
+                : `Take Exam`}
             </Link>
           </Button>
         </CardActions>
