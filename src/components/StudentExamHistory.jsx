@@ -37,21 +37,27 @@ const StudentExamHistory = ({ match }) => {
         uuid: question.uuid,
         points: question.points,
         answer: question.answer,
+        type: question.type,
       };
     });
 
     const answers = exam.submittedExam.filter(
       submission => submission.submittedBy === localStorage.getItem("email")
-    );
+    )[0];
+
+    const answerUUIDs = Object.keys(answers);
 
     let points = 0;
 
     for (let i = 0; i < questions.length; i++) {
-      const questionUUID = questions[i].uuid;
-      const answer = questions[i].answer;
-
-      if (answer === answers[questionUUID]) {
-        points += parseInt(questions[i].points);
+      for (let ii = 0; ii < answerUUIDs.length - 1; ii++) {
+        if (questions[i].uuid === answerUUIDs[ii]) {
+          if (questions[i].answer === answers[answerUUIDs[ii]]) {
+            points += parseInt(questions[i].points);
+          } else if (questions[i].type === "essayType") {
+            points += parseInt(questions[i].points);
+          }
+        }
       }
     }
 
