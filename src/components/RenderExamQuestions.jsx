@@ -11,7 +11,8 @@ const RenderExamQuestions = ({ exam, handleDialogOpen }) => {
 
   // Form Submit Handler
   const submitHandle = formData => {
-    handleDialogOpen(formData);
+    formData.submittedBy = localStorage.getItem("email");
+    handleDialogOpen(formData, exam.uuid);
   };
 
   for (let index = 0; index < exam.questions.length; index++) {

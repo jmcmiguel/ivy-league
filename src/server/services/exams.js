@@ -56,10 +56,22 @@ const getStudentExams = async () => {
   );
 };
 
+const addExamSubmission = async (examUUID, examSubmission) => {
+  const request = axios.put(`${baseURL}/api/exam`, {
+    uuid: examUUID,
+    examSubmission: examSubmission,
+  });
+
+  const response = await request;
+
+  return response.data;
+};
+
 export default {
   create,
   getAll,
   getProfExams,
   getUpcomingExams,
   getStudentExams,
+  addExamSubmission,
 };

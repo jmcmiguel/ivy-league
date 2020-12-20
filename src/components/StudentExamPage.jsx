@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RenderExamQuestions from "./RenderExamQuestions";
+import examServices from "../server/services/exams";
 import { differenceInSeconds, parseISO, addSeconds, format } from "date-fns";
 import {
   Container,
@@ -15,6 +16,7 @@ const StudentExamPage = props => {
   const exam = props.location.examProps.exam;
   const [open, setOpen] = useState(false);
   const [examAnswers, setExamAnswers] = useState();
+  const [examUUID, setExamUUID] = useState();
   const [counter, setCounter] = useState(
     differenceInSeconds(parseISO(exam.deadline), parseISO(exam.sched))
   );
@@ -24,8 +26,9 @@ const StudentExamPage = props => {
     return format(helperDate, "mm:ss");
   };
 
-  const handleClickOpen = formData => {
+  const handleClickOpen = (formData, examUUID) => {
     setExamAnswers(formData);
+    setExamUUID(examUUID);
     setOpen(true);
   };
 
@@ -34,7 +37,12 @@ const StudentExamPage = props => {
   };
 
   const handleYes = () => {
-    console.log("examAnswers :>> ", examAnswers);
+    examServices
+      .addExamSubmission(examUUID, examAnswers)
+      .then(returnedData => {
+        console.log("returnedData :>> ", returnedData);
+      })
+      .catch(err => console.log(err.message));
     handleClose();
   };
 

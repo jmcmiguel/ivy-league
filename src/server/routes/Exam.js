@@ -48,4 +48,17 @@ router.get("/exam", async (req, res) => {
     });
 });
 
+router.put("/exam", async (req, res) => {
+  await Exam.updateOne(
+    { uuid: req.body.uuid },
+    { $push: { submittedExam: req.body.examSubmission } }
+  )
+    .then(() => {
+      res.sendStatus(200).end();
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
 module.exports = router;
