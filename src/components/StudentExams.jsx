@@ -16,7 +16,7 @@ const StudentExams = ({ match }) => {
 
   const getStudentExams = () => {
     examServices
-      .getStudentExams()
+      .getNotSubmittedExams()
       .then(returnedData => {
         setExams(returnedData);
       })

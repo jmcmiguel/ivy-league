@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
 import classServices from "../server/services/classes";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isAfter, isBefore } from "date-fns";
 import {
   Card,
   CardActions,
@@ -21,6 +21,31 @@ const StudentExamsCard = ({ exam, match }) => {
     return exam.submittedExam.some(
       submission => submission["submittedBy"] === localStorage.getItem("email")
     );
+  };
+
+  const rightSched = () => {
+    return (
+      isAfter(Date.now(), parseISO(exam.sched)) &&
+      isBefore(Date.now(), parseISO(exam.deadline))
+    );
+  };
+
+  const renderExamStatus = () => {
+    if (alreadySubmitted()) {
+      return `Exam has already been submitted`;
+    } else if (!rightSched()) {
+      return "Exam will be available on scheduled date";
+    } else {
+      return "Take Exam";
+    }
+  };
+
+  const renderButtonText = () => {
+    if (alreadySubmitted() || !rightSched()) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -51,6 +76,7 @@ const StudentExamsCard = ({ exam, match }) => {
 
           {/* Course Code & Section */}
           <Typography
+            variant="body2"
             gutterBottom
             align="center"
             paragraph
@@ -87,16 +113,14 @@ const StudentExamsCard = ({ exam, match }) => {
           </div>
         </CardContent>
         <CardActions style={{ justifyContent: "center", marginBottom: "1rem" }}>
-          <Button size="small" color="primary" disabled={alreadySubmitted()}>
+          <Button size="small" color="primary" disabled={renderButtonText()}>
             <Link
               to={{
                 pathname: `${match.path}/studentexampage`,
                 examProps: { exam: exam },
               }}
               style={{ color: "inherit", textDecoration: "inherit" }}>
-              {alreadySubmitted()
-                ? `Exam has already been submitted`
-                : `Take Exam`}
+              {renderExamStatus()}
             </Link>
           </Button>
         </CardActions>

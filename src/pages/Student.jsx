@@ -45,12 +45,10 @@ const Student = () => {
             <Route path={`${match.path}/exams`} exact>
               <Exams match={match} />
             </Route>
+            <Route path={`${match.path}/examhistory`} exact>
+              <History match={match} />
+            </Route>
             <Route path={`${match.path}/account`} exact component={Account} />
-            <Route
-              path={`${match.path}/examhistory`}
-              exact
-              component={History}
-            />
             <Route
               path={`${match.path}/studentexampage`}
               exact

@@ -28,7 +28,11 @@ const getUpcomingExams = async classcode => {
   return response.data.filter(
     exam =>
       exam.classCode === classcode &&
-      isAfter(parseISO(exam.deadline), new Date())
+      isAfter(parseISO(exam.deadline), new Date()) &&
+      !exam.submittedExam.some(
+        submission =>
+          submission["submittedBy"] === localStorage.getItem("email")
+      )
   );
 };
 
@@ -67,6 +71,39 @@ const addExamSubmission = async (examUUID, examSubmission) => {
   return response.data;
 };
 
+const getNotSubmittedExams = async () => {
+  const studentClasses = await getStudentClass(localStorage.getItem("email"));
+  const classCodes = studentClasses.map(classes => classes.classCode);
+
+  const allExams = await getAll();
+
+  return allExams.filter(
+    exam =>
+      classCodes.includes(exam.classCode) &&
+      isAfter(parseISO(exam.deadline), new Date()) &&
+      !exam.submittedExam.some(
+        submission =>
+          submission["submittedBy"] === localStorage.getItem("email")
+      )
+  );
+};
+
+const getSubmittedExams = async () => {
+  const studentClasses = await getStudentClass(localStorage.getItem("email"));
+  const classCodes = studentClasses.map(classes => classes.classCode);
+
+  const allExams = await getAll();
+
+  return allExams.filter(
+    exam =>
+      classCodes.includes(exam.classCode) &&
+      exam.submittedExam.some(
+        submission =>
+          submission["submittedBy"] === localStorage.getItem("email")
+      )
+  );
+};
+
 export default {
   create,
   getAll,
@@ -74,4 +111,6 @@ export default {
   getUpcomingExams,
   getStudentExams,
   addExamSubmission,
+  getNotSubmittedExams,
+  getSubmittedExams,
 };
