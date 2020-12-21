@@ -4,6 +4,7 @@ import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
 import examServices from "../server/services/exams";
+import ExamScoresDialog from "./ExamScoresDialog";
 import {
   Button,
   Box,
@@ -17,6 +18,8 @@ import {
 
 const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState();
+  const [openExamDetailsDialog, setOpenExamDetailsDialog] = useState(false);
+  const [exam, setExam] = useState();
 
   useEffect(() => {
     examServices
@@ -31,12 +34,19 @@ const ExamTeacher = ({ match }) => {
 
   useEffect(() => {}, [exams]);
 
+  const handleDialogOpen = exam => {
+    setExam(exam);
+    setOpenExamDetailsDialog(true);
+  };
+
   const renderExams = examsLength => {
     if (examsLength) {
       return exams
         .slice(0)
         .reverse()
-        .map((exam, i) => <ExamsCard key={i} exam={exam} />);
+        .map((exam, i) => (
+          <ExamsCard key={i} exam={exam} handleDialogOpen={handleDialogOpen} />
+        ));
     } else {
       return (
         <Box pt={8} style={{ marginBottom: "3rem" }}>
@@ -79,6 +89,13 @@ const ExamTeacher = ({ match }) => {
           <CreateIcon />
         </Fab>
       </Link>
+
+      {/* Exam Scores Dialog */}
+      <ExamScoresDialog
+        open={openExamDetailsDialog}
+        setOpen={setOpenExamDetailsDialog}
+        exam={exam}
+      />
 
       {/* Start Hero Unit */}
       <Container maxWidth="sm">

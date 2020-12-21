@@ -12,7 +12,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-const ExamsCard = ({ exam }) => {
+const ExamsCard = ({ exam, handleDialogOpen }) => {
   const [section, setSection] = useState({});
 
   useEffect(() => {
@@ -73,7 +73,10 @@ const ExamsCard = ({ exam }) => {
           </div>
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => handleDialogOpen(exam)}>
             View
           </Button>
           <Button size="small" color="primary">
