@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "localhost:8080";
+const baseURL = "http://localhost:8080";
 
 const getAll = async () => {
   const request = axios.get(`${baseURL}/api/class`);
