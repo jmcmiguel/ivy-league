@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
 import classServices from "../server/services/classes";
+import { format, parseISO } from "date-fns";
 import {
   Card,
   CardActions,
@@ -54,6 +55,12 @@ const StudentExamsCard = ({ exam }) => {
           <Typography variant="subtitle2" gutterBottom align="center">
             {exam.examDesc}
           </Typography>
+
+          {/* Exam Schedule */}
+          <Typography variant="subtitle2" gutterBottom align="center">
+            {`Schedule: ${format(parseISO(exam.sched), "PPpp")}`}
+          </Typography>
+
           <div>
             <Divider
               variant="middle"

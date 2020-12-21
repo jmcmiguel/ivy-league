@@ -1,6 +1,5 @@
 import axios from "axios";
 import isAfter from "date-fns/isAfter";
-import DateAdd from "date-fns/add";
 import { parseISO } from "date-fns";
 
 const baseURL = "http://localhost:8080";
@@ -28,8 +27,7 @@ const getUpcomingExams = async classcode => {
   const response = await request;
   return response.data.filter(
     exam =>
-      exam.classCode === classcode &&
-      isAfter(parseISO(exam.sched), DateAdd(new Date(), { seconds: 1 }))
+      exam.classCode === classcode && isAfter(parseISO(exam.sched), new Date())
   );
 };
 
@@ -50,7 +48,11 @@ const getStudentExams = async () => {
 
   const allExams = await getAll();
 
-  return allExams.filter(exam => classCodes.includes(exam.classCode));
+  return allExams.filter(
+    exam =>
+      classCodes.includes(exam.classCode) &&
+      isAfter(parseISO(exam.sched), new Date())
+  );
 };
 
 export default {
