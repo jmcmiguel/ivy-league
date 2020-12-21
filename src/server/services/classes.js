@@ -79,7 +79,13 @@ const deleteClass = async classCode => {
     params: { classCode: classCode },
   });
   const response = await request;
-  return response.status;
+
+  const request2 = axios.delete(`${baseURL}/api/exam`, {
+    params: { classCode: classCode },
+  });
+  const response2 = await request2;
+
+  return `Class Deletion:${response.status} Exam Deletion:${response2.status}`;
 };
 
 const addStudent = async (classCode, email) => {

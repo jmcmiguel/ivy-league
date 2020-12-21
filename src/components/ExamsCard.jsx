@@ -11,9 +11,10 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 
 const ExamsCard = ({ exam, handleDialogOpen }) => {
-  const [section, setSection] = useState({});
+  const [section, setSection] = useState();
 
   useEffect(() => {
     classServices
@@ -26,6 +27,14 @@ const ExamsCard = ({ exam, handleDialogOpen }) => {
       });
   }, [exam]);
 
+  const renderExamTotalExaminees = (totalExaminees, classCapacity) => {
+    if (totalExaminees === classCapacity) {
+      return "Everyone has taken this exam";
+    } else {
+      return `${totalExaminees}/${classCapacity} has taken this exam`;
+    }
+  };
+
   return (
     <Grid item xs={12} md={6}>
       <Card className={classes.card}>
@@ -37,7 +46,11 @@ const ExamsCard = ({ exam, handleDialogOpen }) => {
 
           {/* Course Code and Section */}
           <Typography gutterBottom align="center">
-            {`${section.courseCode} (${section.section})`}
+            {section ? (
+              `${section.courseCode} (${section.section})`
+            ) : (
+              <Skeleton />
+            )}
           </Typography>
 
           {/* Exam Desc */}
@@ -65,10 +78,14 @@ const ExamsCard = ({ exam, handleDialogOpen }) => {
               style={{ marginTop: "1rem", marginBottom: "1rem" }}
             />
             <Typography gutterBottom color="secondary" align="center">
-              {exam.submittedExam.length === section.classCapacity
-                ? "Everyone "
-                : `${exam.submittedExam.length}/${section.classCapacity} `}
-              has taken this exam
+              {section ? (
+                renderExamTotalExaminees(
+                  exam.submittedExam.length,
+                  section.classCapacity
+                )
+              ) : (
+                <Skeleton />
+              )}
             </Typography>
           </div>
         </CardContent>

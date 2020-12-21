@@ -58,13 +58,13 @@ const ExamScoresTable = ({ title, exam }) => {
 
   return (
     <React.Fragment>
-      <Title style={{ textAlign: "center" }}>{title}</Title>
+      <Title>{title}</Title>
       <Table size="medium">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Score</TableCell>
-            <TableCell align="right">Total Score</TableCell>
+            <TableCell align="right">Max Score</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -61,4 +61,14 @@ router.put("/exam", async (req, res) => {
     });
 });
 
+router.delete("/exam", async (req, res) => {
+  await Exam.deleteMany({ classCode: req.query.classCode })
+    .then(() => {
+      res.sendStatus(204).end();
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
 module.exports = router;
