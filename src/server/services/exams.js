@@ -2,7 +2,7 @@ import axios from "axios";
 import isAfter from "date-fns/isAfter";
 import { parseISO } from "date-fns";
 
-const baseURL = "";
+const baseURL = "localhost:8080";
 
 const create = async newExam => {
   const request = axios.post(`${baseURL}/api/exam`, newExam);
