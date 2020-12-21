@@ -192,7 +192,7 @@ const StudentsTeacher = () => {
         </MuiAlert>
       </Snackbar>
 
-      {/* Yes/No Dialog */}
+      {/* Delete Confirmation Dialog */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -201,7 +201,8 @@ const StudentsTeacher = () => {
         <DialogTitle id="alert-dialog-title">{"Delete class?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This process is unreversible.
+            This wil delete this class and all its exams. This process is
+            unreversible.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

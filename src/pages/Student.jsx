@@ -9,6 +9,7 @@ import Exams from "../components/StudentExams";
 import Account from "../components/AccountStudent";
 import History from "../components/StudentExamHistory";
 import StudentAppBar from "../components/StudentAppBar";
+import StudentExamPage from "../components/StudentExamPage";
 
 const Student = () => {
   let match = useRouteMatch();
@@ -41,12 +42,17 @@ const Student = () => {
           {/* React Router */}
           <Switch>
             <Route path={`${match.path}`} exact component={Dashboard} />
-            <Route path={`${match.path}/exams`} exact component={Exams} />
+            <Route path={`${match.path}/exams`} exact>
+              <Exams match={match} />
+            </Route>
+            <Route path={`${match.path}/examhistory`} exact>
+              <History match={match} />
+            </Route>
             <Route path={`${match.path}/account`} exact component={Account} />
             <Route
-              path={`${match.path}/examhistory`}
+              path={`${match.path}/studentexampage`}
               exact
-              component={History}
+              component={StudentExamPage}
             />
           </Switch>
         </Container>
