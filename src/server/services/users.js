@@ -29,4 +29,10 @@ const getUser = async email => {
   };
 };
 
-export default { signup, signin, getUser };
+const getAll = async () => {
+  const request = axios.get(`${baseURL}/api/user`);
+  const response = await request;
+  return response.data;
+};
+
+export default { signup, signin, getUser, getAll };

@@ -125,11 +125,6 @@ const ExamTeacher = ({ match }) => {
                 </Link>
               </Button>
             </Grid>
-            <Grid item>
-              <Button variant="outlined" color="primary">
-                View Reports
-              </Button>
-            </Grid>
           </Grid>
         </div>
       </Container>

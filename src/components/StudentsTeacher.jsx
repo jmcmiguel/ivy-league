@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogContentText,
 } from "@material-ui/core";
+import EnrolledStudentsDialog from "./EnrolledStudentsDialog";
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
@@ -29,8 +30,11 @@ const StudentsTeacher = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [classCode, setClassCode] = useState("");
-
   const [open, setOpen] = useState(false);
+  const [enrolledStudents, setEnrolledStudents] = useState();
+  const [openEnrolledStudentsDialog, setOpenEnrolledStudentsDialog] = useState(
+    false
+  );
 
   const handleDelete = classCode => {
     sectionServices
@@ -65,6 +69,11 @@ const StudentsTeacher = () => {
       return;
     }
     setOpenSnackbar(false);
+  };
+
+  const handleStudentsDialogOpen = enrolledStudents => {
+    setEnrolledStudents(enrolledStudents);
+    setOpenEnrolledStudentsDialog(true);
   };
 
   const handleAdd = (
@@ -132,6 +141,7 @@ const StudentsTeacher = () => {
               key={i}
               section={section}
               handleDialogOpen={handleClickOpen}
+              handleStudentsOpen={handleStudentsDialogOpen}
             />
           );
         });
@@ -222,6 +232,13 @@ const StudentsTeacher = () => {
         handleAdd={handleAdd}
       />
 
+      {/* Enrolled Students Dialog */}
+      <EnrolledStudentsDialog
+        open={openEnrolledStudentsDialog}
+        setOpen={setOpenEnrolledStudentsDialog}
+        enrolledStudents={enrolledStudents}
+      />
+
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
         <Typography
@@ -250,11 +267,6 @@ const StudentsTeacher = () => {
                   setOpenAddSection(true);
                 }}>
                 Create New Class
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="outlined" color="primary">
-                View Reports
               </Button>
             </Grid>
           </Grid>

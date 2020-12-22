@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionsCard = ({ section, handleDialogOpen }) => {
+const SectionsCard = ({ section, handleDialogOpen, handleStudentsOpen }) => {
   const classes = useStyles();
 
   return (
@@ -47,11 +47,13 @@ const SectionsCard = ({ section, handleDialogOpen }) => {
           </CardContent>
 
           <CardActions style={{ marginTop: "-1.5rem" }}>
-            <Button size="small" color="primary">
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                handleStudentsOpen(section.studentEnrolled);
+              }}>
               View
-            </Button>
-            <Button size="small" color="primary">
-              Edit
             </Button>
             <Button
               size="small"
