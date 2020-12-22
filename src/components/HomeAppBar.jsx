@@ -1,14 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Badge,
-  IconButton,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import useStylesTeacherHome from "./styles/useStylesTeacherHome";
 
 const HomeAppBar = ({ open, handleDrawerOpen, name }) => {
@@ -38,11 +31,6 @@ const HomeAppBar = ({ open, handleDrawerOpen, name }) => {
           className={classes.title}>
           {`Welcome Professor ${name}!`}
         </Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
       </Toolbar>
     </AppBar>
   );

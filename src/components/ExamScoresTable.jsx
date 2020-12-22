@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
+import userServices from "../server/services/users";
+import { Skeleton } from "@material-ui/lab";
 
 const ExamScoresTable = ({ title, exam }) => {
+  const [users, setUsers] = useState();
+
   const getTotalScore = exam => {
     const total = exam.questions.reduce((acc, cur) => ({
       points: parseInt(acc.points) + parseInt(cur.points),
@@ -48,6 +52,25 @@ const ExamScoresTable = ({ title, exam }) => {
     return points;
   };
 
+  const getName = email => {
+    let fullName = "";
+
+    users.forEach(user => {
+      if (user.email === email) {
+        fullName = `${user.lastName}, ${user.firstName} ${user.middleName}`;
+      }
+    });
+
+    return fullName;
+  };
+
+  useEffect(() => {
+    userServices
+      .getAll()
+      .then(users => setUsers(users))
+      .catch(err => console.log(err.message));
+  }, []);
+
   const rows = exam.submittedExam.map((submission, i) => {
     const id = i;
     const name = submission.submittedBy;
@@ -70,7 +93,7 @@ const ExamScoresTable = ({ title, exam }) => {
         <TableBody>
           {rows.map(row => (
             <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{users ? getName(row.name) : <Skeleton />}</TableCell>
               <TableCell>{row.score}</TableCell>
               <TableCell align="right">{row.totalScore}</TableCell>
             </TableRow>

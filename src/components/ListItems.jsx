@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import CreateIcon from "@material-ui/icons/Create";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
-import Section from "../server/services/classes";
 import {
   ListItem,
   ListItemIcon,
@@ -16,18 +14,6 @@ import {
 } from "@material-ui/core";
 
 const ListItems = ({ match }) => {
-  const [sections, setSections] = useState([]);
-
-  useEffect(() => {
-    Section.getProfClasses(localStorage.getItem("email"))
-      .then(returnedData => {
-        setSections(returnedData);
-      })
-      .catch(error => {
-        console.log("error :>> ", error);
-      });
-  }, []);
-
   return (
     <>
       <Divider />
@@ -59,24 +45,6 @@ const ListItems = ({ match }) => {
               <ListItemText primary="Classes" />
             </ListItem>
           </Link>
-        </div>
-      </List>
-
-      <Divider />
-
-      <List>
-        <div>
-          <ListSubheader inset>Class reports</ListSubheader>
-          {sections.map((section, i) => {
-            return (
-              <ListItem button key={i}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary={section.label} />
-              </ListItem>
-            );
-          })}
         </div>
       </List>
 
