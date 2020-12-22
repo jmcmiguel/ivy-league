@@ -80,7 +80,7 @@ const ExamScoresTable = ({ title, exam }) => {
   });
 
   return (
-    <React.Fragment>
+    <div>
       <Title>{title}</Title>
       <Table size="medium">
         <TableHead>
@@ -100,7 +100,7 @@ const ExamScoresTable = ({ title, exam }) => {
           ))}
         </TableBody>
       </Table>
-    </React.Fragment>
+    </div>
   );
 };
 

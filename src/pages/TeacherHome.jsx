@@ -4,10 +4,8 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
 import HomeAppBar from "../components/HomeAppBar";
-import DashboardTeacher from "../components/DashboardTeacher";
 import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
-import AccountTeacher from "../components/AccountTeacher";
 import CreateExam from "../pages/CreateExam";
 import BottomNav from "../components/TeacherBottomNav";
 
@@ -44,19 +42,14 @@ const TeacherHome = () => {
         <Container maxWidth="lg" className={classes.container}>
           {/* React Router */}
           <Switch>
-            <Route path={`${match.path}`} exact component={DashboardTeacher} />
-            <Route path={`${match.path}/exams`} exact>
+            {/* <Route path={`${match.path}`} exact component={DashboardTeacher} /> */}
+            <Route path={`${match.path}`} exact>
               <ExamTeacher match={match} />
             </Route>
             <Route
               path={`${match.path}/students`}
               exact
               component={StudentsTeacher}
-            />
-            <Route
-              path={`${match.path}/account`}
-              exact
-              component={AccountTeacher}
             />
             <Route
               path={`${match.path}/createexam`}

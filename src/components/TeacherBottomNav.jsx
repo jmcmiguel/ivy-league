@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Link } from "react-router-dom";
-import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import CreateIcon from "@material-ui/icons/Create";
 
@@ -28,17 +27,17 @@ export default function TeacherBottomNav({ match }) {
       }}
       showLabels
       className={classes.root}>
-      <BottomNavigationAction
+      {/* <BottomNavigationAction
         label="Dashboard"
         icon={<DashboardIcon />}
         component={Link}
         to={`${match.url}`}
-      />
+      /> */}
       <BottomNavigationAction
         label="Exams"
         icon={<CreateIcon />}
         component={Link}
-        to={`${match.url}/exams`}
+        to={`${match.url}`}
       />
       <BottomNavigationAction
         label="Classes"

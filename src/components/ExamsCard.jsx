@@ -97,9 +97,6 @@ const ExamsCard = ({ exam, handleDialogOpen }) => {
             View
           </Button>
           <Button size="small" color="primary">
-            Edit
-          </Button>
-          <Button size="small" color="primary">
             Delete
           </Button>
         </CardActions>

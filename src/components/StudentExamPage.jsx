@@ -10,6 +10,9 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
+  CircularProgress,
+  Backdrop,
+  makeStyles,
 } from "@material-ui/core";
 
 const StudentExamPage = props => {
@@ -20,6 +23,16 @@ const StudentExamPage = props => {
   const [counter, setCounter] = useState(
     differenceInSeconds(parseISO(exam.deadline), parseISO(exam.sched))
   );
+  const [backdropOpen, setBackdropOpen] = useState(false);
+
+  const useStyles = makeStyles(theme => ({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: "#fff",
+    },
+  }));
+
+  const classes = useStyles();
 
   const formattedTime = seconds => {
     var helperDate = addSeconds(new Date(0), seconds);
@@ -37,9 +50,12 @@ const StudentExamPage = props => {
   };
 
   const handleYes = () => {
+    setBackdropOpen(true);
+
     examServices
       .addExamSubmission(examUUID, examAnswers)
       .then(returnedData => {
+        setBackdropOpen(false);
         window.location.replace("/");
         console.log("returnedData :>> ", returnedData);
       })
@@ -58,6 +74,11 @@ const StudentExamPage = props => {
 
   return (
     <div style={{ minHeight: "100vh", marginBottom: "3rem" }}>
+      {/* Backdrop */}
+      <Backdrop className={classes.backdrop} open={backdropOpen}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
       {/* Yes/No Dialog */}
       <Dialog
         open={open}
