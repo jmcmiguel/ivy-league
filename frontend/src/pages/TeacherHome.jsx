@@ -8,6 +8,7 @@ import ExamTeacher from "../components/ExamTeacher";
 import StudentsTeacher from "../components/StudentsTeacher";
 import CreateExam from "../pages/CreateExam";
 import BottomNav from "../components/TeacherBottomNav";
+import DashboardTeacher from "../components/DashboardTeacher";
 
 const TeacherHome = () => {
   let match = useRouteMatch();
@@ -42,8 +43,8 @@ const TeacherHome = () => {
         <Container maxWidth="lg" className={classes.container}>
           {/* React Router */}
           <Switch>
-            {/* <Route path={`${match.path}`} exact component={DashboardTeacher} /> */}
-            <Route path={`${match.path}`} exact>
+            <Route path={`${match.path}`} exact component={DashboardTeacher} />
+            <Route path={`${match.path}/exams`} exact>
               <ExamTeacher match={match} />
             </Route>
             <Route

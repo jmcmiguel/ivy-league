@@ -5,6 +5,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Link } from "react-router-dom";
 import PeopleIcon from "@material-ui/icons/People";
 import CreateIcon from "@material-ui/icons/Create";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
 const useStyles = makeStyles({
   root: {
@@ -27,17 +28,17 @@ export default function TeacherBottomNav({ match }) {
       }}
       showLabels
       className={classes.root}>
-      {/* <BottomNavigationAction
+      <BottomNavigationAction
         label="Dashboard"
         icon={<DashboardIcon />}
         component={Link}
         to={`${match.url}`}
-      /> */}
+      />
       <BottomNavigationAction
         label="Exams"
         icon={<CreateIcon />}
         component={Link}
-        to={`${match.url}`}
+        to={`${match.url}/exams`}
       />
       <BottomNavigationAction
         label="Classes"
