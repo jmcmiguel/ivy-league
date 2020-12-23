@@ -3,7 +3,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import classes from "../components/styles/useStylesTeacherExam";
 import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
-import examServices from "../server/services/exams";
+import examServices from "../services/exams";
 import ExamScoresDialog from "./ExamScoresDialog";
 import {
   Button,

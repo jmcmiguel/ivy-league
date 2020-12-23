@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import userServices from "../server/services/users";
-import examServices from "../server/services/exams";
+import userServices from "../services/users";
+import examServices from "../services/exams";
 import {
   makeStyles,
   Typography,

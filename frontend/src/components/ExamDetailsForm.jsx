@@ -4,7 +4,7 @@ import useStylesForgotPassword from "../components/styles/useStylesForgotPasswor
 import ControlledTextField from "../components/ControlledTextField";
 import ControlledSelect from "./ControlledSelect";
 import { Grid, Button, Typography } from "@material-ui/core";
-import Section from "../server/services/classes";
+import Section from "../services/classes";
 import ControlledDateTimePicker from "../components/ControlledDateTimePicker";
 import DateAdd from "date-fns/add";
 import DateSub from "date-fns/sub";

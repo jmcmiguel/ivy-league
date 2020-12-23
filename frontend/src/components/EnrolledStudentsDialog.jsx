@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import userServices from "../server/services/users";
+import userServices from "../services/users";
 import {
   Button,
   Dialog,

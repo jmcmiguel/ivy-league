@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RenderExamQuestions from "./RenderExamQuestions";
-import examServices from "../server/services/exams";
+import examServices from "../services/exams";
 import { differenceInSeconds, parseISO, addSeconds, format } from "date-fns";
 import {
   Container,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherHome";
 import StudentExamsCard from "../components/StudentExamsCard";
-import examServices from "../server/services/exams";
+import examServices from "../services/exams";
 import {
   Container,
   Typography,

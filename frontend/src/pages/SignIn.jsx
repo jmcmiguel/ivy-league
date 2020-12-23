@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import ControlledTextField from "../components/ControlledTextField";
-import users from "../server/services/users";
+import users from "../services/users";
 import MuiAlert from "@material-ui/lab/Alert";
 import {
   Avatar,

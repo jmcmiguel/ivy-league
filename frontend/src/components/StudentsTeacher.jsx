@@ -3,7 +3,7 @@ import AddIcon from "@material-ui/icons/Add";
 import classes from "../components/styles/useStylesTeacherHome";
 import SectionsCard from "../components/SectionsCard";
 import AddSectionDialog from "../components/AddSectionDialog";
-import sectionServices from "../server/services/classes";
+import sectionServices from "../services/classes";
 import MuiAlert from "@material-ui/lab/Alert";
 import {
   Container,

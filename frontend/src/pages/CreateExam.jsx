@@ -3,7 +3,7 @@ import ExamDetailsForm from "../components/ExamDetailsForm";
 import ExamQuestionsForm from "../components/ExamQuestionsForm";
 import useStylesForgotPassword from "../components/styles/useStylesForgotPassword";
 import VerifyExamQuestions from "../components/VerifyExamQuestions";
-import examServices from "../server/services/exams";
+import examServices from "../services/exams";
 import { Link } from "react-router-dom";
 import {
   CssBaseline,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
-import classServices from "../server/services/classes";
+import classServices from "../services/classes";
 import { format, parseISO, isAfter, isBefore } from "date-fns";
 import {
   Card,

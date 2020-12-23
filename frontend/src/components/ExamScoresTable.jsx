@@ -5,7 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import userServices from "../server/services/users";
+import userServices from "../services/users";
 import { Skeleton } from "@material-ui/lab";
 
 const ExamScoresTable = ({ title, exam }) => {

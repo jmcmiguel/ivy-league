@@ -3,7 +3,7 @@ import classes from "../components/styles/useStylesTeacherHome";
 import MuiAlert from "@material-ui/lab/Alert";
 import AddIcon from "@material-ui/icons/Add";
 import JoinClassDialog from "../components/JoinClassDialog";
-import classServices from "../server/services/classes";
+import classServices from "../services/classes";
 import StudentClassCard from "../components/StudentClassCard";
 import {
   Container,
