@@ -19,7 +19,7 @@ const ControlledSelect = ({
 }) => {
   return (
     <FormControl
-      style={{ minWidth: "100%" }}
+      style={{ minWidth: "100%", maxWidth: "100%" }}
       error={Boolean(error[name])}
       variant={variant}>
       <InputLabel id={`${name}Label`}>{label}</InputLabel>
