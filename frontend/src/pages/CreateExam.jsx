@@ -12,6 +12,9 @@ import {
   Step,
   StepLabel,
   Typography,
+  makeStyles,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 
 const steps = ["Enter exam details", "Input question pool", "Verify exam "];
@@ -21,6 +24,7 @@ const ForgotPassword = () => {
   const [examQuestions, setExamQuestions] = useState([]);
   const classes = useStylesForgotPassword();
   const [activeStep, setActiveStep] = useState(0);
+  const [openBackdrop, setOpenBackdrop] = useState(false);
 
   const handleSubmitExamDetails = examDetail => {
     setExamDetails(examDetail);
@@ -30,7 +34,18 @@ const ForgotPassword = () => {
     setExamQuestions(examQuestion);
   };
 
+  const useStyles = makeStyles(theme => ({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: "#fff",
+    },
+  }));
+
+  const classess = useStyles();
+
   const handleSubmitQuestions = questions => {
+    setOpenBackdrop(true);
+
     const newExam = {
       uuid: examDetails.uuid,
       examName: examDetails.examName,
@@ -48,7 +63,7 @@ const ForgotPassword = () => {
       .create(newExam)
       .then(returnedData => {
         if (returnedData !== "exam uuid already exists") {
-          console.log("Exam inserted into database");
+          setOpenBackdrop(false);
         }
       })
       .catch(error => {
@@ -108,6 +123,9 @@ const ForgotPassword = () => {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
+                <Backdrop className={classess.backdrop} open={openBackdrop}>
+                  <CircularProgress color="inherit" />
+                </Backdrop>
                 <Typography variant="h5" gutterBottom>
                   Exam has been uploaded to database
                 </Typography>

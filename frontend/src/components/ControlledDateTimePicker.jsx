@@ -20,10 +20,6 @@ const ControlledDateTimePicker = ({
   return (
     <FormControl style={{ width: "100%" }} error={Boolean(error[name])}>
       <Controller
-        name={name}
-        defaultValue={""}
-        control={control}
-        rules={rules}
         as={
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker
@@ -40,6 +36,10 @@ const ControlledDateTimePicker = ({
             />
           </MuiPickersUtilsProvider>
         }
+        name={name}
+        defaultValue={""}
+        control={control}
+        rules={rules}
       />
       <FormHelperText>{error[name] && error[name].message}</FormHelperText>
     </FormControl>

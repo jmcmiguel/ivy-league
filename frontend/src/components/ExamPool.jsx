@@ -20,7 +20,7 @@ const ExamPool = ({ question, errors, control, index }) => {
               }}>{`Question ${i} (Multiple Choice)`}</Typography>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|multichoice`}
+                name={`Set${index}-Question${i}-multichoice`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -31,7 +31,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Choice${i}|c1`}
+                name={`Set${index}-Choice${i}-c1`}
                 label={`Choice A`}
                 error={errors}
                 control={control}
@@ -40,7 +40,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Choice${i}|c2`}
+                name={`Set${index}-Choice${i}-c2`}
                 label={`Choice B`}
                 error={errors}
                 control={control}
@@ -49,7 +49,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Choice${i}|c3`}
+                name={`Set${index}-Choice${i}-c3`}
                 label={`Choice C`}
                 error={errors}
                 control={control}
@@ -58,7 +58,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Choice${i}|c4`}
+                name={`Set${index}-Choice${i}-c4`}
                 label={`Choice D`}
                 error={errors}
                 control={control}
@@ -67,7 +67,7 @@ const ExamPool = ({ question, errors, control, index }) => {
             </Grid>
             <Grid item xs={12}>
               <ControlledSelect
-                name={`Set${index}|Answer${i}|multichoice`}
+                name={`Set${index}-Answer${i}-multichoice`}
                 label={`Answer`}
                 error={errors}
                 control={control}
@@ -102,7 +102,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|trueorfalse`}
+                name={`Set${index}-Question${i}-trueorfalse`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -114,7 +114,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledSelect
-                name={`Set${index}|Answer${i}|trueorfalse`}
+                name={`Set${index}-Answer${i}-trueorfalse`}
                 label={`Answer`}
                 error={errors}
                 control={control}
@@ -148,7 +148,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|identification`}
+                name={`Set${index}-Question${i}-identification`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -160,7 +160,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Answer${i}|identification`}
+                name={`Set${index}-Answer${i}-identification`}
                 label={`Answer`}
                 error={errors}
                 control={control}
@@ -181,7 +181,7 @@ const ExamPool = ({ question, errors, control, index }) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|enumeration`}
+                name={`Set${index}-Question${i}-enumeration`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}
@@ -216,7 +216,7 @@ const ExamPool = ({ question, errors, control, index }) => {
 
             <Grid item xs={12}>
               <ControlledTextField
-                name={`Set${index}|Question${i}|essaytype`}
+                name={`Set${index}-Question${i}-essaytype`}
                 label={`Question ${i}`}
                 error={errors}
                 control={control}

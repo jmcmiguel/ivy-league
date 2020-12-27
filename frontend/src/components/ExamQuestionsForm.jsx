@@ -40,28 +40,28 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
           for (let index = 0; index < questions.length; index++) {
             for (let i = 1; i <= questions[index].noitems; i++) {
               // Multiple choice
-              if (key === `Set${index}|Question${i}|multichoice`) {
+              if (key === `Set${index}-Question${i}-multichoice`) {
                 dummyObj.uuid = uuidv4();
                 dummyObj.choices = choices;
                 dummyObj.points = questions[index].points;
                 dummyObj.type = "multipleChoice";
                 dummyObj.question = formDataClone[key];
                 dummyObj.answer =
-                  formDataClone[`Set${index}|Answer${i}|multichoice`];
+                  formDataClone[`Set${index}-Answer${i}-multichoice`];
                 choices[0] = {
-                  label: formDataClone[`Set${index}|Choice${i}|c1`],
+                  label: formDataClone[`Set${index}-Choice${i}-c1`],
                   value: "a",
                 };
                 choices[1] = {
-                  label: formDataClone[`Set${index}|Choice${i}|c2`],
+                  label: formDataClone[`Set${index}-Choice${i}-c2`],
                   value: "b",
                 };
                 choices[2] = {
-                  label: formDataClone[`Set${index}|Choice${i}|c3`],
+                  label: formDataClone[`Set${index}-Choice${i}-c3`],
                   value: "c",
                 };
                 choices[3] = {
-                  label: formDataClone[`Set${index}|Choice${i}|c4`],
+                  label: formDataClone[`Set${index}-Choice${i}-c4`],
                   value: "d",
                 };
 
@@ -69,49 +69,49 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
                 dummyIndex = index;
 
                 delete formDataClone[
-                  `Set${dummyIndex}|Question${dummyI}|multichoice`
+                  `Set${dummyIndex}-Question${dummyI}-multichoice`
                 ];
-                delete formDataClone[`Set${dummyIndex}|Answer${dummyI}|Answer`];
-                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c1`];
-                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c2`];
-                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c3`];
-                delete formDataClone[`Set${dummyIndex}|Choice${dummyI}|c4`];
+                delete formDataClone[`Set${dummyIndex}-Answer${dummyI}-Answer`];
+                delete formDataClone[`Set${dummyIndex}-Choice${dummyI}-c1`];
+                delete formDataClone[`Set${dummyIndex}-Choice${dummyI}-c2`];
+                delete formDataClone[`Set${dummyIndex}-Choice${dummyI}-c3`];
+                delete formDataClone[`Set${dummyIndex}-Choice${dummyI}-c4`];
 
                 break outerloop;
               } // True or False
-              else if (key === `Set${index}|Question${i}|trueorfalse`) {
+              else if (key === `Set${index}-Question${i}-trueorfalse`) {
                 dummyObj.uuid = uuidv4();
                 dummyObj.points = questions[index].points;
                 dummyObj.type = "trueOrFalse";
                 dummyObj.question = formDataClone[key];
                 dummyObj.answer =
-                  formDataClone[`Set${index}|Answer${i}|trueorfalse`];
+                  formDataClone[`Set${index}-Answer${i}-trueorfalse`];
 
                 dummyI = i;
                 dummyIndex = index;
 
-                delete formDataClone[`Set${index}|Question${i}|trueorfalse`];
-                delete formDataClone[`Set${index}|Answer${i}|trueorfalse`];
+                delete formDataClone[`Set${index}-Question${i}-trueorfalse`];
+                delete formDataClone[`Set${index}-Answer${i}-trueorfalse`];
 
                 break outerloop;
               } // Identification
-              else if (key === `Set${index}|Question${i}|identification`) {
+              else if (key === `Set${index}-Question${i}-identification`) {
                 dummyObj.uuid = uuidv4();
                 dummyObj.points = questions[index].points;
                 dummyObj.type = "identification";
                 dummyObj.question = formDataClone[key];
                 dummyObj.answer =
-                  formDataClone[`Set${index}|Answer${i}|identification`];
+                  formDataClone[`Set${index}-Answer${i}-identification`];
 
                 dummyI = i;
                 dummyIndex = index;
 
-                delete formDataClone[`Set${index}|Question${i}|identification`];
-                delete formDataClone[`Set${index}|Answer${i}|identification`];
+                delete formDataClone[`Set${index}-Question${i}-identification`];
+                delete formDataClone[`Set${index}-Answer${i}-identification`];
 
                 break outerloop;
               } // Essay Type
-              else if (key === `Set${index}|Question${i}|essaytype`) {
+              else if (key === `Set${index}-Question${i}-essaytype`) {
                 dummyObj.uuid = uuidv4();
                 dummyObj.points = questions[index].points;
                 dummyObj.type = "essayType";
@@ -120,7 +120,7 @@ const ExamQuestionsForm = ({ submitExamQuestions, handleNext }) => {
                 dummyI = i;
                 dummyIndex = index;
 
-                delete formDataClone[`Set${index}|Question${i}|essaytype`];
+                delete formDataClone[`Set${index}-Question${i}-essaytype`];
 
                 break outerloop;
               }
