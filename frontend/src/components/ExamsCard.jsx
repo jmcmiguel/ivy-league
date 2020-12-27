@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 
-const ExamsCard = ({ exam, handleDialogOpen }) => {
+const ExamsCard = ({ exam, handleDialogOpen, handleDelete }) => {
   const [section, setSection] = useState();
 
   useEffect(() => {
@@ -96,7 +96,12 @@ const ExamsCard = ({ exam, handleDialogOpen }) => {
             onClick={() => handleDialogOpen(exam)}>
             View
           </Button>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              handleDelete(exam.uuid);
+            }}>
             Delete
           </Button>
         </CardActions>

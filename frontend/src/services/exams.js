@@ -104,6 +104,15 @@ const getSubmittedExams = async () => {
   );
 };
 
+const deleteExam = async examUUID => {
+  const request = axios.delete(`${baseURL}/api/examm`, {
+    params: { uuid: examUUID },
+  });
+  const response = await request;
+
+  return response.status;
+};
+
 export default {
   create,
   getAll,
@@ -113,4 +122,5 @@ export default {
   addExamSubmission,
   getNotSubmittedExams,
   getSubmittedExams,
+  deleteExam,
 };

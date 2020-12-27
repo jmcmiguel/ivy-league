@@ -71,4 +71,14 @@ router.delete("/exam", async (req, res) => {
     });
 });
 
+router.delete("/examm", async (req, res) => {
+  await Exam.deleteOne({ uuid: req.query.uuid })
+    .then(() => {
+      res.sendStatus(204).end();
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
 module.exports = router;

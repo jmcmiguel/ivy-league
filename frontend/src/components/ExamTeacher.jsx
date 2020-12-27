@@ -5,6 +5,7 @@ import ExamsCard from "./ExamsCard";
 import { Link } from "react-router-dom";
 import examServices from "../services/exams";
 import ExamScoresDialog from "./ExamScoresDialog";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   Button,
   Box,
@@ -14,14 +15,39 @@ import {
   Container,
   Divider,
   CircularProgress,
+  Snackbar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
 } from "@material-ui/core";
 
 const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState();
   const [openExamDetailsDialog, setOpenExamDetailsDialog] = useState(false);
   const [exam, setExam] = useState();
+  const [snackbarSeverity, setSnackbarSeverity] = useState("error");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [examUUID, setExamUUID] = useState();
 
-  useEffect(() => {
+  const handleDialogOpen = exam => {
+    setExam(exam);
+    setOpenExamDetailsDialog(true);
+  };
+
+  const handleConfirmDialogOpen = examUUID => {
+    setOpenConfirmDialog(true);
+    setExamUUID(examUUID);
+  };
+
+  const handleClose = () => {
+    setOpenConfirmDialog(false);
+  };
+
+  const getExams = () => {
     examServices
       .getProfExams(localStorage.getItem("email"))
       .then(returnedData => {
@@ -30,13 +56,30 @@ const ExamTeacher = ({ match }) => {
       .catch(error => {
         console.log("Error: ", error);
       });
-  }, []);
+  };
 
-  useEffect(() => {}, [exams]);
+  const handleDelete = examUUID => {
+    examServices
+      .deleteExam(examUUID)
+      .then(returnedData => {
+        getExams();
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Exam Deleted");
+        setOpenSnackbar(!openSnackbar);
+      })
+      .catch(err => console.log(err.message));
+  };
 
-  const handleDialogOpen = exam => {
-    setExam(exam);
-    setOpenExamDetailsDialog(true);
+  const handleYes = () => {
+    handleDelete(examUUID);
+    handleClose();
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
   };
 
   const renderExams = examsLength => {
@@ -45,7 +88,12 @@ const ExamTeacher = ({ match }) => {
         .slice(0)
         .reverse()
         .map((exam, i) => (
-          <ExamsCard key={i} exam={exam} handleDialogOpen={handleDialogOpen} />
+          <ExamsCard
+            key={i}
+            exam={exam}
+            handleDialogOpen={handleDialogOpen}
+            handleDelete={handleConfirmDialogOpen}
+          />
         ));
     } else {
       return (
@@ -70,8 +118,15 @@ const ExamTeacher = ({ match }) => {
     }
   };
 
+  useEffect(() => {
+    getExams();
+  }, []);
+
+  useEffect(() => {}, [exams]);
+
   return (
     <div style={{ minHeight: "100vh" }}>
+      {/* Floating Icon Button */}
       <Link
         to={`${match.url}/createexam`}
         style={{ color: "inherit", textDecoration: "inherit" }}>
@@ -96,6 +151,42 @@ const ExamTeacher = ({ match }) => {
         setOpen={setOpenExamDetailsDialog}
         exam={exam}
       />
+
+      {/* Snackbar */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}>
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={openConfirmDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">Delete Exam?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This process is unreversible.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleYes} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Start Hero Unit */}
       <Container maxWidth="sm">
