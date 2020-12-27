@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline, Container } from "@material-ui/core";
+import { CssBaseline, Container, Hidden } from "@material-ui/core";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import HomeDrawer from "../components/HomeDrawer";
@@ -39,7 +39,9 @@ const TeacherHome = () => {
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <BottomNav match={match} />
+        <Hidden mdUp>
+          <BottomNav match={match} />
+        </Hidden>
         <Container maxWidth="lg" className={classes.container}>
           {/* React Router */}
           <Switch>
