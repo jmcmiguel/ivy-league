@@ -18,6 +18,22 @@ const EnrolledStudentsDialog = ({ open, setOpen, enrolledStudents }) => {
     setOpen(false);
   };
 
+  const renderStudentsEnrolled = usersLength => {
+    if (usersLength) {
+      return users.map((user, i) => {
+        return (
+          <Typography variant="body1" key={i}>
+            {`${i + 1}.) ${user.lastName}, ${user.firstName} ${
+              user.middleName
+            }`}
+          </Typography>
+        );
+      });
+    } else {
+      return <Typography variant="body1">No students enrolled yet</Typography>;
+    }
+  };
+
   useEffect(() => {
     userServices
       .getAll()
@@ -42,15 +58,7 @@ const EnrolledStudentsDialog = ({ open, setOpen, enrolledStudents }) => {
       <DialogContent>
         <Grid container spacing={2}>
           {users ? (
-            users.map((user, i) => {
-              return (
-                <Typography variant="body1" key={i}>
-                  {`${i + 1}.) ${user.lastName}, ${user.firstName} ${
-                    user.middleName
-                  }`}
-                </Typography>
-              );
-            })
+            renderStudentsEnrolled(users.length)
           ) : (
             <Skeleton width="100%" />
           )}
