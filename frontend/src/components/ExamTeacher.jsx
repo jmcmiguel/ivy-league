@@ -22,6 +22,7 @@ import {
   DialogTitle,
   DialogContentText,
 } from "@material-ui/core";
+import ExamQuestionsDialog from "./ExamQuestionsDialog";
 
 const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState();
@@ -32,15 +33,20 @@ const ExamTeacher = ({ match }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
   const [examUUID, setExamUUID] = useState();
-
+  const [openExamQuestions, setOpenExamQuestions] = useState(false);
   const handleDialogOpen = exam => {
     setExam(exam);
     setOpenExamDetailsDialog(true);
   };
 
   const handleConfirmDialogOpen = examUUID => {
-    setOpenConfirmDialog(true);
     setExamUUID(examUUID);
+    setOpenConfirmDialog(true);
+  };
+
+  const handleViewExamOpen = exam => {
+    setExam(exam);
+    setOpenExamQuestions(true);
   };
 
   const handleClose = () => {
@@ -93,6 +99,7 @@ const ExamTeacher = ({ match }) => {
             exam={exam}
             handleDialogOpen={handleDialogOpen}
             handleDelete={handleConfirmDialogOpen}
+            handleViewExam={handleViewExamOpen}
           />
         ));
     } else {
@@ -144,6 +151,13 @@ const ExamTeacher = ({ match }) => {
           <CreateIcon />
         </Fab>
       </Link>
+
+      {/* Exam Questions Dialog */}
+      <ExamQuestionsDialog
+        open={openExamQuestions}
+        setOpen={setOpenExamQuestions}
+        exam={exam}
+      />
 
       {/* Exam Scores Dialog */}
       <ExamScoresDialog
