@@ -23,6 +23,7 @@ import {
   Backdrop,
   CircularProgress,
 } from "@material-ui/core";
+import { GoogleLogin } from "react-google-login";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -97,6 +98,18 @@ const SignIn = () => {
       .catch(error => {
         console.log("Error :>> ", error);
       });
+  };
+
+  const onSuccess = res => {
+    console.log(`[Login Success] Current User: ${res.profileObj}`);
+  };
+
+  const onFailure = res => {
+    console.log(`[Login Failed] ${res}`);
+  };
+
+  const responseGoogle = response => {
+    console.log(response);
   };
 
   return (
@@ -175,7 +188,30 @@ const SignIn = () => {
             className={classes.submit}>
             Sign In
           </Button>
+
+          {/* Google Sign-in */}
+          <GoogleLogin
+            clientId="551384499965-sq5c2de5hccm99ovllhr3ecob6d39o2h.apps.googleusercontent.com"
+            buttonText="Sign in with Google"
+            render={renderProps => (
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                style={{ marginTop: "0" }}>
+                Sign in with Google
+              </Button>
+            )}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+
           <Grid container>
+            {/* Forgot Password */}
             <Grid item xs>
               <BrowserLink
                 to="forgotpassword"
@@ -183,6 +219,8 @@ const SignIn = () => {
                 Forgot password?
               </BrowserLink>
             </Grid>
+
+            {/* Sign up */}
             <Grid item>
               <BrowserLink to="/signup" style={{ textDecoration: "inherit" }}>
                 Don't have an account? Sign Up
