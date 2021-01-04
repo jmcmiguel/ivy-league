@@ -154,7 +154,10 @@ const StudentsTeacher = () => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Awwww. You haven't created a class yet 😞`}
+            Awwww. You haven't created a class yet{" "}
+            <span role="img" aria-label="emoji">
+              😞
+            </span>
           </Typography>
           <Typography
             variant="h5"

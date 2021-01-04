@@ -108,10 +108,6 @@ const SignIn = () => {
     console.log(`[Login Failed] ${res}`);
   };
 
-  const responseGoogle = response => {
-    console.log(response);
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

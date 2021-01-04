@@ -81,7 +81,10 @@ const DashboardStudent = () => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Heeey, why haven't you joined a class yet? 😟`}
+            Heeey, why haven't you joined a class yet?{" "}
+            <span role="img" aria-label="emoji">
+              😟
+            </span>
           </Typography>
           <Typography
             variant="h5"

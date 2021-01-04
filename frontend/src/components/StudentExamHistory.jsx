@@ -87,7 +87,14 @@ const StudentExamHistory = ({ match }) => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`It's empty out here 👻, you have no exam records yet 😴`}
+            It's empty out here{" "}
+            <span role="img" aria-label="emoji">
+              👻
+            </span>
+            , you have no exam records yet{" "}
+            <span role="img" aria-label="emoji">
+              😴
+            </span>
           </Typography>
           <Typography
             variant="h5"

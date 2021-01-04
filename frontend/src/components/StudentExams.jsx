@@ -40,14 +40,25 @@ const StudentExams = ({ match }) => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Wooohoooooo 🙌🎉🍻! You have no upcoming exams 😂!`}
+            Wooohoooooo{" "}
+            <span role="img" aria-label="emoji">
+              🙌🎉🍻
+            </span>
+            ! You have no upcoming exams{" "}
+            <span role="img" aria-label="emoji">
+              😂
+            </span>
+            !
           </Typography>
           <Typography
             variant="h5"
             align="center"
             color="textSecondary"
             component="p">
-            Previous exam records can be reviewed instead 🤓
+            Previous exam records can be reviewed instead{" "}
+            <span role="img" aria-label="emoji">
+              🤓
+            </span>
           </Typography>
         </Box>
       );

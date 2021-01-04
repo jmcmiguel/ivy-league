@@ -149,7 +149,10 @@ const DashboardTeacher = () => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Yikes! No data to show yet 😬`}
+            Yikes! No data to show yet{" "}
+            <span role="img" aria-label="emoji">
+              😬
+            </span>
           </Typography>
           <Typography
             variant="h5"
