@@ -10,7 +10,6 @@ import {
   Paper,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import ExamScoresTable from "./ExamScoresTable";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 
 const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
@@ -24,11 +23,74 @@ const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
     if (questionsLength) {
       return (
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            {exam.questions.map((question, i) => {
-              return `${i + 1}.) ${question.question} (${question.points})pts`;
-            })}
-          </Paper>
+          {exam.questions.map((question, i) => {
+            let displayQuestion = "";
+
+            switch (question.type) {
+              case "multipleChoice":
+                displayQuestion = (
+                  <>
+                    {question.choices.map((choice, i) => {
+                      if (choice.value === question.answer) {
+                        return (
+                          <Typography variant="body2" color="secondary" key={i}>
+                            {`${choice.value.toUpperCase()}.) ${choice.label}`}
+                          </Typography>
+                        );
+                      } else {
+                        return (
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            key={i}>
+                            {`${choice.value.toUpperCase()}.) ${choice.label}`}
+                          </Typography>
+                        );
+                      }
+                    })}
+                  </>
+                );
+                break;
+
+              case "trueOrFalse":
+                displayQuestion = (
+                  <Typography variant="body2" color="secondary">
+                    Answer: {question.answer === "f" ? "False" : "True"}
+                  </Typography>
+                );
+                break;
+
+              case "identification":
+                displayQuestion = (
+                  <Typography variant="body2" color="secondary">
+                    {`Answer: ${question.answer}`}
+                  </Typography>
+                );
+                break;
+
+              case "essayType":
+                displayQuestion = (
+                  <Typography variant="body2" color="secondary">
+                    Essay Type
+                  </Typography>
+                );
+                break;
+              default:
+                break;
+            }
+
+            return (
+              <Paper
+                key={i}
+                className={classes.paper}
+                style={{ marginBottom: "0.5rem" }}>
+                <Typography>
+                  {`${i + 1}.) ${question.question} (${question.points})pts`}
+                </Typography>
+                {displayQuestion}
+              </Paper>
+            );
+          })}
         </Grid>
       );
     } else {
@@ -41,7 +103,9 @@ const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
+      <DialogTitle
+        id="form-dialog-title"
+        style={{ textAlign: "center", minWidth: "60vw" }}>
         {exam ? `${exam.examName} Questions` : <Skeleton />}
       </DialogTitle>
       <DialogContent>
