@@ -111,7 +111,7 @@ const ExamTeacher = ({ match }) => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Yikes! you haven't created an exam yet :/`}
+            {`Yikes! you haven't created an exam yet 😦`}
           </Typography>
           <Typography
             variant="h5"

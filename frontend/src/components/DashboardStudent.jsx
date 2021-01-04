@@ -81,7 +81,7 @@ const DashboardStudent = () => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Heeey, why haven't you joined a class yet? :/`}
+            {`Heeey, why haven't you joined a class yet? 😟`}
           </Typography>
           <Typography
             variant="h5"

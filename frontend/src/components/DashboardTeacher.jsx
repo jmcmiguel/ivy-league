@@ -149,7 +149,7 @@ const DashboardTeacher = () => {
             align="center"
             color="textPrimary"
             gutterBottom>
-            {`Yikes! No data to show yet :/`}
+            {`Yikes! No data to show yet 😬`}
           </Typography>
           <Typography
             variant="h5"
