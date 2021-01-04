@@ -102,10 +102,10 @@ const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="form-dialog-title">
-      <DialogTitle
-        id="form-dialog-title"
-        style={{ textAlign: "center", minWidth: "60vw" }}>
+      aria-labelledby="form-dialog-title"
+      maxWidth="sm"
+      fullWidth={true}>
+      <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
         {exam ? `${exam.examName} Questions` : <Skeleton />}
       </DialogTitle>
       <DialogContent>
