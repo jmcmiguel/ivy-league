@@ -110,6 +110,24 @@ const getStudentClass = async email => {
   return classes.filter(clas => clas.studentEnrolled.includes(email));
 };
 
+const getClassAndExams = async email => {
+  const request = axios.get(`${baseURL}/api/exam`);
+  const response = await request;
+  const exams = response.data.filter(exam => exam.prof === email);
+
+  const request2 = axios.get(`${baseURL}/api/user`);
+  const response2 = await request2;
+  const users = response2.data;
+
+  const classes = await getProfClass(email);
+
+  return {
+    classes: classes,
+    exams: exams,
+    users: users,
+  };
+};
+
 export default {
   create,
   getAll,
@@ -123,4 +141,5 @@ export default {
   addStudent,
   getStudents,
   getStudentClass,
+  getClassAndExams,
 };

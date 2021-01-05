@@ -23,13 +23,12 @@ const DashboardCharts = ({
       <Grid container spacing={3} justify={"center"}>
         <Grid item>
           <Typography
-            component="h2"
-            variant="h2"
+            variant="h4"
             align="center"
             color="textPrimary"
             gutterBottom>{`${subject} (${section})`}</Typography>
           <Typography
-            variant="h5"
+            variant="h6"
             align="center"
             color="textSecondary"
             component="p">
@@ -39,10 +38,7 @@ const DashboardCharts = ({
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
-            <AverageScoreChart
-              title={`${subject}(${section}) Average Score`}
-              chartData={chartData}
-            />
+            <AverageScoreChart title={`Average Score`} chartData={chartData} />
           </Paper>
         </Grid>
         {/* Top Scorer */}
@@ -53,16 +49,14 @@ const DashboardCharts = ({
               section={section}
               subject={subject}
               highestScore={topScore}
+              examName={chartData[chartData.length - 1].examname}
             />
           </Paper>
         </Grid>
         {/* Ranking Board */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <RankingBoard
-              title={`${subject}(${section}) Ranking Board`}
-              tableData={tableData}
-            />
+            <RankingBoard title={`Ranking Board`} tableData={tableData} />
           </Paper>
         </Grid>
       </Grid>

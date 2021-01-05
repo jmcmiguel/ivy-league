@@ -14,19 +14,23 @@ const useStyles = makeStyles({
   },
 });
 
-const TopScorer = ({ name, section, subject, highestScore }) => {
+const TopScorer = ({ name, section, subject, highestScore, examName }) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>{`${subject} (${section})`}</Title>
-      <Typography component="p" variant="h4">
+      <Title>{`Top Scorer`}</Title>
+      <Typography component="p" variant="h6">
         {`${name}`}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        Highest in Last Exam
+        {examName === "No exams yet"
+          ? "No exams yet"
+          : `Highest in ${examName}`}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        Highest Score: {highestScore}
+        {examName === "No exams yet"
+          ? "No Score yet"
+          : `Score: ${highestScore}`}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>

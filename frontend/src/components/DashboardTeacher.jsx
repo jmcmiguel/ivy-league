@@ -1,98 +1,235 @@
 import React, { useState } from "react";
 import classServices from "../services/classes";
-import examServices from "../services/exams";
 import DashboardCharts from "../components/DashboardCharts";
 import useStylesTeacherHome from "../components/styles/useStylesTeacherHome";
 import clsx from "clsx";
 
-import { Box, Typography, Paper, Container, Divider } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Paper,
+  Container,
+  Divider,
+  CircularProgress,
+  Grid,
+} from "@material-ui/core";
 
 const DashboardTeacher = () => {
-  const [sampleData, setSampleData] = useState();
-  const [exams, setExams] = useState();
-  const [classess, setClassess] = useState();
+  const [Data, setData] = useState();
+
+  const getScore = (exam, studentEmail) => {
+    const questions = exam.questions.map(question => {
+      return {
+        uuid: question.uuid,
+        points: question.points,
+        answer: question.answer,
+        type: question.type,
+      };
+    });
+
+    const answers = exam.submittedExam.filter(
+      submission => submission.submittedBy === studentEmail
+    )[0];
+
+    const answerUUIDs = Object.keys(answers);
+
+    let points = 0;
+
+    for (let i = 0; i < questions.length; i++) {
+      for (let ii = 0; ii < answerUUIDs.length - 1; ii++) {
+        if (questions[i].uuid === answerUUIDs[ii]) {
+          if (questions[i].answer === answers[answerUUIDs[ii]]) {
+            points += parseInt(questions[i].points);
+          } else if (questions[i].type === "essayType") {
+            points += parseInt(questions[i].points);
+          }
+        }
+      }
+    }
+
+    return points;
+  };
+
+  const getName = (email, users) => {
+    const user = users.filter(user => user.email === email).slice(0, 1);
+    return `${user[0].lastName}, ${user[0].firstName} ${user[0].middleName}`;
+  };
+
+  const getIdNumber = (email, users) => {
+    const user = users.filter(user => user.email === email).slice(0, 1);
+    return user[0].idNumber;
+  };
+
+  const renderDashboard = dataLength => {
+    if (dataLength) {
+      return Data.map((data, i) => {
+        return (
+          <div key={i}>
+            <Paper
+              className={fixedHeightPaper}
+              style={{ marginBottom: "3.5rem" }}>
+              <DashboardCharts
+                section={data.section}
+                subject={data.subject}
+                desc={data.desc}
+                highestScorer={data.highestScorer}
+                topScore={data.topScore}
+                chartData={data.chartData}
+                tableData={data.tableData}
+              />
+            </Paper>
+          </div>
+        );
+      });
+    } else {
+      return (
+        <Box pt={8} style={{ marginBottom: "3rem" }}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom>
+            Yikes! No data to show yet{" "}
+            <span role="img" aria-label="emoji">
+              😬
+            </span>
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p">
+            To show data, add students and exams
+          </Typography>
+        </Box>
+      );
+    }
+  };
+
+  const getTableData = (classs, exams, users) => {
+    let tableData = [];
+
+    if (!classs) {
+      return;
+    }
+
+    classs.studentEnrolled.forEach((email, i) => {
+      const getTotalScore = exams
+        .filter(exam => exam.classCode === classs.classCode)
+        .map((exam, i) => {
+          let scores = [];
+
+          exam.submittedExam.length
+            ? exam.submittedExam.forEach(submission => {
+                if (submission.submittedBy === email) {
+                  scores.push(getScore(exam, submission.submittedBy));
+                }
+              })
+            : scores.push(0);
+
+          return scores;
+        });
+
+      let newData = {
+        idNumber: getIdNumber(email, users),
+        name: getName(email, users),
+        avgScore: (
+          getTotalScore.reduce(
+            (acc, curVal) => parseInt(acc) + parseInt(curVal)
+          ) / getTotalScore.length
+        ).toFixed(2),
+        ttlScore: getTotalScore
+          .reduce((acc, curVal) => parseInt(acc) + parseInt(curVal))
+          .toFixed(2),
+      };
+      tableData.push(newData);
+    });
+
+    // Sorts the table data
+    tableData.sort((a, b) => a.ttlScore - b.ttlScore);
+    // Add ranks to each data
+    tableData.forEach((data, i) => (data.rank = i + 1));
+
+    return tableData;
+  };
 
   useState(() => {
-    // Get prof classes
     classServices
-      .getProfClass(localStorage.getItem("email"))
-      .then(classes => {
-        setClassess(classes);
+      .getClassAndExams(localStorage.getItem("email"))
+      .then(returnedData => {
+        let newSampleData = [];
 
-        // Get Prof exams
-        examServices
-          .getProfExams(localStorage.getItem("email"))
-          .then(exams => {
-            setExams(exams);
-            let dummyData = {};
+        returnedData.classes.forEach(classs => {
+          const examsAndAvg = returnedData.exams
+            .filter(exam => exam.classCode === classs.classCode)
+            .map((exam, i) => {
+              let scores = [];
 
-            classess.map(classes => {
+              exam.submittedExam.length
+                ? exam.submittedExam.forEach(submission => {
+                    scores.push(getScore(exam, submission.submittedBy));
+                  })
+                : scores.push(0);
+
               return {
-                section: classes.section,
-                subject: classes.courseCode,
-                desc: classes.courseCode,
+                examname: exam.examName,
+                avgscore: `${
+                  scores.reduce((a, b) => a + b, 0) / scores.length
+                }`,
               };
             });
-          })
-          .catch(err => console.log(err.message));
+
+          const examTopScore = returnedData.exams
+            .filter(exam => exam.classCode === classs.classCode)
+            .map((exam, i) => {
+              let scores = [];
+
+              exam.submittedExam.length
+                ? exam.submittedExam.forEach(submission => {
+                    scores.push({
+                      score: getScore(exam, submission.submittedBy),
+                      email: submission.submittedBy,
+                    });
+                  })
+                : scores.push({ score: 0, email: "" });
+
+              scores.sort((a, b) => a.score - b.score);
+
+              return scores.pop();
+            });
+
+          newSampleData.push({
+            section: classs.section,
+            subject: classs.courseCode,
+            desc: classs.courseDesc,
+            highestScorer: examTopScore.length
+              ? getName(
+                  examTopScore[examTopScore.length - 1].email,
+                  returnedData.users
+                )
+              : "No Submission yet",
+            topScore: examTopScore.length
+              ? examTopScore[examTopScore.length - 1].score
+              : 0,
+            chartData: examsAndAvg.length
+              ? examsAndAvg
+              : [{ examname: "No exams yet", avgscore: 0 }],
+            tableData: getTableData(
+              classs,
+              returnedData.exams,
+              returnedData.users
+            ).length
+              ? getTableData(classs, returnedData.exams, returnedData.users)
+              : null,
+          });
+        });
+        setData(newSampleData);
       })
-
-      .catch(err => console.log(err.message));
+      .catch(err => {
+        console.log(err.message);
+      });
   }, []);
-
-  // const sampleData = [
-  //   {
-  //     section: "NW3D",
-  //     subject: "ICTC-1213",
-  //     desc: "Software Engineering 1",
-  //     highestScorer: "Sanchez, Rick",
-  //     topScore: 100,
-  //     chartData: [
-  //       { examname: "Exam 1", avgscore: 20 },
-  //       { examname: "Exam 2", avgscore: 10 },
-  //       { examname: "Exam 3", avgscore: 30 },
-  //       { examname: "Exam 4", avgscore: 50 },
-  //       { examname: "Exam 5", avgscore: 80 },
-  //     ],
-  //     tableData: [
-  //       {
-  //         rank: 1,
-  //         idNumber: "18-0xxxx",
-  //         name: "Rick Sanchez",
-  //         avgScore: 102,
-  //         ttlScore: 9000,
-  //       },
-  //       {
-  //         rank: 2,
-  //         idNumber: "20-0xxxx",
-  //         name: "Morty Smith",
-  //         avgScore: 10,
-  //         ttlScore: 90,
-  //       },
-  //       {
-  //         rank: 3,
-  //         idNumber: "14-0xxxx",
-  //         name: "Light Yagami",
-  //         avgScore: 400,
-  //         ttlScore: 10000,
-  //       },
-  //       {
-  //         rank: 4,
-  //         idNumber: "16-0xxxx",
-  //         name: "Tanjiro Kamado",
-  //         avgScore: 1123,
-  //         ttlScore: 901230,
-  //       },
-  //       {
-  //         rank: 5,
-  //         idNumber: "18-0xxxx",
-  //         name: "Nezuko-Chan",
-  //         avgScore: 1023,
-  //         ttlScore: 9420,
-  //       },
-  //     ],
-  //   },
-  // ];
 
   const classes = useStylesTeacherHome();
   const fixedHeightPaper = clsx(classes.paper);
@@ -121,47 +258,17 @@ const DashboardTeacher = () => {
       {/* End hero unit */}
       <Divider style={{ marginTop: "3rem", marginBottom: "3rem" }} />
 
-      {sampleData ? (
-        sampleData.map((data, i) => {
-          return (
-            <div key={i}>
-              <Paper
-                className={fixedHeightPaper}
-                style={{ marginBottom: "3.5rem" }}>
-                <DashboardCharts
-                  section={data.section}
-                  subject={data.subject}
-                  desc={data.desc}
-                  highestScorer={data.highestScorer}
-                  topScore={data.topScore}
-                  chartData={data.chartData}
-                  tableData={data.tableData}
-                />
-              </Paper>
-            </div>
-          );
-        })
+      {Data ? (
+        renderDashboard(Data.length)
       ) : (
-        <Box pt={8} style={{ marginBottom: "3rem" }}>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="textPrimary"
-            gutterBottom>
-            Yikes! No data to show yet{" "}
-            <span role="img" aria-label="emoji">
-              😬
-            </span>
-          </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-            color="textSecondary"
-            component="p">
-            To show data, add students and exam using the sidebar
-          </Typography>
-        </Box>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justify="center"
+          style={{ marginTop: "5rem" }}>
+          <CircularProgress />
+        </Grid>
       )}
     </div>
   );
