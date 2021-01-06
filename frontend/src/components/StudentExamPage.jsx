@@ -21,7 +21,7 @@ const StudentExamPage = props => {
   const [examAnswers, setExamAnswers] = useState();
   const [examUUID, setExamUUID] = useState();
   const [counter, setCounter] = useState(
-    differenceInSeconds(parseISO(exam.deadline), parseISO(exam.sched))
+    differenceInSeconds(parseISO(exam.deadline), addSeconds(new Date(), 1))
   );
   const [backdropOpen, setBackdropOpen] = useState(false);
 

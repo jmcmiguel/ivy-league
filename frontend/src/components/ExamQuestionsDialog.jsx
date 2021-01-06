@@ -84,9 +84,14 @@ const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
                 key={i}
                 className={classes.paper}
                 style={{ marginBottom: "0.5rem" }}>
-                <Typography>
-                  {`${i + 1}.) ${question.question} (${question.points})pts`}
-                </Typography>
+                <div>
+                  <Typography variant="body1" display="inline">{`${i + 1}.) ${
+                    question.question
+                  } `}</Typography>
+                  <Typography
+                    variant="caption"
+                    color="textSecondary">{`${question.points} points`}</Typography>
+                </div>
                 {displayQuestion}
               </Paper>
             );

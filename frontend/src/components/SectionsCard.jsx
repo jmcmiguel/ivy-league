@@ -28,7 +28,7 @@ const SectionsCard = ({ section, handleDialogOpen, handleStudentsOpen }) => {
 
   return (
     <Grid item xs={12} md={6}>
-      <Card className={classes.card}>
+      <Card className={classes.card} elevation={3}>
         <div className={classes.cardDetails}>
           <CardContent>
             <Typography component="h2" variant="h5">

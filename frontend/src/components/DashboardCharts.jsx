@@ -37,13 +37,13 @@ const DashboardCharts = ({
         </Grid>
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
+          <Paper className={fixedHeightPaper} elevation={5}>
             <AverageScoreChart title={`Average Score`} chartData={chartData} />
           </Paper>
         </Grid>
         {/* Top Scorer */}
         <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
+          <Paper className={fixedHeightPaper} elevation={5}>
             <TopScorer
               name={highestScorer}
               section={section}
@@ -55,7 +55,7 @@ const DashboardCharts = ({
         </Grid>
         {/* Ranking Board */}
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={5}>
             <RankingBoard title={`Ranking Board`} tableData={tableData} />
           </Paper>
         </Grid>

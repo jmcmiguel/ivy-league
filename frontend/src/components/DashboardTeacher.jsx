@@ -52,7 +52,12 @@ const DashboardTeacher = () => {
 
   const getName = (email, users) => {
     const user = users.filter(user => user.email === email).slice(0, 1);
-    return `${user[0].lastName}, ${user[0].firstName} ${user[0].middleName}`;
+
+    if (user.length) {
+      return `${user[0].lastName}, ${user[0].firstName} ${user[0].middleName}`;
+    } else {
+      return "No submission yet";
+    }
   };
 
   const getIdNumber = (email, users) => {
@@ -66,6 +71,7 @@ const DashboardTeacher = () => {
         return (
           <div key={i}>
             <Paper
+              elevation={2}
               className={fixedHeightPaper}
               style={{ marginBottom: "3.5rem" }}>
               <DashboardCharts
@@ -136,11 +142,12 @@ const DashboardTeacher = () => {
         name: getName(email, users),
         avgScore: (
           getTotalScore.reduce(
-            (acc, curVal) => parseInt(acc) + parseInt(curVal)
+            (acc, curVal) => parseInt(acc) + parseInt(curVal),
+            0
           ) / getTotalScore.length
         ).toFixed(2),
         ttlScore: getTotalScore
-          .reduce((acc, curVal) => parseInt(acc) + parseInt(curVal))
+          .reduce((acc, curVal) => parseInt(acc) + parseInt(curVal), 0)
           .toFixed(2),
       };
       tableData.push(newData);

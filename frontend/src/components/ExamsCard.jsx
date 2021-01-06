@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "../components/styles/useStylesTeacherExam";
 import classServices from "../services/classes";
-import { format, parseISO, isAfter, parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 import {
   Card,
   CardActions,
@@ -32,17 +32,19 @@ const ExamsCard = ({
       });
   }, [exam]);
 
-  const renderExamTotalExaminees = (totalExaminees, classCapacity) => {
-    if (totalExaminees === classCapacity) {
+  const renderExamTotalExaminees = (totalExaminees, studentEnrolled) => {
+    if (+totalExaminees === 0) {
+      return "No one has taken this exam yet";
+    } else if (totalExaminees === studentEnrolled) {
       return "Everyone has taken this exam";
     } else {
-      return `${totalExaminees}/${classCapacity} has taken this exam`;
+      return `${totalExaminees}/${studentEnrolled} has taken this exam`;
     }
   };
 
   return (
     <Grid item xs={12} md={6}>
-      <Card className={classes.card}>
+      <Card className={classes.card} elevation={3}>
         <CardContent className={classes.cardContent}>
           {/* Exam Name */}
           <Typography gutterBottom variant="h5" align="center">
@@ -86,7 +88,7 @@ const ExamsCard = ({
               {section ? (
                 renderExamTotalExaminees(
                   exam.submittedExam.length,
-                  section.classCapacity
+                  section.studentEnrolled.length
                 )
               ) : (
                 <Skeleton />

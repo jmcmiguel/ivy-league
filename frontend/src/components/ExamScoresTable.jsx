@@ -86,16 +86,14 @@ const ExamScoresTable = ({ title, exam }) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Score</TableCell>
-            <TableCell align="right">Max Score</TableCell>
+            <TableCell align="right">Score</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
             <TableRow key={row.id}>
               <TableCell>{users ? getName(row.name) : <Skeleton />}</TableCell>
-              <TableCell>{row.score}</TableCell>
-              <TableCell align="right">{row.totalScore}</TableCell>
+              <TableCell align="right">{`${row.score} / ${row.totalScore}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
