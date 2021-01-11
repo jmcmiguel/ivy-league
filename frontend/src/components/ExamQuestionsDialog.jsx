@@ -120,7 +120,7 @@ const ExamQuestionsDialog = ({ open, setOpen, exam }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Close
+          Back
         </Button>
       </DialogActions>
     </Dialog>

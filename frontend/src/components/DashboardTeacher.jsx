@@ -258,7 +258,7 @@ const DashboardTeacher = () => {
           align="center"
           color="textSecondary"
           component="p">
-          View Exam Statistics
+          View Exam Statistics for each classes
         </Typography>
       </Container>
 

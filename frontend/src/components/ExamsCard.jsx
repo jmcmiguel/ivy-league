@@ -15,6 +15,7 @@ import { Skeleton } from "@material-ui/lab";
 
 const ExamsCard = ({
   exam,
+  handleDialogOpenStats,
   handleDialogOpen,
   handleDelete,
   handleViewExam,
@@ -100,6 +101,12 @@ const ExamsCard = ({
           <Button
             size="small"
             color="primary"
+            onClick={() => handleDialogOpenStats(exam)}>
+            Stats
+          </Button>
+          <Button
+            size="small"
+            color="primary"
             onClick={() => handleDialogOpen(exam)}>
             Submissions
           </Button>
@@ -107,7 +114,7 @@ const ExamsCard = ({
             size="small"
             color="primary"
             onClick={() => handleViewExam(exam)}>
-            View
+            Questions
           </Button>
           <Button
             size="small"

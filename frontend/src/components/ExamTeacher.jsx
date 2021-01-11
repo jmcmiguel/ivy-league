@@ -23,6 +23,7 @@ import {
   DialogContentText,
 } from "@material-ui/core";
 import ExamQuestionsDialog from "./ExamQuestionsDialog";
+import ExamStatsDialog from "./ExamStatsDialog";
 
 const ExamTeacher = ({ match }) => {
   const [exams, setExams] = useState();
@@ -38,6 +39,7 @@ const ExamTeacher = ({ match }) => {
     setExam(exam);
     setOpenExamDetailsDialog(true);
   };
+  const [openExamStats, setOpenExamStats] = useState(false);
 
   const handleConfirmDialogOpen = examUUID => {
     setExamUUID(examUUID);
@@ -47,6 +49,11 @@ const ExamTeacher = ({ match }) => {
   const handleViewExamOpen = exam => {
     setExam(exam);
     setOpenExamQuestions(true);
+  };
+
+  const handleDialogOpenStats = exam => {
+    setExam(exam);
+    setOpenExamStats(true);
   };
 
   const handleClose = () => {
@@ -100,11 +107,12 @@ const ExamTeacher = ({ match }) => {
             handleDialogOpen={handleDialogOpen}
             handleDelete={handleConfirmDialogOpen}
             handleViewExam={handleViewExamOpen}
+            handleDialogOpenStats={handleDialogOpenStats}
           />
         ));
     } else {
       return (
-        <Box pt={8} style={{ marginBottom: "3rem" }}>
+        <Box pt={8} style={{ marghandleDialogOpeninBottom: "3rem" }}>
           <Typography
             component="h1"
             variant="h2"
@@ -154,6 +162,13 @@ const ExamTeacher = ({ match }) => {
           <CreateIcon />
         </Fab>
       </Link>
+
+      {/* Exam Stats Dialog */}
+      <ExamStatsDialog
+        open={openExamStats}
+        setOpen={setOpenExamStats}
+        exam={exam}
+      />
 
       {/* Exam Questions Dialog */}
       <ExamQuestionsDialog

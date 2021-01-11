@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 import userServices from "../services/users";
 import { Skeleton } from "@material-ui/lab";
+import { format, parseISO } from "date-fns";
 
 const ExamScoresTable = ({ title, exam }) => {
   const [users, setUsers] = useState();
@@ -76,7 +77,11 @@ const ExamScoresTable = ({ title, exam }) => {
     const name = submission.submittedBy;
     const score = getScore(exam, submission.submittedBy);
     const totalScore = getTotalScore(exam);
-    return { id, name, score, totalScore };
+    const dateSubmitted = format(
+      parseISO(submission.submissionDate),
+      "hh:mm:ss aaa MMMM dd, yyyy"
+    );
+    return { id, name, score, totalScore, dateSubmitted };
   });
 
   return (
@@ -86,14 +91,16 @@ const ExamScoresTable = ({ title, exam }) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Score</TableCell>
+            <TableCell>Score</TableCell>
+            <TableCell>Date Submitted</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
             <TableRow key={row.id}>
               <TableCell>{users ? getName(row.name) : <Skeleton />}</TableCell>
-              <TableCell align="right">{`${row.score} / ${row.totalScore}`}</TableCell>
+              <TableCell>{`${row.score} / ${row.totalScore}`}</TableCell>
+              <TableCell>{`${row.dateSubmitted}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -21,11 +21,16 @@ const RenderExamQuestions = ({ exam, handleDialogOpen }) => {
       examQuestions.push(
         <Paper style={{ padding: "1.5em" }}>
           {/* Question */}
-          <Typography variant="body1" gutterBottom>
-            {`${index + 1}.) ${exam.questions[index].question} (${
-              exam.questions[index].points
-            } ${exam.questions[index].points > 1 ? "points" : "point"})`}
-          </Typography>
+          <div>
+            <Typography variant="body1" display="inline" gutterBottom>
+              {`${index + 1}.) ${exam.questions[index].question} `}
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              {`(${exam.questions[index].points} ${
+                exam.questions[index].points > 1 ? "points" : "point"
+              })`}
+            </Typography>
+          </div>
 
           {/* Choices */}
           <ControlledRadioButton
@@ -45,11 +50,16 @@ const RenderExamQuestions = ({ exam, handleDialogOpen }) => {
       examQuestions.push(
         <Paper style={{ padding: "1.5em" }}>
           {/* Question */}
-          <Typography variant="body1" gutterBottom>
-            {`${index + 1}.) ${exam.questions[index].question} (${
-              exam.questions[index].points
-            } ${exam.questions[index].points > 1 ? "points" : "point"})`}
-          </Typography>
+          <div>
+            <Typography variant="body1" display="inline" gutterBottom>
+              {`${index + 1}.) ${exam.questions[index].question} `}
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              {`(${exam.questions[index].points} ${
+                exam.questions[index].points > 1 ? "points" : "point"
+              })`}
+            </Typography>
+          </div>
 
           {/* Choices */}
           <ControlledRadioButton
@@ -72,11 +82,16 @@ const RenderExamQuestions = ({ exam, handleDialogOpen }) => {
       examQuestions.push(
         <Paper style={{ padding: "1.5em" }}>
           {/* Question */}
-          <Typography variant="body1" gutterBottom>
-            {`${index + 1}.) ${exam.questions[index].question} (${
-              exam.questions[index].points
-            } ${exam.questions[index].points > 1 ? "points" : "point"})`}
-          </Typography>
+          <div>
+            <Typography variant="body1" display="inline" gutterBottom>
+              {`${index + 1}.) ${exam.questions[index].question} `}
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              {`(${exam.questions[index].points} ${
+                exam.questions[index].points > 1 ? "points" : "point"
+              })`}
+            </Typography>
+          </div>
 
           {/* Answer Field */}
           <ControlledTextField
@@ -95,11 +110,16 @@ const RenderExamQuestions = ({ exam, handleDialogOpen }) => {
       examQuestions.push(
         <Paper style={{ padding: "1.5em" }}>
           {/* Question */}
-          <Typography variant="body1" gutterBottom>
-            {`${index + 1}.) ${exam.questions[index].question} (${
-              exam.questions[index].points
-            } ${exam.questions[index].points > 1 ? "points" : "point"})`}
-          </Typography>
+          <div>
+            <Typography variant="body1" display="inline" gutterBottom>
+              {`${index + 1}.) ${exam.questions[index].question} `}
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              {`(${exam.questions[index].points} ${
+                exam.questions[index].points > 1 ? "points" : "point"
+              })`}
+            </Typography>
+          </div>
 
           {/* Answer Field */}
           <ControlledTextField

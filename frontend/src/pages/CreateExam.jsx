@@ -130,8 +130,7 @@ const ForgotPassword = () => {
                   Exam has been uploaded to database
                 </Typography>
                 <Typography variant="subtitle1">
-                  It is available for students to be taken at specified time.
-                  Exams can be modified only before it starts.{" "}
+                  It is available for students to be taken at specified time.{" "}
                   <Link to="/teacher">Click here to return to dashboard</Link>
                 </Typography>
               </React.Fragment>

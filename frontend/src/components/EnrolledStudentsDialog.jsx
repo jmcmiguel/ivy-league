@@ -8,27 +8,28 @@ import {
   DialogTitle,
   Grid,
   Typography,
+  Paper,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import EnrolledStudentsTable from "./EnrolledStudentsTable";
 
 const EnrolledStudentsDialog = ({ open, setOpen, enrolledStudents }) => {
   const [users, setUsers] = useState();
 
   const handleClose = () => {
     setOpen(false);
+    setUsers();
   };
 
   const renderStudentsEnrolled = usersLength => {
     if (usersLength) {
-      return users.map((user, i) => {
-        return (
-          <Typography variant="body1" key={i}>
-            {`${i + 1}.) ${user.lastName}, ${user.firstName} ${
-              user.middleName
-            }`}
-          </Typography>
-        );
-      });
+      return (
+        <Grid item xs={12}>
+          <Paper>
+            <EnrolledStudentsTable users={users} />
+          </Paper>
+        </Grid>
+      );
     } else {
       return <Typography variant="body1">No students enrolled yet</Typography>;
     }
@@ -53,10 +54,12 @@ const EnrolledStudentsDialog = ({ open, setOpen, enrolledStudents }) => {
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="form-dialog-title">
+      aria-labelledby="form-dialog-title"
+      maxWidth="md"
+      fullWidth={true}>
       <DialogTitle id="form-dialog-title">Enrolled Students</DialogTitle>
       <DialogContent>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} direction="column">
           {users ? (
             renderStudentsEnrolled(users.length)
           ) : (
@@ -66,7 +69,7 @@ const EnrolledStudentsDialog = ({ open, setOpen, enrolledStudents }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cancel
+          Back
         </Button>
       </DialogActions>
     </Dialog>

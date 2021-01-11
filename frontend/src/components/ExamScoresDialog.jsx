@@ -30,7 +30,11 @@ const ExamScoresDialog = ({ open, setOpen, exam }) => {
         </Grid>
       );
     } else {
-      return <Typography>No submissions yet</Typography>;
+      return (
+        <Grid item xs={12} style={{ textAlign: "center" }}>
+          <Typography>No submissions yet</Typography>
+        </Grid>
+      );
     }
   };
 
@@ -38,7 +42,9 @@ const ExamScoresDialog = ({ open, setOpen, exam }) => {
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="form-dialog-title">
+      aria-labelledby="form-dialog-title"
+      maxWidth="md"
+      fullWidth={true}>
       <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
         {exam ? exam.examName : <Skeleton />}
       </DialogTitle>
@@ -49,7 +55,7 @@ const ExamScoresDialog = ({ open, setOpen, exam }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Close
+          Back
         </Button>
       </DialogActions>
     </Dialog>

@@ -13,6 +13,8 @@ import {
   CircularProgress,
   Backdrop,
   makeStyles,
+  DialogContent,
+  DialogContentText,
 } from "@material-ui/core";
 
 const StudentExamPage = props => {
@@ -24,6 +26,7 @@ const StudentExamPage = props => {
     differenceInSeconds(parseISO(exam.deadline), addSeconds(new Date(), 1))
   );
   const [backdropOpen, setBackdropOpen] = useState(false);
+  const [openCloseDialog, setOpenCloseDialog] = useState(false);
 
   const useStyles = makeStyles(theme => ({
     backdrop: {
@@ -40,6 +43,7 @@ const StudentExamPage = props => {
   };
 
   const handleClickOpen = (formData, examUUID) => {
+    formData.submissionDate = new Date();
     setExamAnswers(formData);
     setExamUUID(examUUID);
     setOpen(true);
@@ -57,13 +61,20 @@ const StudentExamPage = props => {
       .then(returnedData => {
         setBackdropOpen(false);
         window.location.replace("/");
-        console.log("returnedData :>> ", returnedData);
       })
       .catch(err => console.log(err.message));
     handleClose();
   };
 
   useEffect(() => {
+    if (counter === 0) {
+      setOpenCloseDialog(true);
+      setTimeout(() => {
+        setOpenCloseDialog(false);
+        window.location.replace("/");
+      }, 5000);
+    }
+
     const timer =
       counter > 0 &&
       setInterval(() => {
@@ -78,6 +89,20 @@ const StudentExamPage = props => {
       <Backdrop className={classes.backdrop} open={backdropOpen}>
         <CircularProgress color="inherit" />
       </Backdrop>
+
+      {/* Exam is closed dialog */}
+      <Dialog
+        open={openCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">{"Exam is closed"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Your exam is not submitted because you have not submitted before
+            deadline.
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
 
       {/* Yes/No Dialog */}
       <Dialog
@@ -124,7 +149,7 @@ const StudentExamPage = props => {
         align="center"
         color="textSecondary"
         component="p">
-        {`Exam will auto-submit in: ${formattedTime(counter)}`}
+        {`Exam will close in: ${formattedTime(counter)}`}
       </Typography>
 
       {/* Divider */}
