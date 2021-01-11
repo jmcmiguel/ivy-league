@@ -84,8 +84,6 @@ const SectionRecords = ({
         });
 
       const rows = users.map((user, i) => {
-        const newRow = {};
-
         const id = i;
         const name = `${user.lastName}, ${user.firstName} ${user.middleName}`;
         const email = user.email;
