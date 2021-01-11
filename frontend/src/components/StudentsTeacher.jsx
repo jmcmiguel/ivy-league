@@ -22,6 +22,8 @@ import {
   DialogContentText,
 } from "@material-ui/core";
 import EnrolledStudentsDialog from "./EnrolledStudentsDialog";
+import SectionRecords from "../components/SectionRecords";
+import examServices from "../services/exams";
 
 const StudentsTeacher = () => {
   const [openAddSection, setOpenAddSection] = useState(false);
@@ -35,6 +37,8 @@ const StudentsTeacher = () => {
   const [openEnrolledStudentsDialog, setOpenEnrolledStudentsDialog] = useState(
     false
   );
+  const [exams, setExams] = useState();
+  const [openRecords, setOpenRecords] = useState(false);
 
   const handleDelete = classCode => {
     sectionServices
@@ -74,6 +78,12 @@ const StudentsTeacher = () => {
   const handleStudentsDialogOpen = enrolledStudents => {
     setEnrolledStudents(enrolledStudents);
     setOpenEnrolledStudentsDialog(true);
+  };
+
+  const handleRecordsOpen = (enrolledStudents, classCode) => {
+    setEnrolledStudents(enrolledStudents);
+    setClassCode(classCode);
+    setOpenRecords(true);
   };
 
   const handleAdd = (
@@ -124,8 +134,20 @@ const StudentsTeacher = () => {
       });
   };
 
+  const getExams = () => {
+    examServices
+      .getProfExams(localStorage.getItem("email"))
+      .then(returnedData => {
+        setExams(returnedData);
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
+  };
+
   useEffect(() => {
     getClasses();
+    getExams();
   }, []);
 
   useEffect(() => {}, [sections]);
@@ -142,6 +164,7 @@ const StudentsTeacher = () => {
               section={section}
               handleDialogOpen={handleClickOpen}
               handleStudentsOpen={handleStudentsDialogOpen}
+              handleRecordsOpen={handleRecordsOpen}
             />
           );
         });
@@ -227,6 +250,15 @@ const StudentsTeacher = () => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Records Dialog */}
+      <SectionRecords
+        open={openRecords}
+        setOpen={setOpenRecords}
+        exams={exams}
+        classCode={classCode}
+        enrolledStudents={enrolledStudents}
+      />
 
       {/* Add section Dialog */}
       <AddSectionDialog

@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,10 +7,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 import { Typography } from "@material-ui/core";
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles(theme => ({
   seeMore: {
@@ -61,9 +56,9 @@ const RankingBoard = ({ title, tableData }) => {
           </TableBody>
         </Table>
         <div className={classes.seeMore}>
-          <Link color="primary" href="#" onClick={preventDefault}>
+          {/* <Link color="primary" href="#" onClick={preventDefault}>
             See full ranking
-          </Link>
+          </Link> */}
         </div>
       </>
     );

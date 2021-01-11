@@ -38,10 +38,15 @@ const DashboardTeacher = () => {
     for (let i = 0; i < questions.length; i++) {
       for (let ii = 0; ii < answerUUIDs.length - 1; ii++) {
         if (questions[i].uuid === answerUUIDs[ii]) {
-          if (questions[i].answer === answers[answerUUIDs[ii]]) {
-            points += parseInt(questions[i].points);
-          } else if (questions[i].type === "essayType") {
-            points += parseInt(questions[i].points);
+          if (answers[answerUUIDs[ii]]) {
+            if (questions[i].type === "essayType") {
+              points += parseInt(questions[i].points);
+            } else if (
+              questions[i].answer.toUpperCase() ===
+              answers[answerUUIDs[ii]].toUpperCase()
+            ) {
+              points += parseInt(questions[i].points);
+            }
           }
         }
       }

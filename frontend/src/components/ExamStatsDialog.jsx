@@ -42,19 +42,31 @@ const ExamStatsDialog = ({ open, setOpen, exam }) => {
                 data = [
                   {
                     name: "A",
-                    answer: 12,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "A"
+                    ).length,
                   },
                   {
                     name: "B",
-                    answer: 3,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "B"
+                    ).length,
                   },
                   {
                     name: "C",
-                    answer: 5,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "C"
+                    ).length,
                   },
                   {
                     name: "D",
-                    answer: 6,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "D"
+                    ).length,
                   },
                 ];
 
@@ -129,11 +141,17 @@ const ExamStatsDialog = ({ open, setOpen, exam }) => {
                 data = [
                   {
                     name: "True",
-                    answer: 12,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "T"
+                    ).length,
                   },
                   {
                     name: "False",
-                    answer: 3,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() === "T"
+                    ).length,
                   },
                 ];
 
@@ -186,11 +204,19 @@ const ExamStatsDialog = ({ open, setOpen, exam }) => {
                 data = [
                   {
                     name: question.answer,
-                    answer: 12,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() ===
+                        question.answer.toUpperCase()
+                    ).length,
                   },
                   {
                     name: "Others",
-                    answer: 3,
+                    answer: exam.submittedExam.filter(
+                      submission =>
+                        submission[question.uuid].toUpperCase() !==
+                        question.answer.toUpperCase()
+                    ).length,
                   },
                 ];
                 displayQuestion = (

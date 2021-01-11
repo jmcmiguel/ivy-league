@@ -114,7 +114,7 @@ const ExamsCard = ({
             size="small"
             color="primary"
             onClick={() => handleViewExam(exam)}>
-            Questions
+            View
           </Button>
           <Button
             size="small"

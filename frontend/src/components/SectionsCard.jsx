@@ -23,7 +23,12 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionsCard = ({ section, handleDialogOpen, handleStudentsOpen }) => {
+const SectionsCard = ({
+  section,
+  handleDialogOpen,
+  handleStudentsOpen,
+  handleRecordsOpen,
+}) => {
   const classes = useStyles();
 
   return (
@@ -54,6 +59,14 @@ const SectionsCard = ({ section, handleDialogOpen, handleStudentsOpen }) => {
                 handleStudentsOpen(section.studentEnrolled);
               }}>
               View
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                handleRecordsOpen(section.studentEnrolled, section.classCode);
+              }}>
+              Report
             </Button>
             <Button
               size="small"
