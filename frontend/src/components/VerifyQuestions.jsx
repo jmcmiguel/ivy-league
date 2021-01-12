@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Paper } from "@material-ui/core";
 
 const VerifyQuestions = ({ questions }) => {
   let examQuestions = [];
@@ -8,87 +8,134 @@ const VerifyQuestions = ({ questions }) => {
     if (questions[i].type === "multipleChoice") {
       examQuestions.push(
         <Grid container spacing={1}>
-          {/* Question */}
-          <Grid item xs={12}>
-            <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
+          <Paper
+            style={{
+              minWidth: "100%",
+              padding: "1rem",
+              marginTop: "1rem",
+              marginBottom: "1rem",
+            }}>
+            {/* Question */}
+            <Grid item xs={12}>
+              <Typography
+                variant="body1"
+                gutterBottom
+                style={{ display: "inline" }}>
+                {`${i + 1}.) ${questions[i].question}`}
+              </Typography>
+              <Typography variant="caption">{` ${questions[i].points} ${
                 questions.points > 1 ? "points" : "point"
-              })`}
-            </Typography>
-          </Grid>
+              }`}</Typography>
+            </Grid>
 
-          {/* Choices */}
-          {questions[i].choices.map((choice, i) => {
-            return (
-              <Grid item key={i}>
-                <Typography variant="body1">
-                  {`${choice.value.toUpperCase()}.) ${choice.label}`}
-                </Typography>
-              </Grid>
-            );
-          })}
+            {/* Choices */}
+            {questions[i].choices.map((choice, i) => {
+              return (
+                <Grid item key={i}>
+                  <Typography variant="caption">
+                    {`${choice.value.toUpperCase()}.) ${choice.label}`}
+                  </Typography>
+                </Grid>
+              );
+            })}
 
-          {/* Answer */}
-          <Grid item xs={12}>
-            <Typography
-              variant="body1"
-              gutterBottom>{`Answer: ${questions[i].answer}`}</Typography>
-          </Grid>
+            {/* Answer */}
+            <Grid item xs={12}>
+              <Typography
+                color="secondary"
+                variant="body1"
+                gutterBottom>{`Answer: ${questions[i].answer}`}</Typography>
+            </Grid>
+          </Paper>
         </Grid>
       );
     } else if (questions[i].type === "trueOrFalse") {
       examQuestions.push(
         <Grid container spacing={1}>
-          <Grid item xs={12}>
+          <Paper
+            style={{
+              minWidth: "100%",
+              padding: "1rem",
+              marginTop: "1rem",
+              marginBottom: "1rem",
+            }}>
             {/* Question */}
             <Grid item xs={12}>
-              <Typography variant="body1" gutterBottom>
-                {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
-                  questions[i].points > 1 ? "points" : "point"
-                })`}
+              <Typography
+                variant="body1"
+                gutterBottom
+                style={{ display: "inline" }}>
+                {`${i + 1}.) ${questions[i].question}`}
               </Typography>
+              <Typography variant="caption">{` ${questions[i].points} ${
+                questions.points > 1 ? "points" : "point"
+              }`}</Typography>
             </Grid>
 
             {/* Answer */}
             <Grid item xs={12}>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" color="secondary" gutterBottom>
                 {`Answer: ${questions[i].answer === "t" ? "True" : "False"}`}
               </Typography>
             </Grid>
-          </Grid>
+          </Paper>
         </Grid>
       );
     } else if (questions[i].type === "identification") {
       examQuestions.push(
         <Grid container spacing={1}>
-          {/* Question */}
-          <Grid item xs={12}>
-            <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
-                questions[i].points > 1 ? "points" : "point"
-              })`}
-            </Typography>
-          </Grid>
+          <Paper
+            style={{
+              minWidth: "100%",
+              padding: "1rem",
+              marginTop: "1rem",
+              marginBottom: "1rem",
+            }}>
+            {/* Question */}
+            <Grid item xs={12}>
+              <Typography
+                variant="body1"
+                gutterBottom
+                style={{ display: "inline" }}>
+                {`${i + 1}.) ${questions[i].question}`}
+              </Typography>
+              <Typography variant="caption">{` ${questions[i].points} ${
+                questions.points > 1 ? "points" : "point"
+              }`}</Typography>
+            </Grid>
 
-          {/* Answer */}
-          <Grid item xs={12}>
-            <Typography variant="body1" gutterBottom>
-              {`Answer: ${questions[i].answer}`}
-            </Typography>
-          </Grid>
+            {/* Answer */}
+            <Grid item xs={12}>
+              <Typography variant="body1" color="secondary" gutterBottom>
+                {`Answer: ${questions[i].answer}`}
+              </Typography>
+            </Grid>
+          </Paper>
         </Grid>
       );
     } else if (questions[i].type === "essayType") {
       examQuestions.push(
         <Grid container spacing={1}>
-          {/* Question */}
-          <Grid item xs={12}>
-            <Typography variant="body1" gutterBottom>
-              {`${i + 1}.) ${questions[i].question} (${questions[i].points} ${
-                questions[i].points > 1 ? "points" : "point"
-              })`}
-            </Typography>
-          </Grid>
+          <Paper
+            style={{
+              minWidth: "100%",
+              padding: "1rem",
+              marginTop: "1rem",
+              marginBottom: "1rem",
+            }}>
+            {/* Question */}
+            <Grid item xs={12}>
+              <Typography
+                variant="body1"
+                gutterBottom
+                style={{ display: "inline" }}>
+                {`${i + 1}.) ${questions[i].question}`}
+              </Typography>
+              <Typography variant="caption">{` ${questions[i].points} ${
+                questions.points > 1 ? "points" : "point"
+              }`}</Typography>
+            </Grid>
+          </Paper>
         </Grid>
       );
     }
@@ -97,7 +144,9 @@ const VerifyQuestions = ({ questions }) => {
   return (
     <Grid container spacing={3}>
       {examQuestions.map((qstn, i) => (
-        <div key={i}>{qstn}</div>
+        <Grid container spacing={2} key={i}>
+          {qstn}
+        </Grid>
       ))}
     </Grid>
   );

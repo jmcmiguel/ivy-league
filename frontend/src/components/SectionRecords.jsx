@@ -31,6 +31,14 @@ const SectionRecords = ({
     setUsers();
   };
 
+  const getTotalScore = exam => {
+    const total = exam.questions.reduce((acc, cur) => ({
+      points: parseInt(acc.points) + parseInt(cur.points),
+    }));
+
+    return total.points;
+  };
+
   const getScore = (exam, studentEmail) => {
     const questions = exam.questions.map(question => {
       return {
@@ -115,7 +123,12 @@ const SectionRecords = ({
                       </TableCell>
                       {columns.map((column, i) => (
                         <TableCell key={i}>
-                          {getScore(column.exam, row.email)}
+                          {getScore(column.exam, row.email) === "N/A"
+                            ? "N/A"
+                            : `${getScore(
+                                column.exam,
+                                row.email
+                              )} / ${getTotalScore(column.exam)}`}
                         </TableCell>
                       ))}
                     </TableRow>

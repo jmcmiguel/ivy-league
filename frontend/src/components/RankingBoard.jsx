@@ -47,9 +47,7 @@ const RankingBoard = ({ title, tableData }) => {
                 <TableCell>{row.rank}</TableCell>
                 <TableCell>{row.idNumber}</TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell align="right">
-                  {row.avgScore === "NaN" ? row.avgScore : 0.0}
-                </TableCell>
+                <TableCell align="right">{row.avgScore}</TableCell>
                 <TableCell align="right">{row.ttlScore}</TableCell>
               </TableRow>
             ))}
