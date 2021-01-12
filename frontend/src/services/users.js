@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "";
 
 const signup = async newUser => {
   const request = axios.post(`${baseURL}/api/signup`, newUser);
