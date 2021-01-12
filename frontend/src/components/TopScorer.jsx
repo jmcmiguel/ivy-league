@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
@@ -32,11 +31,6 @@ const TopScorer = ({ name, section, subject, highestScore, examName }) => {
           ? "No Score yet"
           : `Score: ${highestScore}`}
       </Typography>
-      <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View Student Record
-        </Link>
-      </div>
     </React.Fragment>
   );
 };
